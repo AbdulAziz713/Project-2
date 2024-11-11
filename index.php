@@ -1,3 +1,12 @@
+<?php
+// session start
+if (!empty($_SESSION)) {
+} else {
+    session_start();
+}
+require 'db-connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,8 +57,8 @@
           ><i data-feather="shopping-cart"></i
         ></a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
-        <a href="login.php" class="login-button"
-          ><i data-feather="log-in"></i
+        <a href="index.html" class="logout-button"
+          ><i data-feather="log-out"></i
         ></a>
       </div>
 
@@ -154,7 +163,9 @@
             </div>
             <div class="product-price">IDR 50K <span>IDR 100K</span></div>
           </div>
-          <div class="pesan"></div>
+          <div class="pesan">
+            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
+          </div>
         </div>
         <div class="product-card">
           <div class="product-icons">
@@ -176,7 +187,9 @@
             </div>
             <div class="product-price">IDR 50K <span>IDR 100K</span></div>
           </div>
-          <div class="pesan"></div>
+          <div class="pesan">
+            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
+          </div>
         </div>
         <div class="product-card">
           <div class="product-icons">
@@ -198,7 +211,9 @@
             </div>
             <div class="product-price">IDR 50K <span>IDR 100K</span></div>
           </div>
-          <div class="pesan"></div>
+          <div class="pesan">
+            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
+          </div>
         </div>
         <div class="product-card">
           <div class="product-icons">
@@ -219,6 +234,9 @@
               <i data-feather="star"></i>
             </div>
             <div class="product-price">IDR 50K <span>IDR 100K</span></div>
+          </div>
+          <div class="pesan">
+            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
           </div>
         </div>
       </div>
@@ -321,9 +339,6 @@
               <i data-feather="star"></i>
             </div>
             <div class="product-price">IDR 50K <span>IDR 100K</span></div>
-            <a href="login.php"
-              ><i data-feather="shopping-cart"></i><span>add to cart</span></a
-            >
           </div>
         </div>
       </div>

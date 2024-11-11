@@ -1,0 +1,169 @@
+body {
+  font-family: sans-serif;
+  background-image: url(img/bg-login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  text-align: center;
+  /*ketebalan font*/
+  font-weight: 100;
+}
+
+.tulisan_login {
+  text-align: center;
+  /*membuat semua huruf menjadi kapital*/
+  text-transform: uppercase;
+}
+
+.kotak_login {
+  width: 350px;
+  /*meletakkan form ke tengah*/
+  margin: 80px auto;
+}
+
+.kotak_login2 {
+  width: 400px; /* Atur lebar kotak login */
+  margin: 0 auto; /* Pusatkan kotak */
+  padding: 20px; /* Tambahkan padding */
+  border-radius: 10px; /* Sudut melengkung */
+  background-color: #f9f9f9; /* Warna latar belakang */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan */
+  /* Hapus max-height dan overflow */
+}
+
+.kotak_login2 label {
+  display: block; /* Agar label mengambil satu baris penuh */
+  margin-bottom: 10px; /* Menambahkan jarak di bawah label */
+}
+
+.kotak_login2 .forget-password {
+  margin-bottom: 15px; /* Menambahkan jarak di bawah link Forget Password */
+}
+
+.kotak_login2 .forget-password a:hover {
+  color: red;
+}
+
+.kotak_login2 .signup {
+  text-align: center; /* Memusatkan teks dalam elemen signup */
+}
+
+.signup a:hover {
+  color: red;
+}
+
+label {
+  font-size: 11pt;
+}
+
+.signup-form .form-row {
+  display: flex; /* Menggunakan flexbox untuk dua kolom */
+  justify-content: space-between; /* Ruang antara kolom */
+  margin-bottom: 15px; /* Jarak antar baris */
+}
+
+.signup-form .form-group {
+  flex: 1; /* Setiap kolom mengambil ruang yang sama */
+  margin-right: 10px; /* Jarak antar kolom */
+}
+
+.signup-form .form-group:last-child {
+  margin-right: 0; /* Menghapus margin kanan pada kolom terakhir */
+}
+
+/* Pastikan label dan input tetap konsisten */
+.signup-form label {
+  font-size: 11pt; /* Ukuran font label */
+}
+
+.signup-form .form_login {
+  width: 100%; /* Lebar penuh */
+  padding: 10px; /* Padding untuk input */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 5px; /* Sudut melengkung */
+  box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar */
+}
+
+.form_login {
+  width: 100%; /* Lebar penuh */
+  padding: 10px; /* Padding untuk input */
+  margin: 10px 0; /* Margin atas dan bawah */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 5px; /* Sudut melengkung */
+  box-sizing: border-box;
+}
+
+.tombol_login {
+  width: 100%; /* Tombol lebar penuh */
+  padding: 10px; /* Padding untuk tombol */
+  background-color: #4caf50; /* Warna latar belakang tombol */
+  color: white; /* Warna teks tombol */
+  border: none; /* Tanpa border */
+  border-radius: 5px; /* Sudut melengkung */
+  cursor: pointer; /* Kursor pointer */
+}
+
+.tombol_login:hover {
+  background-color: #45a049; /* Warna latar belakang saat hover */
+}
+
+.signup {
+  text-align: center; /* Pusatkan teks */
+  margin-top: 20px; /* Margin atas */
+}
+
+.link {
+  color: #232323;
+  text-decoration: none;
+  font-size: 10pt;
+}
+
+.reset {
+  text-align: left;
+  margin: 10px 0;
+}
+
+.vertical-line {
+  width: 5px; /* Lebar garis vertikal */
+  background-color: #ccc; /* Warna garis */
+  height: 500px; /* Tinggi garis vertikal, sesuaikan sesuai kebutuhan */
+  margin: 20px auto; /* Menambahkan margin atas dan bawah */
+}
+
+/*Media Queries*/
+
+/*Laptop*/
+@media (max-width: 1366px) {
+  html {
+    font-size: 75%;
+  }
+}
+/*Tablet*/
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+/*Mobile Phone*/
+@media (max-width: 450px) {
+  html {
+    font-size: 55%;
+  }
+
+  .vertical-line {
+    display: none; /* Menyembunyikan garis vertikal di mobile */
+  }
+}
