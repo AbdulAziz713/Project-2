@@ -17,7 +17,7 @@ function redirectUser ($user) {
                 'name' => $user['Nama'],
                 'role' => $user['role_id']
             ];
-            header("Location: dashboard_super_admin.php");
+            header("Location: superadmin/index.php");
             break;
         case 2: // admin
             $_SESSION['ADMIN'] = [

@@ -5,7 +5,7 @@ if (!empty($_SESSION)) {
   session_start();
 }
 require '../db-connect.php';
-if (!empty($_SESSION['ADMIN'])) {
+if (!empty($_SESSION['SUPER_ADMIN'])) {
 } else {
   echo '<script>alert("Required Login Authorization!");window.location="../login.php"</script>';
 } ?>
@@ -127,21 +127,9 @@ if (!empty($_SESSION['ADMIN'])) {
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="index.php?page=features">
-          <i class="bi bi-file-earmark-bar-graph"></i>
-          <span>Features</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="index.php?page=gallery">
-          <i class="bi bi-images"></i>
-          <span>Gallery</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="index.php?page=blog">
-          <i class="bi bi-newspaper"></i>
-          <span>Blog</span>
+        <a class="nav-link " href="index.php?page=about">
+          <i class="bi bi-question-circle"></i>
+          <span>About</span>
         </a>
       </li>
       <li class="nav-item">

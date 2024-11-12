@@ -5,7 +5,7 @@ if (!empty($_SESSION)) {
   session_start();
 }
 require '../db-connect.php';
-if (!empty($_SESSION['ADMIN'])) {
+if (!empty($_SESSION['VENDOR'])) {
 } else {
   echo '<script>alert("Required Login Authorization!");window.location="../login.php"</script>';
 } ?>
@@ -121,33 +121,15 @@ if (!empty($_SESSION['ADMIN'])) {
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.php?page=dashboard">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="index.php?page=features">
-          <i class="bi bi-file-earmark-bar-graph"></i>
-          <span>Features</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="index.php?page=gallery">
-          <i class="bi bi-images"></i>
-          <span>Gallery</span>
+        <a class="nav-link " href="index.php?page=packages">
+          <i class="bi bi-archive"></i>
+          <span>Packages</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="index.php?page=blog">
           <i class="bi bi-newspaper"></i>
           <span>Blog</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="index.php?page=testi">
-          <i class="bi bi-people"></i>
-          <span>Testimonial</span>
         </a>
       </li>
       <li class="nav-item">
