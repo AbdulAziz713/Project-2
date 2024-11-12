@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Password</label>
             <input type="password" name="password" id="password" class="form_login" placeholder="Password" required/>
 
-            <label class="forget-password"><a href="sign.php">Forget Password?</a></label>
+            <label class="forget-password"><a href="reset.php">Forget Password?</a></label>
             <input type="submit" name="login" class="tombol_login" value="LOGIN"/>&nbsp;
         </form>
         <div class="signup">

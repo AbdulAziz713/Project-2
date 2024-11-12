@@ -17,7 +17,7 @@ if (!empty($_SESSION['ADMIN'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - WeddingCuy</title>
+  <title>Admin - Wedding Organizer</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -45,8 +45,8 @@ if (!empty($_SESSION['ADMIN'])) {
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block">WeddingCuy</span>
+      <a href="../index.php" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">Wedding Organizer</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -120,12 +120,6 @@ if (!empty($_SESSION['ADMIN'])) {
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link " href="index.php?page=dashboard">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
       <li class="nav-item">
         <a class="nav-link " href="index.php?page=features">
           <i class="bi bi-file-earmark-bar-graph"></i>

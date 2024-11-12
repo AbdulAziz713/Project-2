@@ -4,29 +4,10 @@ require 'db-connect.php';
 
 date_default_timezone_set("Asia/Jakarta");
 
-// proses login
-if (!empty($_GET['act'] == 'login')) {
-  // validasi text untuk filter karakter khusus dengan fungsi strip_tags()
-  $user = $_POST['user_username'];
-  $pass = $_POST['user_password'];
-  $sql = "SELECT * FROM user WHERE user_username = ? AND user_password = md5(?)";
-  $row = $koneksi->prepare($sql);
-  $row->execute(array($user, $pass));
-  $count = $row->rowCount();
-
-  if ($count > 0) {
-    $result = $row->fetch();
-    $_SESSION['ADMIN'] = $result;
-    // status yang diberikan
-    echo "<script>window.location='admin/';</script>";
-  } else {
-    echo "<script>window.location='login/index.php?get=failed';</script>";
-  }
-}
-
 if (!empty($_GET['act'] == 'logout')) {
   session_destroy();
-  echo "<script>window.location='login/index.php?signout=success';</script>";
+  echo "<script>alert('Berhasil Logout!');</script>";
+  echo "<script>window.location='login.php';</script>";
 }
 
 
@@ -35,7 +16,7 @@ if (!empty($_GET['act'] == "add-features")) {
   $features_name = $_POST['features_name'];
   $features_icon = $_POST['features_icon'];
 
-  $query = mysqli_query($koneksi2, "INSERT INTO features(features_name, features_icon) VALUES ('$features_name', '$features_icon')");
+  $query = mysqli_query($koneksi, "INSERT INTO features(features_name, features_icon) VALUES ('$features_name', '$features_icon')");
 
   if ($query) {
     header("location:admin/index.php?page=features&pesan=tambah");
@@ -57,7 +38,7 @@ if (!empty($_GET['act'] == "edit-features")) {
       header("location:admin/index.php?page=features");
     }
 
-    $query = mysqli_query($koneksi2, "UPDATE features SET features_name='$features_name', features_icon='$features_icon' WHERE id='$id'");
+    $query = mysqli_query($koneksi, "UPDATE features SET features_name='$features_name', features_icon='$features_icon' WHERE id='$id'");
 
     if ($query) {
       header("location:admin/index.php?page=features");
@@ -74,7 +55,7 @@ if (!empty($_GET['act'] == "delete-features")) {
     if ($_GET['id'] != "") {
 
       $id = $_GET['id'];
-      $query = mysqli_query($koneksi2, "DELETE FROM features WHERE id='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM features WHERE id='$id'");
       if ($query) {
         header("location:admin/index.php?page=features&pesan=hapus");
       } else {
@@ -94,7 +75,7 @@ if (!empty($_GET['act'] == "add-about")) {
   $about_heading = $_POST['about_heading'];
   $about_text = $_POST['about_text'];
 
-  $query = mysqli_query($koneksi2, "INSERT INTO about(about_heading, about_text) VALUES ('$about_heading', '$about_text')");
+  $query = mysqli_query($koneksi, "INSERT INTO about(about_heading, about_text) VALUES ('$about_heading', '$about_text')");
 
   if ($query) {
     header("location:admin/index.php?page=about&pesan=tambah");
@@ -116,7 +97,7 @@ if (!empty($_GET['act'] == "edit-about")) {
       header("location:admin/index.php?page=about");
     }
 
-    $query = mysqli_query($koneksi2, "UPDATE about SET about_heading='$about_heading', about_text='$about_text' WHERE id='$id'");
+    $query = mysqli_query($koneksi, "UPDATE about SET about_heading='$about_heading', about_text='$about_text' WHERE id='$id'");
 
     if ($query) {
       header("location:admin/index.php?page=about");
@@ -133,7 +114,7 @@ if (!empty($_GET['act'] == "add-packages")) {
   $packages_price = $_POST['packages_price'];
   $packages_list = $_POST['packages_list'];
 
-  $query = mysqli_query($koneksi2, "INSERT INTO packages(packages_heading, packages_price, packages_list) VALUES ('$packages_heading', '$packages_price', '$packages_list')");
+  $query = mysqli_query($koneksi, "INSERT INTO packages(packages_heading, packages_price, packages_list) VALUES ('$packages_heading', '$packages_price', '$packages_list')");
 
   if ($query) {
     header("location:admin/index.php?page=packages&pesan=tambah");
@@ -156,7 +137,7 @@ if (!empty($_GET['act'] == "edit-packages")) {
       header("location:admin/index.php?page=packages");
     }
 
-    $query = mysqli_query($koneksi2, "UPDATE packages SET packages_heading='$packages_heading', packages_price='$packages_price', packages_list='$packages_list' WHERE id='$id'");
+    $query = mysqli_query($koneksi, "UPDATE packages SET packages_heading='$packages_heading', packages_price='$packages_price', packages_list='$packages_list' WHERE id='$id'");
 
     if ($query) {
       header("location:admin/index.php?page=packages&pesan=berhasil");
@@ -173,7 +154,7 @@ if (!empty($_GET['act'] == "delete-packages")) {
     if ($_GET['id'] != "") {
 
       $id = $_GET['id'];
-      $query = mysqli_query($koneksi2, "DELETE FROM packages WHERE id='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM packages WHERE id='$id'");
       if ($query) {
         header("location:admin/index.php?page=packages&pesan=hapus");
       } else {
@@ -213,7 +194,7 @@ if (!empty($_GET['act'] == "add-gallery")) {
       if (in_array($ekstensi, $ekstensi_izin) === true) {
 
         move_uploaded_file($file_tmp, 'assets/img/gallery/' . $gallery_image_name_new);
-        $query = mysqli_query($koneksi2, "INSERT INTO gallery( gallery_heading, gallery_desc, gallery_image) VALUES ('$gallery_heading', '$gallery_desc', '$gallery_image_name_new')");
+        $query = mysqli_query($koneksi, "INSERT INTO gallery( gallery_heading, gallery_desc, gallery_image) VALUES ('$gallery_heading', '$gallery_desc', '$gallery_image_name_new')");
 
         if ($query) {
           header("location:admin/index.php?page=gallery&pesan=tambah");
@@ -258,14 +239,14 @@ if (!empty($_GET['act'] == "edit-gallery")) {
         if (in_array($ekstensi, $ekstensi_izin) === true) {
 
           $get_foto = "SELECT gallery_image FROM gallery WHERE id='$id'";
-          $data_foto = mysqli_query($koneksi2, $get_foto);
+          $data_foto = mysqli_query($koneksi, $get_foto);
           $foto_lama = mysqli_fetch_array($data_foto);
 
           unlink("assets/img/gallery/" . $foto_lama['gallery_image']);
 
           move_uploaded_file($file_tmp, 'assets/img/gallery/' . $gallery_image_new);
 
-          $query = mysqli_query($koneksi2, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_desc='$gallery_desc', gallery_image='$gallery_image_new' WHERE id='$id'");
+          $query = mysqli_query($koneksi, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_desc='$gallery_desc', gallery_image='$gallery_image_new' WHERE id='$id'");
 
           if ($query) {
             header("location:admin/index.php?page=gallery&pesan=berhasil");
@@ -276,7 +257,7 @@ if (!empty($_GET['act'] == "edit-gallery")) {
           header("location:admin/index.php?page=gallery&pesan=ekstensi");
         }
       } else {
-        $query = mysqli_query($koneksi2, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_desc='$gallery_desc' WHERE id='$id'");
+        $query = mysqli_query($koneksi, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_desc='$gallery_desc' WHERE id='$id'");
 
         if ($query) {
           header("location:admin/index.php?page=gallery&pesan=berhasil");
@@ -299,13 +280,13 @@ if (!empty($_GET['act'] == "delete-gallery")) {
       $id = $_GET['id'];
 
       $get_foto = "SELECT gallery_image FROM gallery WHERE id='$id'";
-      $data_foto = mysqli_query($koneksi2, $get_foto);
+      $data_foto = mysqli_query($koneksi, $get_foto);
       $foto_lama = mysqli_fetch_array($data_foto);
 
       unlink("assets/img/gallery/" . $foto_lama['gallery_image']);
 
       // Mengapus data siswa berdasarkan ID
-      $query = mysqli_query($koneksi2, "DELETE FROM gallery WHERE id='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM gallery WHERE id='$id'");
       if ($query) {
         header("location:admin/index.php?page=gallery&pesan=hapus");
       } else {
@@ -347,7 +328,7 @@ if (!empty($_GET['act'] == "add-blog")) {
       if (in_array($ekstensi, $ekstensi_izin) === true) {
 
         move_uploaded_file($file_tmp, 'assets/img/blog/' . $blog_image_name_new);
-        $query = mysqli_query($koneksi2, "INSERT INTO blog(blog_date, blog_heading, blog_text, blog_image) VALUES ('$blog_date', '$blog_heading', '$blog_text', '$blog_image_name_new')");
+        $query = mysqli_query($koneksi, "INSERT INTO blog(blog_date, blog_heading, blog_text, blog_image) VALUES ('$blog_date', '$blog_heading', '$blog_text', '$blog_image_name_new')");
 
         if ($query) {
           header("location:admin/index.php?page=blog&pesan=tambah");
@@ -393,14 +374,14 @@ if (!empty($_GET['act'] == "edit-blog")) {
         if (in_array($ekstensi, $ekstensi_izin) === true) {
 
           $get_foto = "SELECT blog_image FROM blog WHERE id='$id'";
-          $data_foto = mysqli_query($koneksi2, $get_foto);
+          $data_foto = mysqli_query($koneksi, $get_foto);
           $foto_lama = mysqli_fetch_array($data_foto);
 
           unlink("assets/img/blog/" . $foto_lama['blog_image']);
 
           move_uploaded_file($file_tmp, 'assets/img/blog/' . $blog_image_new);
 
-          $query = mysqli_query($koneksi2, "UPDATE blog SET blog_date='$blog_date', blog_heading='$blog_heading', blog_text='$blog_text', blog_image='$blog_image_new' WHERE id='$id'");
+          $query = mysqli_query($koneksi, "UPDATE blog SET blog_date='$blog_date', blog_heading='$blog_heading', blog_text='$blog_text', blog_image='$blog_image_new' WHERE id='$id'");
 
           if ($query) {
             header("location:admin/index.php?page=blog&pesan=berhasil");
@@ -411,7 +392,7 @@ if (!empty($_GET['act'] == "edit-blog")) {
           header("location:admin/index.php?page=blog&pesan=ekstensi");
         }
       } else {
-        $query = mysqli_query($koneksi2, "UPDATE blog SET blog_date='$blog_date', blog_heading='$blog_heading', blog_text='$blog_text' WHERE id='$id'");
+        $query = mysqli_query($koneksi, "UPDATE blog SET blog_date='$blog_date', blog_heading='$blog_heading', blog_text='$blog_text' WHERE id='$id'");
 
         if ($query) {
           header("location:admin/index.php?page=blog&pesan=berhasil");
@@ -434,13 +415,13 @@ if (!empty($_GET['act'] == "delete-blog")) {
       $id = $_GET['id'];
 
       $get_foto = "SELECT blog_image FROM blog WHERE id='$id'";
-      $data_foto = mysqli_query($koneksi2, $get_foto);
+      $data_foto = mysqli_query($koneksi, $get_foto);
       $foto_lama = mysqli_fetch_array($data_foto);
 
       unlink("assets/img/blog/" . $foto_lama['blog_image']);
 
       // Mengapus data siswa berdasarkan ID
-      $query = mysqli_query($koneksi2, "DELETE FROM blog WHERE id='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM blog WHERE id='$id'");
       if ($query) {
         header("location:admin/index.php?page=blog&pesan=hapus");
       } else {
@@ -482,7 +463,7 @@ if (!empty($_GET['act'] == "add-testi")) {
       if (in_array($ekstensi, $ekstensi_izin) === true) {
 
         move_uploaded_file($file_tmp, 'assets/img/testimonial/' . $testi_image_name_new);
-        $query = mysqli_query($koneksi2, "INSERT INTO testimonial(testi_text, testi_client, testi_image) VALUES ('$testi_text', '$testi_client', '$testi_image_name_new')");
+        $query = mysqli_query($koneksi, "INSERT INTO testimonial(testi_text, testi_client, testi_image) VALUES ('$testi_text', '$testi_client', '$testi_image_name_new')");
 
         if ($query) {
           header("location:admin/index.php?page=testi&pesan=tambah");
@@ -527,13 +508,13 @@ if (!empty($_GET['act'] == "edit-testi")) {
         if (in_array($ekstensi, $ekstensi_izin) === true) {
 
           $get_foto = "SELECT testi_image FROM testimonial WHERE id='$id'";
-          $data_foto = mysqli_query($koneksi2, $get_foto);
+          $data_foto = mysqli_query($koneksi, $get_foto);
           $foto_lama = mysqli_fetch_array($data_foto);
 
           unlink("assets/img/testimonial/" . $foto_lama['testi_image']);
 
           move_uploaded_file($file_tmp, 'assets/img/testimonial/' . $testi_image_new);
-          $query = mysqli_query($koneksi2, "UPDATE testimonial SET testi_text='$testi_text', testi_client='$testi_client', testi_image='$testi_image_new' WHERE id='$id'");
+          $query = mysqli_query($koneksi, "UPDATE testimonial SET testi_text='$testi_text', testi_client='$testi_client', testi_image='$testi_image_new' WHERE id='$id'");
 
           if ($query) {
             header("location:admin/index.php?page=testi&pesan=berhasil");
@@ -544,7 +525,7 @@ if (!empty($_GET['act'] == "edit-testi")) {
           header("location:admin/index.php?page=testi&pesan=ekstensi");
         }
       } else {
-        $query = mysqli_query($koneksi2, "UPDATE testimonial SET testi_text='$testi_text', testi_client='$testi_client' WHERE id='$id'");
+        $query = mysqli_query($koneksi, "UPDATE testimonial SET testi_text='$testi_text', testi_client='$testi_client' WHERE id='$id'");
 
         if ($query) {
           header("location:admin/index.php?page=testi&pesan=berhasil");
@@ -567,13 +548,13 @@ if (!empty($_GET['act'] == "delete-testi")) {
       $id = $_GET['id'];
 
       $get_foto = "SELECT testi_image FROM testimonial WHERE id='$id'";
-      $data_foto = mysqli_query($koneksi2, $get_foto);
+      $data_foto = mysqli_query($koneksi, $get_foto);
       $foto_lama = mysqli_fetch_array($data_foto);
 
       unlink("assets/img/testimonial/" . $foto_lama['testi_image']);
 
       // Mengapus data siswa berdasarkan ID
-      $query = mysqli_query($koneksi2, "DELETE FROM testimonial WHERE id='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM testimonial WHERE id='$id'");
       if ($query) {
         header("location:admin/index.php?page=testi&pesan=hapus");
       } else {
@@ -598,7 +579,7 @@ if (!empty($_GET['act'] == "add-contact")) {
   $contact_subject = $_POST['contact_subject'];
   $contact_message = $_POST['contact_message'];
 
-  $query = mysqli_query($koneksi2, "INSERT INTO contact(contact_date, contact_name, contact_email, contact_subject, contact_message) VALUES ('$contact_date', '$contact_name', '$contact_email', '$contact_subject', '$contact_message')");
+  $query = mysqli_query($koneksi, "INSERT INTO contact(contact_date, contact_name, contact_email, contact_subject, contact_message) VALUES ('$contact_date', '$contact_name', '$contact_email', '$contact_subject', '$contact_message')");
 
   if ($query) {
     echo '<script>window.location = "index.php?pesan=success#contact";</script>';
@@ -615,7 +596,7 @@ if (!empty($_GET['act'] == "delete-contact")) {
     if ($_GET['id'] != "") {
 
       $id = $_GET['id'];
-      $query = mysqli_query($koneksi2, "DELETE FROM contact WHERE id='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM contact WHERE id='$id'");
       if ($query) {
         header("location:admin/index.php?page=contact&pesan=hapus");
       } else {
