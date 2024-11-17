@@ -8,13 +8,12 @@ if (!$koneksi) {
 }
 
 if (isset($_POST['reset'])) {
-    $nama = trim($_POST['nama']);
     $email = trim($_POST['email']);
     $password_lama = trim($_POST['password_lama']);
     $password_baru = trim($_POST['password_baru']);
 
     // Memeriksa apakah input tidak kosong
-    if (empty($nama) || empty($email) || empty($password_lama) || empty($password_baru)) {
+    if (empty($email) || empty($password_lama) || empty($password_baru)) {
         echo "<script>alert('Semua field harus diisi!');</script>";
     } else {
         // Memeriksa apakah email sudah ada
@@ -48,7 +47,8 @@ if (isset($_POST['reset'])) {
 
                 $stmt->bind_param("ss", $hashed_password, $email);
                 if ($stmt->execute()) {
-                    echo "<script>alert('Password berhasil direset!'); window.location.href='login.php';</script>";
+                    echo "<script>alert('Password berhasil direset!');</script>";
+                    echo "<script>alert('Silahkan login kembali!'); window.location.href='login.php';</script>";
                 } else {
                     echo "<script>alert('Terjadi kesalahan, coba lagi!');</script>";
                 }
@@ -76,10 +76,6 @@ if (isset($_POST['reset'])) {
         <p class="tulisan_login">Silahkan Isi Data</p>
         <form name="form 1" action="" method="post" class="form-horizontal" onsubmit="showLoading()">
             <div class="form-row">
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" name="nama" class="form_login" placeholder="Nama Lengkap" required/>
-                </div>
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" name="email" class="form_login" placeholder="Email" required/>

@@ -5,113 +5,119 @@ if (!empty($_SESSION)) {
   session_start();
 }
 require 'db-connect.php';
+if (!empty($_SESSION['USER'])) {
+} else {
+  echo '<script>alert("Required Login Authorization!");window.location="../login.php"</script>';
+} 
+$username = isset($_SESSION['USER']['name']) ? $_SESSION['USER']['name'] : 'Guest';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="assets/img/logo/polsub.png" />
-    <title>Wedding Organizer</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
-
-    <!-- My Style -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-
-    <!-- Alpine JS -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Wedding Organizer</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
     <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
     ></script>
-
-    <!-- App -->
-    <script src="src/app.js"></script>
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="landing-page/css/styles.css" rel="stylesheet" />
   </head>
+  <body id="page-top">
 
-  <body>
-    <!-- Navbar Start -->
-    <nav class="navbar">
-      <a href="#" class="navbar-logo">Wedding <span>Organizer</span></a>
-
-      <div class="navbar-nav">
-        <a href="#home">Home</a>
-        <a href="#about">Tentang Kami</a>
-        <a href="#products">Product</a>
-        <a href="#contact">Kontak</a>
-      </div>
-
-      <div class="navbar-extra">
-        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
-        <a href="index.html" class="logout-button"><i data-feather="log-out"></i></a>
-      </div>
-
-      <!-- Search Form Start -->
-      <div class="search-form">
-        <input type="search" id="search-box" placeholder="Search here..." />
-        <label for="search-box"><i data-feather="search"></i></label>
-      </div>
-      <!-- Search Form End -->
-
-      <!-- Shopping Cart Start -->
-      <div class="shopping-cart">
-        <div class="cart-item">
-          <img src="assets/img/products/product1.jpg" alt="Product1" />
-          <div class="item-detail">
-            <h3>Product1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a href="#page-top" class="navbar-brand">Wedding <span>Organizer</span></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          Menu
+          <i class="fas fa-bars ms-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#portfolio">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <?php echo htmlspecialchars($username); ?>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li>
+        <a class="dropdown-item" href="reset_password.php">Rubah Password</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="action.php?act=logout">Log Out</a>
+      </li>
+    </ul>
+  </li>
+</ul>
         </div>
-        <div class="cart-item">
-          <img src="assets/img/products/product1.jpg" alt="Product2" />
-          <div class="item-detail">
-            <h3>Product1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="assets/img/products/product1.jpg" alt="Product3" />
-          <div class="item-detail">
-            <h3>Product1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
+    </div>
+  </nav>
+
+    <!-- Masthead-->
+    <header class="masthead">
+      <div class="container">
+        <div class="masthead-subheading">Welcome To Our Studio!</div>
+        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#services"
+          >Tell Me More</a
+        >
       </div>
-      <!-- Shopping Cart End -->
-    </nav>
-    <!-- Navbar End -->
+    </header>
 
-    <!-- Hero Section Start -->
-    <section class="hero" id="home">
-      <main class="content">
-        <h1>Selamat Datang di <span>Wedding Organizer</span></h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <a href="#" class="cta">Selengkapnya</a>
-      </main>
-    </section>
-    <!-- Hero Section End -->
-
-    <section id="features" class="features py-5">
+    <!-- Services-->
+    <section id="services" class="page-section">
         <div class="container">
-            <div class="heading-text text-center mb-5">
-                <p class="text-p">&#129321; Why Choose Us</p>
-                <h4>The Best Features We Provide</h4>
-                <p>Provide the main service in the form of making a wedding website with various interesting features, the prospective bride and groom</p>
+            <div class="text-center">
+            <h2 class="section-heading text-uppercase">Services</h2>
+            <h3 class="section-subheading text-muted">
+                Lorem ipsum dolor sit amet consectetur.
+            </h3>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center text-center">
                 <?php
                 // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
                 $query = "SELECT * FROM features ORDER BY id ASC";
@@ -121,12 +127,17 @@ require 'db-connect.php';
                     die("Query Error: " . mysqli_errno($koneksi) .
                         " - " . mysqli_error($koneksi));
                 }
-                $no = 1;  
+                $no = 1;
                 while ($row = mysqli_fetch_assoc($result)) {
                 ?>
-                    <div class="features-item col-md-3 text-center">
-                        <i class="<?php echo $row['features_icon']; ?>"></i>
-                        <h5><?php echo $row['features_name']; ?></h5>
+                    <div class="features-item col-md-4 text-center">
+                      <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary <?php echo $row['features_icon']; ?>"></i>
+                      </span>
+                      <h5 class="my-3"><?php echo $row['features_name']; ?></h5>
+                      <p class="text-muted">
+                      <?php echo $row['description']; ?>
+                      </p>
                     </div>
 
                 <?php
@@ -137,6 +148,55 @@ require 'db-connect.php';
         </div>
     </section>
 
+    <!-- Portfolio Grid-->
+    <section id="portfolio" class="page-section bg-light">
+        <div class="container">
+            <div class="text-center">
+            <h2 class="section-heading text-uppercase">gallery</h2>
+            <h3 class="section-subheading text-muted">
+              Lorem ipsum dolor sit amet consectetur.
+            </h3>
+            </div>
+            <div class="row">
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM gallery ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="portfolio-item">
+                          <a class="portfolio-link" data-bs-toggle="modal" href="#PortfolioModal<?php echo $row['id']; ?>">
+                            <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                            </div>
+                            <img src="assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
+                          </a>
+                          <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Pernikahan <?php echo $row['gallery_heading']; ?></div>
+                            <div class="portfolio-caption-subheading text-muted">
+                              <!-- <?php echo $row['tgl_pernikahan']; ?> -->
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                <?php
+                    $no++;
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- About-->
     <section id="about" class="about">
         <div class="container">
             <?php
@@ -152,423 +212,467 @@ require 'db-connect.php';
             ?>
             <div class="about-content">
                 <div class="text-center mb-4">
-                    <p class="text-p">&#128075; Who Are We?</p>
                     <h4><?php echo $row['about_heading']; ?></h4>
                 </div>
                 <div class="row justify-content-center text-center">
                     <div class="col">
                         <p><?php echo $row['about_text']; ?></p>
-                        <div class="main-btn mt-4">Know More <i class="fa-solid fa-angle-right"></i></div>
+                        <a href="about.php" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Know More <i class="fa-solid fa-angle-right"></i></a>
                     </div>
                 </div>
             </div>
 
-            <?php
-            ?>
+            <!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
-        </div>
-    </section>
-
-    <section id="package" class="package py-5">
-        <div class="container">
-            <div class="heading-text text-center mb-4">
-                <p class="text-p">&#128184; Easy Packages Easy Money</p>
-                <h4>Best Packages Best Pricing For You</h4>
-            </div>
-            <div class="row justify-content-center">
-                <?php
-                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                $query = "SELECT * FROM packages ORDER BY id ASC";
-                $result = mysqli_query($koneksi, $query);
-                //mengecek apakah ada error ketika menjalankan query
-                if (!$result) {
-                    die("Query Error: " . mysqli_errno($koneksi) .
-                        " - " . mysqli_error($koneksi));
-                }
-                $no = 1;
-                while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                    <div class="package-item col-md-3">
-                        <div class="head-package text-center">
-                            <h4 class="text-uppercase mb-1"><?php echo $row['packages_heading']; ?></h4>
-                            <p class="price fs-2 fw-semibold"><?php echo $row['packages_price']; ?></p>
-                            <br>
-                        </div>
-                        <div class="body-package">
-                            <?php echo $row['packages_list']; ?>
-                            <div class="text-center">
-                                <a href="" class="second-btn">See Detail Package</a>
-                            </div>
-                        </div>
-                    </div>
-
-                <?php
-                    $no++;
-                }
-                ?>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="gallery" class="gallery py-5">
-        <div class="container">
-            <div class="heading-text text-center mb-5">
-                <p class="text-p">&#128247; Our Gallery</p>
-                <h4>Gallery</h4>
-            </div>
-            <div class="row" data-masonry='{"percentPosition": true }'>
-                <?php
-                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                $query = "SELECT * FROM gallery ORDER BY id ASC";
-                $result = mysqli_query($koneksi, $query);
-                //mengecek apakah ada error ketika menjalankan query
-                if (!$result) {
-                    die("Query Error: " . mysqli_errno($koneksi) .
-                        " - " . mysqli_error($koneksi));
-                }
-                $no = 1;
-                while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                    <div class="gallery-item col-6 col-sm-6 col-lg-4">
-                        <div class="gallery-text">
-                            <h5><?php echo $row['gallery_heading']; ?></h5>
-                            <p><?php echo $row['gallery_desc']; ?></p>
-                        </div>
-                        <img src="assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="" class="img-fluid">
-                    </div>
-
-                <?php
-                    $no++;
-                }
-                ?>
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="blog py-5">
-        <div class="container">
-            <div class="heading-text text-center mb-5">
-                <p class="text-p">&#128221; Blog Post</p>
-                <h4>Blog</h4>
-            </div>
-            <div class="row justify-content-center">
-                <?php
-                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                $query = "SELECT * FROM blog ORDER BY id ASC";
-                $result = mysqli_query($koneksi, $query);
-                //mengecek apakah ada error ketika menjalankan query
-                if (!$result) {
-                    die("Query Error: " . mysqli_errno($koneksi) .
-                        " - " . mysqli_error($koneksi));
-                }
-                $no = 1;
-                while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-
-                    <div class="blog-item col-md-3 card">
-                        <img src="assets/img/blog/<?php echo $row['blog_image']; ?>" class="card-img-top" alt="Blog Image">
-                        <div class="card-body">
-                            <div class="author">
-                                <p><span><?php echo date('M d Y', strtotime($row['blog_date'])); ?></span> / Iqbal Prasetya</p>
-                            </div>
-                            <h5 class="card-title"><?php echo $row['blog_heading']; ?></h5>
-                            <p class="card-text"><?php echo substr($row['blog_text'], 0, 150); ?>...</p>
-                            <a href="blog/page.php?id=<?php echo $row['id']; ?>" class="second-btn">Read More</a>
-                        </div>
-                    </div>
-
-                <?php
-                    $no++;
-                }
-                ?>
-            </div>
-        </div>
-    </section>
-
-    <section id="client" class="client">
-        <div class="container">
-            <div class="heading-text text-center">
-                <p class="text-p">&#128221; Client</p>
-                <h4>Apa Kata Client Kami?</h4>
-            </div>
-            <div class="custom-nav owl-nav"></div>
-            <div id="owl-carousel" class="owl-carousel owl-theme client-carousel col-md-5 text-center">
-                <?php
-                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                $query = "SELECT * FROM testimonial ORDER BY id ASC";
-                $result = mysqli_query($koneksi, $query);
-                //mengecek apakah ada error ketika menjalankan query
-                if (!$result) {
-                    die("Query Error: " . mysqli_errno($koneksi) .
-                        " - " . mysqli_error($koneksi));
-                }
-                $no = 1;
-                while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                    <div class="item client-item">
-                        <img src="assets/img/testimonial/<?php echo $row['testi_image']; ?>" alt="" class="rounded-circle mb-3">
-                        <blockquote class="blockquote mb-0">
-                            <p><?php echo $row['testi_text']; ?></p>
-                            <footer class="blockquote-footer"><cite title="<?php echo $row['testi_client']; ?>"><?php echo $row['testi_client']; ?></cite></footer>
-                        </blockquote>
-                    </div>
-
-                <?php
-                    $no++;
-                }
-                ?>
-
-            </div>
-            <div class="custom-dots owl-dots text-center"></div>
-        </div>
-    </section>
-     
-    <!-- About Section  Start -->
-    <section id="about" class="about">
-      <h2><span>Tentang </span>Kami</h2>
-
-      <div class="row">
-        <div class="about-img">
-          <img src="assets/img/tentang-kami.jpg" alt="Tentang Kami" />
-        </div>
-        <div class="content">
-          <h3>Kenapa Memilih Kami?</h3>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero ipsam
-            veritatis doloribus impedit voluptates nemo?
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab qui
-            laboriosam magni alias, sed porro fugit tempore exercitationem
-            corrupti?
-          </p>
-        </div>
-      </div>
-    </section>
-    <!-- About Section  End -->
-
-    <!-- Products Section Start  -->
-    <section id="products" class="products">
-      <h2><span>Produk Unggulan </span>Kami</h2>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt quia
-        doloremque fugiat expedita quaerat reiciendis?
-      </p>
-
-      <div class="row">
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="assets/img/products/product1.jpg" alt="Product1" />
-          </div>
-          <div class="product-content">
-            <h3>Paket 1</h3>
-            <div class="product-stars">
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 50K <span>IDR 100K</span></div>
-          </div>
-          <div class="pesan">
-            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="assets/img/products/product1.jpg" alt="Product2" />
-          </div>
-          <div class="product-content">
-            <h3>Paket 2</h3>
-            <div class="product-stars">
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 50K <span>IDR 100K</span></div>
-          </div>
-          <div class="pesan">
-            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="assets/img/products/product1.jpg" alt="Product3" />
-          </div>
-          <div class="product-content">
-            <h3>Paket 3</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 50K <span>IDR 100K</span></div>
-          </div>
-          <div class="pesan">
-            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="assets/img/products/product1.jpg" alt="Product4" />
-          </div>
-          <div class="product-content">
-            <h3>Paket Customs</h3>
-            <div class="product-stars">
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 50K <span>IDR 100K</span></div>
-          </div>
-          <div class="pesan">
-            <a href="pemesanan.html" class="cta">Pesan Sekarang</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Products Section End  -->
-
-    <!-- Contact Section Start -->
-    <section id="contact" class="contact">
-      <h2><span>Kontak </span>Kami</h2>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, sint?
-      </p>
-
-      <div class="row">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4939.078498990339!2d107.82527247591773!3d-6.565870364187204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e693b9ae39cc0eb%3A0x76db7b3959df2011!2sPoliteknik%20Negeri%20Subang%2C%20Kampus%20Utama%20Cibogo!5e1!3m2!1sid!2sid!4v1728287150738!5m2!1sid!2sid"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          class="map"
-        ></iframe>
-
-        <form action="">
-          <div class="input-group">
-            <i data-feather="user"></i>
-            <input type="text" placeholder="nama" />
-          </div>
-          <div class="input-group">
-            <i data-feather="mail"></i>
-            <input type="text" placeholder="email" />
-          </div>
-          <div class="input-group">
-            <i data-feather="tag"></i>
-            <input type="text" placeholder="Subject" />
-          </div>
-          <div class="input-group">
-            <i data-feather="file-text"></i>
-            <input type="text" placeholder="Pesan" />
-          </div>
-          <button type="submit" class="btn">Kirim Pesan</button>
-        </form>
-      </div>
-    </section>
-    <!-- Contact Section End -->
-
-    <!-- Footer Start -->
-    <footer>
-      <div class="socials">
-        <a
-          href="https://www.instagram.com/politekniknegerisubang/"
-          target="_blank"
-          ><i data-feather="instagram"></i
-        ></a>
-        <a href="https://polsub.ac.id/" target="_blank"
-          ><i data-feather="globe"></i
-        ></a>
-        <a href="https://web.facebook.com/polsubofficial" target="_blank"
-          ><i data-feather="facebook"></i
-        ></a>
-        <a
-          href="https://api.whatsapp.com/send/?phone=6281111112851&text&type=phone_number&app_absent=0"
-          target="_blank"
-          ><i data-feather="phone"></i
-        ></a>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">About Us</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
-      <div class="links">
-        <a href="#home">Home</a>
-        <a href="#about">Tentang Kami</a>
-        <a href="#products">Product</a>
-        <a href="#contact">Kontak</a>
+      <!-- Modal body -->
+      <div class="modal-body">
+      <section class="page-section" id="about">
+      <div class="container">
+        <ul class="timeline">
+          <li>
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/1.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>2009-2011</h4>
+                <h4 class="subheading">Our Humble Beginnings</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/2.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>March 2011</h4>
+                <h4 class="subheading">An Agency is Born</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/3.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>December 2015</h4>
+                <h4 class="subheading">Transition to Full Service</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/4.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>July 2020</h4>
+                <h4 class="subheading">Phase Two Expansion</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <h4>
+                Be Part
+                <br />
+                Of Our
+                <br />
+                Story!
+              </h4>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
       </div>
 
-      <div class="credit">
-        <p>
-          created by
-          <a href="https://www.instagram.com/4doel_aziz" target="_blank"
-            >Abdul Aziz</a
-          >
-          | &copy; 2023 Politeknik Negeri Subang. All rights reserved.
-        </p>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
-    </footer>
-    <!-- Footer End -->
-
-    <!-- Modal Box Item Detail Start -->
-    <div class="modal" id="item-detail-modal">
-      <div class="modal-container">
-        <a href="#" class="close-icon"><i data-feather="x"></i></a>
-        <div class="modal-content">
-          <img src="assets/img/products/product1.jpg" alt="Product1" />
-          <div class="product-content">
-            <h3>Product 1</h3>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel sed
-              soluta consequuntur magnam ipsam? Laboriosam enim quia quis optio
-              nam culpa quisquam beatae voluptatum suscipit?
+    </div>
+  </div>
+</div>
+        </div>
+    </section>
+    
+    <!-- Team-->
+    <section class="page-section bg-light" id="team">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+          <h3 class="section-subheading text-muted">
+            Lorem ipsum dolor sit amet consectetur.
+          </h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="team-member">
+              <img
+                class="mx-auto rounded-circle"
+                src="landing-page/assets/img/team/1.jpg"
+                alt="..."
+              />
+              <h4>Abdul Aziz</h4>
+              <p class="text-muted">Full Stack Developer</p>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="https://instagram.com/4doel_aziz" target="_blank"
+                aria-label="Parveen Anand Twitter Profile"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="https://web.facebook.com/profile.php?id=100014337487034" target="_blank"
+                aria-label="Parveen Anand Facebook Profile"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="https://www.linkedin.com/in/abdul-aziz-29925021a/" target="_blank"
+                aria-label="Parveen Anand LinkedIn Profile"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="team-member">
+              <img
+                class="mx-auto rounded-circle"
+                src="landing-page/assets/img/team/2.jpg"
+                alt="..."
+              />
+              <h4>Lulu Latifah Nurhafsyah</h4>
+              <p class="text-muted">Marketing</p>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Diana Petersen Twitter Profile"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Diana Petersen Facebook Profile"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Diana Petersen LinkedIn Profile"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="team-member">
+              <img
+                class="mx-auto rounded-circle"
+                src="landing-page/assets/img/team/3.jpg"
+                alt="..."
+              />
+              <h4>Siti Aisah</h4>
+              <p class="text-muted">Designer</p>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Larry Parker Twitter Profile"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Larry Parker Facebook Profile"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Larry Parker LinkedIn Profile"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <p class="large text-muted">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
+              eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam
+              corporis ea, alias ut unde.
             </p>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 50K <span>IDR 100K</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clients-->
+    <div class="py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="landing-page/assets/img/logos/microsoft.svg"
+                alt="..."
+                aria-label="Microsoft Logo"
+            /></a>
+          </div>
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="landing-page/assets/img/logos/google.svg"
+                alt="..."
+                aria-label="Google Logo"
+            /></a>
+          </div>
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="landing-page/assets/img/logos/facebook.svg"
+                alt="..."
+                aria-label="Facebook Logo"
+            /></a>
+          </div>
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="landing-page/assets/img/logos/ibm.svg"
+                alt="..."
+                aria-label="IBM Logo"
+            /></a>
           </div>
         </div>
       </div>
     </div>
-    <!-- Modal Box Item Detail End -->
 
-    <!-- Feather Icons -->
-    <script>
-      feather.replace();
-    </script>
+    <!-- Contact-->
+<section class="page-section" id="contact">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Contact Us</h2>
+      <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.<br></h3>
+      <form id="contactForm" method="POST">
+        <div class="row align-items-stretch mb-5">
+          <div class="col-md-6">
+            <div class="form-group">
+              <!-- Name input -->
+              <label for="contact_name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="contact_name" placeholder="Masukan nama anda" name="contact_name" required>
+            </div>
+            <div class="form-group">
+              <!-- Email address input -->
+              <label for="contact_email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="contact_email" placeholder="Masukan email anda" name="contact_email" required>
+            </div>
+            <div class="form-group mb-md-0">
+              <!-- Phone number input -->
+              <label for="telepon" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="telepon" placeholder="Masukan nomor telepon anda" name="telepon" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-group-textarea mb-md-0">
+              <!-- Message input -->
+              <label for="contact_message" class="form-label">Message</label>
+              <textarea class="form-control" id="contact_message" placeholder="Masukan pesan" name="contact_message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
 
-    <!-- My JavaScript -->
-    <script src="js/script.js"></script>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['contact_name'], $_POST['contact_email'], $_POST['telepon'], $_POST['contact_message'])) {
+        $contact_date = date('Y-m-d H:i:s');
+        $contact_name = htmlspecialchars($_POST['contact_name']);
+        $contact_email = htmlspecialchars($_POST['contact_email']);
+        $telepon = htmlspecialchars($_POST['telepon']);
+        $contact_message = htmlspecialchars($_POST['contact_message']);
+
+        $query = mysqli_query($koneksi, "INSERT INTO contact(contact_date, contact_name, contact_email, telepon, contact_message) VALUES ('$contact_date', '$contact_name', '$contact_email', '$telepon', '$contact_message')");
+
+        if ($query) {
+          echo '<script>window.location = "index.php?pesan=success#contact";</script>';
+          echo '<script>alert("Pesan Berhasil Terkirim :)")</script>';
+        } else {
+          header("location:index.php#contact");
+        }
+    }
+}
+?>
+  </div>
+</section>
+
+
+     <!-- Footer Start -->
+    <footer class="footer py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4 text-lg-start">
+              <p>
+              created by
+              <a href="https://www.instagram.com/4doel_aziz" target="_blank"
+                >Abdul Aziz</a
+              >
+              | &copy; 2023 Politeknik Negeri Subang. All rights reserved.
+            </p>
+          </div>
+          <div class="col-lg-4 my-3 my-lg-0">
+            <a
+              class="btn btn-dark btn-social mx-2"
+              href="https://www.instagram.com/politekniknegerisubang/"
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              class="btn btn-dark btn-social mx-2"
+              href="https://polsub.ac.id/" target="_blank"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a
+              class="btn btn-dark btn-social mx-2" 
+              href="https://web.facebook.com/polsubofficial" target="_blank"
+              ><i class="fab fa-facebook"></i
+              ></a>
+            <a
+              class="btn btn-dark btn-social mx-2"
+              href="https://api.whatsapp.com/send/?phone=6281111112851&text&type=phone_number&app_absent=0"
+              target="_blank"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a class="link-dark text-decoration-none me-3" href="#!"
+              >Privacy Policy</a
+            >
+            <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Portfolio Modals-->
+    <?php
+$query = "SELECT * FROM gallery ORDER BY id ASC";
+$result = mysqli_query($koneksi, $query);
+if (!$result) {
+    die("Query Error: " . mysqli_errno($koneksi) . " - " . mysqli_error($koneksi));
+}
+while ($row = mysqli_fetch_assoc($result)) {
+?>
+    <div class="portfolio-modal modal fade" id="PortfolioModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal">
+                    <img src="assets/img/close-icon.svg" alt="Close modal" />
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                        <div class="modal-body">
+                          <h2 class="text-uppercase">Detail Pernikahan</h2>
+                          <!-- <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
+                          <img src="assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid d-block mx-auto">
+                          <ul class="list-inline">
+                            <li>
+                              <?php echo $row['gallery_heading']; ?>
+                            </li>
+                            <li>
+                              <?php echo $row['tgl_pernikahan']; ?>
+                            </li>
+                          </ul>
+                          <p><?php echo $row['gallery_text']; ?></p>
+                          <button
+                            class="btn btn-primary btn-xl text-uppercase"
+                            data-bs-dismiss="modal"
+                            type="button"
+                          >
+                            <i class="fas fa-xmark me-1"></i>
+                            Close Project
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              <?php
+                  $no++;
+              }
+              ?>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="landing-page/js/scripts.js"></script>
+
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   </body>
 </html>

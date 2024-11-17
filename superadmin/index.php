@@ -17,6 +17,7 @@ if (!empty($_SESSION['SUPER_ADMIN'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
   <title>Owner - Wedding Organizer</title>
 
   <!-- Google Fonts -->
@@ -327,6 +328,11 @@ if (!empty($_SESSION['SUPER_ADMIN'])) {
           <li>
             <a href="../action.php?act=logout">
               <i class="bi bi-caret-right"></i><span>Log Out</span>
+            </a>
+          </li>
+          <li>
+            <a href="../reset_password.php">
+              <i class="bi bi-caret-right"></i><span>Rubah Password</span>
             </a>
           </li>
         </ul>

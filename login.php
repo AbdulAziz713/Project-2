@@ -14,7 +14,7 @@ switch ($role) {
     case 'SUPER_ADMIN':
         $_SESSION['SUPER_ADMIN'] = [
             'id' => $user['id_user'],
-            'name' => $user['Nama'],
+            'name' => $user['username'],
             'role' => $role
         ];
         header("Location: superadmin/index.php");
@@ -22,7 +22,7 @@ switch ($role) {
     case 'ADMIN':
         $_SESSION['ADMIN'] = [
             'id' => $user['id_user'],
-            'name' => $user['Nama'],
+            'name' => $user['username'],
             'role' => $role
         ];
         header("Location: admin/index.php");
@@ -30,7 +30,7 @@ switch ($role) {
     case 'VENDOR':
         $_SESSION['VENDOR'] = [
             'id' => $user['id_user'],
-            'name' => $user['Nama'],
+            'name' => $user['username'],
             'role' => $role
         ];
         header("Location: vendor/index.php");
@@ -38,7 +38,7 @@ switch ($role) {
     case 'USER':
         $_SESSION['USER'] = [
             'id' => $user['id_user'],
-            'name' => $user['Nama'],
+            'name' => $user['username'],
             'role' => $role
         ];
         header("Location: index.php");
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="assets/img/logo/polsub.png" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <title>Form Login</title>
   <link rel="stylesheet" href="style.css">
 </head>

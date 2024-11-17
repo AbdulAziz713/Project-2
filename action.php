@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Jakarta");
 if (!empty($_GET['act'] == 'logout')) {
   session_destroy();
   echo "<script>alert('Berhasil Logout!');</script>";
-  echo "<script>window.location='login.php';</script>";
+  echo "<script>window.location='landing-page/index.php';</script>";
 }
 
 

@@ -40,12 +40,11 @@ require '../db-connect.php';
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body id="page-top">
+
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand" href="#page-top"
-          ><img src="assets/img/navbar-logo.svg" alt="..."
-        /></a>
+        <a href="#page-top" class="navbar-brand">Wedding <span>Organizer</span></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -80,6 +79,7 @@ require '../db-connect.php';
         </div>
       </div>
     </nav>
+
     <!-- Masthead-->
     <header class="masthead">
       <div class="container">
@@ -90,6 +90,7 @@ require '../db-connect.php';
         >
       </div>
     </header>
+
     <!-- Services-->
     <section id="services" class="page-section">
         <div class="container">
@@ -129,6 +130,7 @@ require '../db-connect.php';
             </div>
         </div>
     </section>
+
     <!-- Portfolio Grid-->
     <section id="portfolio" class="page-section bg-light">
         <div class="container">
@@ -153,7 +155,7 @@ require '../db-connect.php';
                 ?>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                          <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal<?php echo $row['id']; ?>">
+                          <a class="portfolio-link" data-bs-toggle="modal" href="#PortfolioModal<?php echo $row['id']; ?>">
                             <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                             <i class="fas fa-plus fa-3x"></i>
@@ -162,9 +164,9 @@ require '../db-connect.php';
                             <img src="../assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
                           </a>
                           <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading"><?php echo $row['gallery_heading']; ?></div>
+                            <div class="portfolio-caption-heading">Pernikahan <?php echo $row['gallery_heading']; ?></div>
                             <div class="portfolio-caption-subheading text-muted">
-                              <?php echo $row['tgl_pernikahan']; ?>
+                              <!-- <?php echo $row['tgl_pernikahan']; ?> -->
                             </div>
                           </div>
                         </div>
@@ -176,6 +178,7 @@ require '../db-connect.php';
             </div>
         </div>
     </section>
+
     <!-- About-->
     <section id="about" class="about">
         <div class="container">
@@ -445,6 +448,7 @@ require '../db-connect.php';
         </div>
       </div>
     </section>
+
     <!-- Clients-->
     <div class="py-5">
       <div class="container">
@@ -488,62 +492,65 @@ require '../db-connect.php';
         </div>
       </div>
     </div>
+
     <!-- Contact-->
-    <section class="page-section" id="contact">
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Contact Us</h2>
-    <form action="" method="POST">
-      <div class="mb-3">
-        <label for="contact_name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="contact_name" name="contact_name" required>
-      </div>
-      <div class="mb-3">
-        <label for="contact_email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="contact_email" name="contact_email" required>
-      </div>
-      <div class="mb-3">
-        <label for="telepon" class="form-label">Phone</label>
-        <input type="text" class="form-control" id="telepon" name="telepon" required>
-      </div>
-      <div class="mb-3">
-        <label for="contact_message" class="form-label">Message</label>
-        <textarea class="form-control" id="contact_message" name="contact_message" rows="5" required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Submit</button>
-    </form>
-  </div>
+<section class="page-section" id="contact">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Contact Us</h2>
+      <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.<br></h3>
+      <form id="contactForm" method="POST">
+        <div class="row align-items-stretch mb-5">
+          <div class="col-md-6">
+            <div class="form-group">
+              <!-- Name input -->
+              <label for="contact_name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="contact_name" placeholder="Masukan nama anda" name="contact_name" required>
+            </div>
+            <div class="form-group">
+              <!-- Email address input -->
+              <label for="contact_email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="contact_email" placeholder="Masukan email anda" name="contact_email" required>
+            </div>
+            <div class="form-group mb-md-0">
+              <!-- Phone number input -->
+              <label for="telepon" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="telepon" placeholder="Masukan nomor telepon anda" name="telepon" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group form-group-textarea mb-md-0">
+              <!-- Message input -->
+              <label for="contact_message" class="form-label">Message</label>
+              <textarea class="form-control" id="contact_message" placeholder="Masukan pesan" name="contact_message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
 
-  <?php
-  // Cek apakah form sudah disubmit
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Cek apakah semua field telah terisi
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['contact_name'], $_POST['contact_email'], $_POST['telepon'], $_POST['contact_message'])) {
-      // Menyaring input untuk menghindari XSS
-      $contact_date = date('Y-m-d H:i:s');
-      $contact_name = htmlspecialchars($_POST['contact_name']);
-      $contact_email = htmlspecialchars($_POST['contact_email']);
-      $telepon = htmlspecialchars($_POST['telepon']);
-      $contact_message = htmlspecialchars($_POST['contact_message']);
+        $contact_date = date('Y-m-d H:i:s');
+        $contact_name = htmlspecialchars($_POST['contact_name']);
+        $contact_email = htmlspecialchars($_POST['contact_email']);
+        $telepon = htmlspecialchars($_POST['telepon']);
+        $contact_message = htmlspecialchars($_POST['contact_message']);
 
-      // Gunakan prepared statement untuk query
-      $stmt = $koneksi->prepare("INSERT INTO contact (contact_date, contact_name, contact_email, telepon, contact_message) VALUES (?, ?, ?, ?, ?)");
-      $stmt->bind_param("sssss", $contact_date, $contact_name, $contact_email, $telepon, $contact_message);
+        $query = mysqli_query($koneksi, "INSERT INTO contact(contact_date, contact_name, contact_email, telepon, contact_message) VALUES ('$contact_date', '$contact_name', '$contact_email', '$telepon', '$contact_message')");
 
-      // Eksekusi query
-      if ($stmt->execute()) {
-        echo '<script>alert("Pesan Berhasil Terkirim :)"); window.location = "index.php?pesan=success#contact";</script>';
-      } else {
-        echo '<script>alert("Gagal mengirim pesan. Silakan coba lagi.")</script>';
-        header("location:index.php#contact");
-        exit();
-      }
-
-      $stmt->close();
-    } else {
-      echo '<script>alert("Semua field harus diisi.")</script>';
+        if ($query) {
+          echo '<script>window.location = "index.php?pesan=success#contact";</script>';
+          echo '<script>alert("Pesan Berhasil Terkirim :)")</script>';
+        } else {
+          header("location:index.php#contact");
+        }
     }
-  }
-  ?>
+}
+?>
+  </div>
 </section>
 
 
@@ -570,7 +577,7 @@ require '../db-connect.php';
             <a
               class="btn btn-dark btn-social mx-2"
               href="https://polsub.ac.id/" target="_blank"
-              ><i class="fab fa-globe"></i
+              ><i class="fab fa-linkedin"></i
             ></a>
             <a
               class="btn btn-dark btn-social mx-2" 
@@ -596,14 +603,14 @@ require '../db-connect.php';
     <!-- Footer End -->
     <!-- Portfolio Modals-->
     <?php
-$query = "SELECT * FROM testimonial ORDER BY id ASC";
+$query = "SELECT * FROM gallery ORDER BY id ASC";
 $result = mysqli_query($koneksi, $query);
 if (!$result) {
     die("Query Error: " . mysqli_errno($koneksi) . " - " . mysqli_error($koneksi));
 }
 while ($row = mysqli_fetch_assoc($result)) {
 ?>
-    <div class="portfolio-modal modal fade" id="portfolioModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="PortfolioModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="close-modal" data-bs-dismiss="modal">
@@ -613,20 +620,18 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="row justify-content-center">
                       <div class="col-lg-8">
                         <div class="modal-body">
-                          <h2 class="text-uppercase">Apa Kata Client Kami?</h2>
-                          <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                          <img src="../assets/img/testimonial/<?php echo $row['testi_image']; ?>" alt="..." class="img-fluid d-block mx-auto">
-                          <p><?php echo $row['testi_text']; ?></p>
+                          <h2 class="text-uppercase">Detail Pernikahan</h2>
+                          <!-- <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
+                          <img src="../assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid d-block mx-auto">
                           <ul class="list-inline">
                             <li>
-                              <strong>Client:</strong>
-                              <?php echo $row['testi_client']; ?>
+                              <?php echo $row['gallery_heading']; ?>
                             </li>
                             <li>
-                              <strong>Category:</strong>
-                              <?php echo $row['category']; ?>
+                              <?php echo $row['tgl_pernikahan']; ?>
                             </li>
                           </ul>
+                          <p><?php echo $row['gallery_text']; ?></p>
                           <button
                             class="btn btn-primary btn-xl text-uppercase"
                             data-bs-dismiss="modal"
