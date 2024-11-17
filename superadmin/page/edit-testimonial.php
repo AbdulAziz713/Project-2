@@ -4,7 +4,7 @@ if (!empty($_SESSION)) {
 } else {
     session_start();
 }
-if (!empty($_SESSION['ADMIN'])) {
+if (!empty($_SESSION['SUPER_ADMIN'])) {
 } else {
     echo '<script>alert("Maaf Login Dahulu !");window.location="login.php"</script>';
 }

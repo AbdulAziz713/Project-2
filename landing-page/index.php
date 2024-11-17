@@ -1,0 +1,656 @@
+<?php
+// session start
+if (!empty($_SESSION)) {
+} else {
+  session_start();
+}
+require '../db-connect.php';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Wedding Organizer</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top"
+          ><img src="assets/img/navbar-logo.svg" alt="..."
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          Menu
+          <i class="fas fa-bars ms-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#portfolio">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../login.php">Log In</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+      <div class="container">
+        <div class="masthead-subheading">Welcome To Our Studio!</div>
+        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#services"
+          >Tell Me More</a
+        >
+      </div>
+    </header>
+    <!-- Services-->
+    <section id="services" class="page-section">
+        <div class="container">
+            <div class="text-center">
+            <h2 class="section-heading text-uppercase">Services</h2>
+            <h3 class="section-subheading text-muted">
+                Lorem ipsum dolor sit amet consectetur.
+            </h3>
+            </div>
+            <div class="row justify-content-center text-center">
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM features ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="features-item col-md-4 text-center">
+                      <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary <?php echo $row['features_icon']; ?>"></i>
+                      </span>
+                      <h5 class="my-3"><?php echo $row['features_name']; ?></h5>
+                      <p class="text-muted">
+                      <?php echo $row['description']; ?>
+                      </p>
+                    </div>
+
+                <?php
+                    $no++;
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+    <!-- Portfolio Grid-->
+    <section id="portfolio" class="page-section bg-light">
+        <div class="container">
+            <div class="text-center">
+            <h2 class="section-heading text-uppercase">gallery</h2>
+            <h3 class="section-subheading text-muted">
+              Lorem ipsum dolor sit amet consectetur.
+            </h3>
+            </div>
+            <div class="row">
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM gallery ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="portfolio-item">
+                          <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal<?php echo $row['id']; ?>">
+                            <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                            </div>
+                            <img src="../assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
+                          </a>
+                          <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading"><?php echo $row['gallery_heading']; ?></div>
+                            <div class="portfolio-caption-subheading text-muted">
+                              <?php echo $row['tgl_pernikahan']; ?>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                <?php
+                    $no++;
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+    <!-- About-->
+    <section id="about" class="about">
+        <div class="container">
+            <?php
+            // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+            $query = "SELECT * FROM about ORDER BY id ASC";
+            $result = mysqli_query($koneksi, $query);
+            //mengecek apakah ada error ketika menjalankan query
+            if (!$result) {
+                die("Query Error: " . mysqli_errno($koneksi) .
+                    " - " . mysqli_error($koneksi));
+            }
+            $row = mysqli_fetch_assoc($result)
+            ?>
+            <div class="about-content">
+                <div class="text-center mb-4">
+                    <h4><?php echo $row['about_heading']; ?></h4>
+                </div>
+                <div class="row justify-content-center text-center">
+                    <div class="col">
+                        <p><?php echo $row['about_text']; ?></p>
+                        <a href="about.php" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Know More <i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">About Us</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <section class="page-section" id="about">
+      <div class="container">
+        <ul class="timeline">
+          <li>
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/1.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>2009-2011</h4>
+                <h4 class="subheading">Our Humble Beginnings</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/2.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>March 2011</h4>
+                <h4 class="subheading">An Agency is Born</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/3.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>December 2015</h4>
+                <h4 class="subheading">Transition to Full Service</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <img
+                class="rounded-circle img-fluid"
+                src="assets/img/about/4.jpg"
+                alt="..."
+              />
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4>July 2020</h4>
+                <h4 class="subheading">Phase Two Expansion</h4>
+              </div>
+              <div class="timeline-body">
+                <p class="text-muted">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
+                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
+                  dolore laudantium consectetur!
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-inverted">
+            <div class="timeline-image">
+              <h4>
+                Be Part
+                <br />
+                Of Our
+                <br />
+                Story!
+              </h4>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+    </section>
+    
+    <!-- Team-->
+    <section class="page-section bg-light" id="team">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+          <h3 class="section-subheading text-muted">
+            Lorem ipsum dolor sit amet consectetur.
+          </h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="team-member">
+              <img
+                class="mx-auto rounded-circle"
+                src="assets/img/team/1.jpg"
+                alt="..."
+              />
+              <h4>Abdul Aziz</h4>
+              <p class="text-muted">Full Stack Developer</p>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="https://instagram.com/4doel_aziz" target="_blank"
+                aria-label="Parveen Anand Twitter Profile"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="https://web.facebook.com/profile.php?id=100014337487034" target="_blank"
+                aria-label="Parveen Anand Facebook Profile"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="https://www.linkedin.com/in/abdul-aziz-29925021a/" target="_blank"
+                aria-label="Parveen Anand LinkedIn Profile"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="team-member">
+              <img
+                class="mx-auto rounded-circle"
+                src="assets/img/team/2.jpg"
+                alt="..."
+              />
+              <h4>Lulu Latifah Nurhafsyah</h4>
+              <p class="text-muted">Marketing</p>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Diana Petersen Twitter Profile"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Diana Petersen Facebook Profile"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Diana Petersen LinkedIn Profile"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="team-member">
+              <img
+                class="mx-auto rounded-circle"
+                src="assets/img/team/3.jpg"
+                alt="..."
+              />
+              <h4>Siti Aisah</h4>
+              <p class="text-muted">Designer</p>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Larry Parker Twitter Profile"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Larry Parker Facebook Profile"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-dark btn-social mx-2"
+                href="#!"
+                aria-label="Larry Parker LinkedIn Profile"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <p class="large text-muted">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
+              eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam
+              corporis ea, alias ut unde.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Clients-->
+    <div class="py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="assets/img/logos/microsoft.svg"
+                alt="..."
+                aria-label="Microsoft Logo"
+            /></a>
+          </div>
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="assets/img/logos/google.svg"
+                alt="..."
+                aria-label="Google Logo"
+            /></a>
+          </div>
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="assets/img/logos/facebook.svg"
+                alt="..."
+                aria-label="Facebook Logo"
+            /></a>
+          </div>
+          <div class="col-md-3 col-sm-6 my-3">
+            <a href="#!"
+              ><img
+                class="img-fluid img-brand d-block mx-auto"
+                src="assets/img/logos/ibm.svg"
+                alt="..."
+                aria-label="IBM Logo"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <form action="" method="POST">
+      <div class="mb-3">
+        <label for="contact_name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="contact_name" name="contact_name" required>
+      </div>
+      <div class="mb-3">
+        <label for="contact_email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="contact_email" name="contact_email" required>
+      </div>
+      <div class="mb-3">
+        <label for="telepon" class="form-label">Phone</label>
+        <input type="text" class="form-control" id="telepon" name="telepon" required>
+      </div>
+      <div class="mb-3">
+        <label for="contact_message" class="form-label">Message</label>
+        <textarea class="form-control" id="contact_message" name="contact_message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Submit</button>
+    </form>
+  </div>
+
+  <?php
+  // Cek apakah form sudah disubmit
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Cek apakah semua field telah terisi
+    if (isset($_POST['contact_name'], $_POST['contact_email'], $_POST['telepon'], $_POST['contact_message'])) {
+      // Menyaring input untuk menghindari XSS
+      $contact_date = date('Y-m-d H:i:s');
+      $contact_name = htmlspecialchars($_POST['contact_name']);
+      $contact_email = htmlspecialchars($_POST['contact_email']);
+      $telepon = htmlspecialchars($_POST['telepon']);
+      $contact_message = htmlspecialchars($_POST['contact_message']);
+
+      // Gunakan prepared statement untuk query
+      $stmt = $koneksi->prepare("INSERT INTO contact (contact_date, contact_name, contact_email, telepon, contact_message) VALUES (?, ?, ?, ?, ?)");
+      $stmt->bind_param("sssss", $contact_date, $contact_name, $contact_email, $telepon, $contact_message);
+
+      // Eksekusi query
+      if ($stmt->execute()) {
+        echo '<script>alert("Pesan Berhasil Terkirim :)"); window.location = "index.php?pesan=success#contact";</script>';
+      } else {
+        echo '<script>alert("Gagal mengirim pesan. Silakan coba lagi.")</script>';
+        header("location:index.php#contact");
+        exit();
+      }
+
+      $stmt->close();
+    } else {
+      echo '<script>alert("Semua field harus diisi.")</script>';
+    }
+  }
+  ?>
+</section>
+
+
+     <!-- Footer Start -->
+    <footer class="footer py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4 text-lg-start">
+              <p>
+              created by
+              <a href="https://www.instagram.com/4doel_aziz" target="_blank"
+                >Abdul Aziz</a
+              >
+              | &copy; 2023 Politeknik Negeri Subang. All rights reserved.
+            </p>
+          </div>
+          <div class="col-lg-4 my-3 my-lg-0">
+            <a
+              class="btn btn-dark btn-social mx-2"
+              href="https://www.instagram.com/politekniknegerisubang/"
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              class="btn btn-dark btn-social mx-2"
+              href="https://polsub.ac.id/" target="_blank"
+              ><i class="fab fa-globe"></i
+            ></a>
+            <a
+              class="btn btn-dark btn-social mx-2" 
+              href="https://web.facebook.com/polsubofficial" target="_blank"
+              ><i class="fab fa-facebook"></i
+              ></a>
+            <a
+              class="btn btn-dark btn-social mx-2"
+              href="https://api.whatsapp.com/send/?phone=6281111112851&text&type=phone_number&app_absent=0"
+              target="_blank"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a class="link-dark text-decoration-none me-3" href="#!"
+              >Privacy Policy</a
+            >
+            <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Portfolio Modals-->
+    <?php
+$query = "SELECT * FROM testimonial ORDER BY id ASC";
+$result = mysqli_query($koneksi, $query);
+if (!$result) {
+    die("Query Error: " . mysqli_errno($koneksi) . " - " . mysqli_error($koneksi));
+}
+while ($row = mysqli_fetch_assoc($result)) {
+?>
+    <div class="portfolio-modal modal fade" id="portfolioModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal">
+                    <img src="assets/img/close-icon.svg" alt="Close modal" />
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                        <div class="modal-body">
+                          <h2 class="text-uppercase">Apa Kata Client Kami?</h2>
+                          <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                          <img src="../assets/img/testimonial/<?php echo $row['testi_image']; ?>" alt="..." class="img-fluid d-block mx-auto">
+                          <p><?php echo $row['testi_text']; ?></p>
+                          <ul class="list-inline">
+                            <li>
+                              <strong>Client:</strong>
+                              <?php echo $row['testi_client']; ?>
+                            </li>
+                            <li>
+                              <strong>Category:</strong>
+                              <?php echo $row['category']; ?>
+                            </li>
+                          </ul>
+                          <button
+                            class="btn btn-primary btn-xl text-uppercase"
+                            data-bs-dismiss="modal"
+                            type="button"
+                          >
+                            <i class="fas fa-xmark me-1"></i>
+                            Close Project
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              <?php
+                  $no++;
+              }
+              ?>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+  </body>
+</html>

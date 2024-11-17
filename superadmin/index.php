@@ -57,21 +57,21 @@ if (!empty($_SESSION['SUPER_ADMIN'])) {
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
+            <img src="../assets/img/logo/polsub.png" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Owner</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <!-- <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+            <li class="dropdown-header">
+              <h6>Abdul Aziz</h6>
+              <span>Full Stack Developer</span>
             </li>
             <li>
               <hr class="dropdown-divider">
-            </li> -->
+            </li>
 
-            <!-- <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="../update.html">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -81,7 +81,7 @@ if (!empty($_SESSION['SUPER_ADMIN'])) {
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="../update.html">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -91,11 +91,11 @@ if (!empty($_SESSION['SUPER_ADMIN'])) {
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" href="../update.html">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>
-            </li> -->
+            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -107,7 +107,9 @@ if (!empty($_SESSION['SUPER_ADMIN'])) {
               </a>
             </li>
 
-          </ul><!-- End Profile Dropdown Items -->
+          </ul>
+
+<!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
 
       </ul>
@@ -349,7 +351,7 @@ if (!empty($_SESSION['SUPER_ADMIN'])) {
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <!-- Vendor JS Files -->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
   <script>
     // tinymce.init({

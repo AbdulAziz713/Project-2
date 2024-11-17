@@ -2,7 +2,7 @@
 // session start
 if (!empty($_SESSION)) {
 } else {
-    session_start();
+  session_start();
 }
 require 'db-connect.php';
 ?>
@@ -12,7 +12,7 @@ require 'db-connect.php';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="img/logo/polsub.png" />
+    <link rel="icon" href="assets/img/logo/polsub.png" />
     <title>Wedding Organizer</title>
 
     <!-- Fonts -->
@@ -27,7 +27,7 @@ require 'db-connect.php';
     <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- My Style -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <!-- Alpine JS -->
     <script
@@ -52,14 +52,8 @@ require 'db-connect.php';
       </div>
 
       <div class="navbar-extra">
-        <a href="#" id="search-button"><i data-feather="search"></i></a>
-        <a href="#" id="shopping-cart-button"
-          ><i data-feather="shopping-cart"></i
-        ></a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
-        <a href="index.html" class="logout-button"
-          ><i data-feather="log-out"></i
-        ></a>
+        <a href="index.html" class="logout-button"><i data-feather="log-out"></i></a>
       </div>
 
       <!-- Search Form Start -->
@@ -72,7 +66,7 @@ require 'db-connect.php';
       <!-- Shopping Cart Start -->
       <div class="shopping-cart">
         <div class="cart-item">
-          <img src="img/products/product1.jpg" alt="Product1" />
+          <img src="assets/img/products/product1.jpg" alt="Product1" />
           <div class="item-detail">
             <h3>Product1</h3>
             <div class="item-price">IDR 30K</div>
@@ -80,7 +74,7 @@ require 'db-connect.php';
           <i data-feather="trash-2" class="remove-item"></i>
         </div>
         <div class="cart-item">
-          <img src="img/products/product1.jpg" alt="Product2" />
+          <img src="assets/img/products/product1.jpg" alt="Product2" />
           <div class="item-detail">
             <h3>Product1</h3>
             <div class="item-price">IDR 30K</div>
@@ -88,7 +82,7 @@ require 'db-connect.php';
           <i data-feather="trash-2" class="remove-item"></i>
         </div>
         <div class="cart-item">
-          <img src="img/products/product1.jpg" alt="Product3" />
+          <img src="assets/img/products/product1.jpg" alt="Product3" />
           <div class="item-detail">
             <h3>Product1</h3>
             <div class="item-price">IDR 30K</div>
@@ -110,13 +104,233 @@ require 'db-connect.php';
     </section>
     <!-- Hero Section End -->
 
+    <section id="features" class="features py-5">
+        <div class="container">
+            <div class="heading-text text-center mb-5">
+                <p class="text-p">&#129321; Why Choose Us</p>
+                <h4>The Best Features We Provide</h4>
+                <p>Provide the main service in the form of making a wedding website with various interesting features, the prospective bride and groom</p>
+            </div>
+            <div class="row justify-content-center">
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM features ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;  
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="features-item col-md-3 text-center">
+                        <i class="<?php echo $row['features_icon']; ?>"></i>
+                        <h5><?php echo $row['features_name']; ?></h5>
+                    </div>
+
+                <?php
+                    $no++;
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <?php
+            // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+            $query = "SELECT * FROM about ORDER BY id ASC";
+            $result = mysqli_query($koneksi, $query);
+            //mengecek apakah ada error ketika menjalankan query
+            if (!$result) {
+                die("Query Error: " . mysqli_errno($koneksi) .
+                    " - " . mysqli_error($koneksi));
+            }
+            $row = mysqli_fetch_assoc($result)
+            ?>
+            <div class="about-content">
+                <div class="text-center mb-4">
+                    <p class="text-p">&#128075; Who Are We?</p>
+                    <h4><?php echo $row['about_heading']; ?></h4>
+                </div>
+                <div class="row justify-content-center text-center">
+                    <div class="col">
+                        <p><?php echo $row['about_text']; ?></p>
+                        <div class="main-btn mt-4">Know More <i class="fa-solid fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <?php
+            ?>
+
+        </div>
+    </section>
+
+    <section id="package" class="package py-5">
+        <div class="container">
+            <div class="heading-text text-center mb-4">
+                <p class="text-p">&#128184; Easy Packages Easy Money</p>
+                <h4>Best Packages Best Pricing For You</h4>
+            </div>
+            <div class="row justify-content-center">
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM packages ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="package-item col-md-3">
+                        <div class="head-package text-center">
+                            <h4 class="text-uppercase mb-1"><?php echo $row['packages_heading']; ?></h4>
+                            <p class="price fs-2 fw-semibold"><?php echo $row['packages_price']; ?></p>
+                            <br>
+                        </div>
+                        <div class="body-package">
+                            <?php echo $row['packages_list']; ?>
+                            <div class="text-center">
+                                <a href="" class="second-btn">See Detail Package</a>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php
+                    $no++;
+                }
+                ?>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery py-5">
+        <div class="container">
+            <div class="heading-text text-center mb-5">
+                <p class="text-p">&#128247; Our Gallery</p>
+                <h4>Gallery</h4>
+            </div>
+            <div class="row" data-masonry='{"percentPosition": true }'>
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM gallery ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="gallery-item col-6 col-sm-6 col-lg-4">
+                        <div class="gallery-text">
+                            <h5><?php echo $row['gallery_heading']; ?></h5>
+                            <p><?php echo $row['gallery_desc']; ?></p>
+                        </div>
+                        <img src="assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="" class="img-fluid">
+                    </div>
+
+                <?php
+                    $no++;
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="blog py-5">
+        <div class="container">
+            <div class="heading-text text-center mb-5">
+                <p class="text-p">&#128221; Blog Post</p>
+                <h4>Blog</h4>
+            </div>
+            <div class="row justify-content-center">
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM blog ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+
+                    <div class="blog-item col-md-3 card">
+                        <img src="assets/img/blog/<?php echo $row['blog_image']; ?>" class="card-img-top" alt="Blog Image">
+                        <div class="card-body">
+                            <div class="author">
+                                <p><span><?php echo date('M d Y', strtotime($row['blog_date'])); ?></span> / Iqbal Prasetya</p>
+                            </div>
+                            <h5 class="card-title"><?php echo $row['blog_heading']; ?></h5>
+                            <p class="card-text"><?php echo substr($row['blog_text'], 0, 150); ?>...</p>
+                            <a href="blog/page.php?id=<?php echo $row['id']; ?>" class="second-btn">Read More</a>
+                        </div>
+                    </div>
+
+                <?php
+                    $no++;
+                }
+                ?>
+            </div>
+        </div>
+    </section>
+
+    <section id="client" class="client">
+        <div class="container">
+            <div class="heading-text text-center">
+                <p class="text-p">&#128221; Client</p>
+                <h4>Apa Kata Client Kami?</h4>
+            </div>
+            <div class="custom-nav owl-nav"></div>
+            <div id="owl-carousel" class="owl-carousel owl-theme client-carousel col-md-5 text-center">
+                <?php
+                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                $query = "SELECT * FROM testimonial ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+                //mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                        " - " . mysqli_error($koneksi));
+                }
+                $no = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="item client-item">
+                        <img src="assets/img/testimonial/<?php echo $row['testi_image']; ?>" alt="" class="rounded-circle mb-3">
+                        <blockquote class="blockquote mb-0">
+                            <p><?php echo $row['testi_text']; ?></p>
+                            <footer class="blockquote-footer"><cite title="<?php echo $row['testi_client']; ?>"><?php echo $row['testi_client']; ?></cite></footer>
+                        </blockquote>
+                    </div>
+
+                <?php
+                    $no++;
+                }
+                ?>
+
+            </div>
+            <div class="custom-dots owl-dots text-center"></div>
+        </div>
+    </section>
+     
     <!-- About Section  Start -->
     <section id="about" class="about">
       <h2><span>Tentang </span>Kami</h2>
 
       <div class="row">
         <div class="about-img">
-          <img src="img/tentang-kami.jpg" alt="Tentang Kami" />
+          <img src="assets/img/tentang-kami.jpg" alt="Tentang Kami" />
         </div>
         <div class="content">
           <h3>Kenapa Memilih Kami?</h3>
@@ -150,10 +364,10 @@ require 'db-connect.php';
             ></a>
           </div>
           <div class="product-image">
-            <img src="img/products/product1.jpg" alt="Product1" />
+            <img src="assets/img/products/product1.jpg" alt="Product1" />
           </div>
           <div class="product-content">
-            <h3>Book 1</h3>
+            <h3>Paket 1</h3>
             <div class="product-stars">
               <i data-feather="star"></i>
               <i data-feather="star"></i>
@@ -174,10 +388,10 @@ require 'db-connect.php';
             ></a>
           </div>
           <div class="product-image">
-            <img src="img/products/product1.jpg" alt="Product2" />
+            <img src="assets/img/products/product1.jpg" alt="Product2" />
           </div>
           <div class="product-content">
-            <h3>Book 2</h3>
+            <h3>Paket 2</h3>
             <div class="product-stars">
               <i data-feather="star"></i>
               <i data-feather="star"></i>
@@ -198,10 +412,10 @@ require 'db-connect.php';
             ></a>
           </div>
           <div class="product-image">
-            <img src="img/products/product1.jpg" alt="Product3" />
+            <img src="assets/img/products/product1.jpg" alt="Product3" />
           </div>
           <div class="product-content">
-            <h3>Book 3</h3>
+            <h3>Paket 3</h3>
             <div class="product-stars">
               <i data-feather="star" class="star-full"></i>
               <i data-feather="star" class="star-full"></i>
@@ -222,10 +436,10 @@ require 'db-connect.php';
             ></a>
           </div>
           <div class="product-image">
-            <img src="img/products/product1.jpg" alt="Product4" />
+            <img src="assets/img/products/product1.jpg" alt="Product4" />
           </div>
           <div class="product-content">
-            <h3>Book 4</h3>
+            <h3>Paket Customs</h3>
             <div class="product-stars">
               <i data-feather="star"></i>
               <i data-feather="star"></i>
@@ -269,8 +483,12 @@ require 'db-connect.php';
             <input type="text" placeholder="email" />
           </div>
           <div class="input-group">
-            <i data-feather="phone"></i>
-            <input type="text" placeholder="no hp" />
+            <i data-feather="tag"></i>
+            <input type="text" placeholder="Subject" />
+          </div>
+          <div class="input-group">
+            <i data-feather="file-text"></i>
+            <input type="text" placeholder="Pesan" />
           </div>
           <button type="submit" class="btn">Kirim Pesan</button>
         </form>
@@ -323,7 +541,7 @@ require 'db-connect.php';
       <div class="modal-container">
         <a href="#" class="close-icon"><i data-feather="x"></i></a>
         <div class="modal-content">
-          <img src="img/products/product1.jpg" alt="Product1" />
+          <img src="assets/img/products/product1.jpg" alt="Product1" />
           <div class="product-content">
             <h3>Product 1</h3>
             <p>

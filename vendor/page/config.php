@@ -84,5 +84,5 @@ switch ($page) {
 
 
   default:
-    include "dashboard.php";
+    include "packages.php";
 }

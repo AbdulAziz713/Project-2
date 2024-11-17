@@ -5,7 +5,7 @@ if (!empty($_SESSION)) {
     session_start();
 }
 require '../db-connect.php';
-if (!empty($_SESSION['ADMIN'])) {
+if (!empty($_SESSION['VENDOR'])) {
 } else {
     echo '<script>alert("Maaf Login Dahulu !");window.location="login.php"</script>';
 }
