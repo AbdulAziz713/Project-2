@@ -19,28 +19,28 @@
                     <h5 class="card-title">Tambah Data Vendor</h5>
 
                     <form class="row g-3" method="POST" action="../action.php?act=add-vendor" enctype="multipart/form-data">
-                    <div class="col-md-2">
+                        <div class="col-lg-2 col-md-9 col-sm-8">
                             <label class="form-label">Nama</label>
                             <input type="text" class="form-control" name="nama_vendor" required="required" autocomplete="off">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-9 col-sm-8">
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control" name="email_vendor" required="required" autocomplete="off">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-9 col-sm-8">
                             <label class="form-label">Telepon</label>
                             <input type="text" class="form-control" name="telepon_vendor" required="required" autocomplete="off">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-9 col-sm-8">
                             <label class="form-label">Jenis Kelamin</label>
-                            <select name="jenis_kelamin" class="form-control" required>
+                            <select name="jenis_kelamin" class="form-control input-fixed" required>
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2 col-md-9 col-sm-8">
                             <label class="form-label">Jenis Layanan</label>
-                            <select name="jenis_layanan" class="form-control" required>
+                            <select name="jenis_layanan" class="form-control input-fixed" required>
                                 <option value="Cattering">Cattering</option>
                                 <option value="Dekorasi">Dekorasi</option>
                                 <option value="Hiburan">Hiburan</option>

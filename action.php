@@ -19,8 +19,9 @@ if (!empty($_GET['act'] == 'rubah-password')) {
 if (!empty($_GET['act'] == "add-features")) {
   $features_name = $_POST['features_name'];
   $features_icon = $_POST['features_icon'];
+  $description = $_POST['description'];
 
-  $query = mysqli_query($koneksi, "INSERT INTO features(features_name, features_icon) VALUES ('$features_name', '$features_icon')");
+  $query = mysqli_query($koneksi, "INSERT INTO features(features_name, features_icon, description) VALUES ('$features_name', '$features_icon', '$description')");
 
   if ($query) {
     header("location:admin/index.php?page=features&pesan=tambah");
@@ -38,11 +39,12 @@ if (!empty($_GET['act'] == "edit-features")) {
       $id = $_POST['id'];
       $features_name = $_POST['features_name'];
       $features_icon = $_POST['features_icon'];
+      $description = $_POST['description'];
     } else {
       header("location:admin/index.php?page=features");
     }
 
-    $query = mysqli_query($koneksi, "UPDATE features SET features_name='$features_name', features_icon='$features_icon' WHERE id='$id'");
+    $query = mysqli_query($koneksi, "UPDATE features SET features_name='$features_name', features_icon='$features_icon', description='$description' WHERE id='$id'");
 
     if ($query) {
       header("location:admin/index.php?page=features");

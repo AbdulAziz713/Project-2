@@ -3,8 +3,8 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php?page=dashboard">Home</a></li>
-            <li class="breadcrumb-item"><a href="index.php?page=features">Features</a></li>
-            <li class="breadcrumb-item active">Add Features</li>
+            <li class="breadcrumb-item"><a href="index.php?page=features">Pelayanan</a></li>
+            <li class="breadcrumb-item active">Tambah Pelayanan</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -16,15 +16,19 @@
         <div class="col-12">
             <div class="card features-card">
             <div class="card-body">
-                <h5 class="card-title">Add Data Features</h5>
+                <h5 class="card-title">Tambah Pelayanan</h5>
 
                 <form class="row g-3" method="POST" action="../action.php?act=add-features" enctype="multipart/form-data">
                     <div class="col-md-6">
-                        <label class="form-label">Features Name</label>
+                        <label class="form-label">Nama Pelayanan</label>
                         <input type="text" class="form-control" name="features_name" required="required" autocomplete="off">
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Deskripsi</label>
+                        <input type="text" class="form-control" name="description" required="required" autocomplete="off">
+                    </div>
                     <div class="col-12">
-                        <label class="form-label">Feature Icon</label>
+                        <label class="form-label">Ikon Pelayanan</label>
                         <p class="example">Untuk Menambahkan Icon anda bisa cari di <code>fontawesome.com/icons</code> </p>
                         <input type="text" class="form-control" name="features_icon" placeholder="fa-brands fa-instagram" required="required" autocomplete="off">
                     </div>

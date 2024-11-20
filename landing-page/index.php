@@ -10,6 +10,35 @@ require '../db-connect.php';
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      /* Pastikan carousel-indicators tidak menempel */
+.carousel-indicators {
+    position: relative; /* Tetap relatif terhadap container */
+    bottom: -30px; /* Turunkan indikator ke bawah */
+    margin-top: 20px; /* Tambahkan margin untuk berjaga */
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Jarak antar indikator */
+}
+
+/* Tampilan tombol indikator */
+.carousel-indicators button {
+    background-color: #fff; /* Warna indikator normal */
+    width: 40px; /* Lebar indikator */
+    height: 5px; /* Tinggi indikator */
+    border: none; /* Hilangkan border */
+    border-radius: 10px; /* Bentuk indikator menjadi oval */
+    opacity: 0.5; /* Transparansi default */
+    transition: opacity 0.3s, background-color 0.3s;
+}
+
+/* Tombol aktif */
+.carousel-indicators button.active {
+    background-color: #ff007f; /* Warna aktif (pink) */
+    opacity: 1; /* Transparansi penuh */
+}
+
+    </style>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -17,7 +46,10 @@ require '../db-connect.php';
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Wedding Organizer</title>
+    <title>Irma Wedding</title>
+    
+    <!-- Carousel -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -44,7 +76,7 @@ require '../db-connect.php';
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a href="#page-top" class="navbar-brand">Wedding <span>Organizer</span></a>
+        <a href="#page-top" class="navbar-brand">Irma <span>Wedding</span></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -60,17 +92,17 @@ require '../db-connect.php';
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#services">Services</a>
+              <a class="nav-link" href="#services">Pelayanan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#portfolio">Portfolio</a>
+              <a class="nav-link" href="#portfolio">Gallery</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+              <a class="nav-link" href="#about">Tentang Kami</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+            <li class="nav-item"><a class="nav-link" href="#team">Tim</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
+              <a class="nav-link" href="#contact">Kontak</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../login/login.php">Log In</a>
@@ -83,10 +115,10 @@ require '../db-connect.php';
     <!-- Masthead-->
     <header class="masthead">
       <div class="container">
-        <div class="masthead-subheading">Welcome To Our Studio!</div>
-        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+        <div class="masthead-heading">Selamat Datang di Irma Wedding!</div>
+        <div class="masthead-subheading">Tempat dimana anda akan merayakan pernikahan</div>
         <a class="btn btn-primary btn-xl text-uppercase" href="#services"
-          >Tell Me More</a
+          >Selengkapnya!</a
         >
       </div>
     </header>
@@ -95,9 +127,9 @@ require '../db-connect.php';
     <section id="services" class="page-section">
         <div class="container">
             <div class="text-center">
-            <h2 class="section-heading text-uppercase">Services</h2>
+            <h2 class="section-heading text-uppercase">Pelayanan</h2>
             <h3 class="section-subheading text-muted">
-                Lorem ipsum dolor sit amet consectetur.
+            Irma Wedding menawarkan rangkaian lengkap layanan pernikahan, mulai dari dekorasi elegan, tata rias pengantin profesional, hingga fotografi dan videografi untuk mengabadikan momen spesial Anda. Kami juga menawarkan persewaan gaun pengantin dan jaket, serta paket pernikahan yang sesuai dengan kebutuhan dan budget pasangan. Pelayanan Irma Wedding yang personal dan penuh perhatian memastikan setiap elemen pernikahan Anda berjalan lancar dan menciptakan kenangan yang tak terlupakan.
             </h3>
             </div>
             <div class="row justify-content-center text-center">
@@ -155,14 +187,15 @@ require '../db-connect.php';
                 ?>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                          <a class="portfolio-link" data-bs-toggle="modal" href="#PortfolioModal<?php echo $row['id']; ?>">
+                          <!-- <a class="portfolio-link" data-bs-toggle="modal" href="#PortfolioModal<?php echo $row['id']; ?>">
                             <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                             <i class="fas fa-plus fa-3x"></i>
                             </div>
                             </div>
                             <img src="../assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
-                          </a>
+                          </a> -->
+                          <img src="../assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
                           <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Pernikahan <?php echo $row['gallery_heading']; ?></div>
                             <div class="portfolio-caption-subheading text-muted">
@@ -178,6 +211,67 @@ require '../db-connect.php';
             </div>
         </div>
     </section>
+
+<!-- testimonial Start -->
+<section class="testimonial bg-dark text-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" style="font-family: 'Comic Sans MS', sans-serif;">Apa Kata Client Kami?</h2>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Wrapper untuk item carousel -->
+            <div class="carousel-inner">
+                <?php
+                // Jalankan query untuk mengambil semua testimonial
+                $query = "SELECT * FROM testimonial ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+
+                // Mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) . " - " . mysqli_error($koneksi));
+                }
+
+                $items = []; // Array untuk menyimpan data testimonial
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $items[] = $row; // Simpan data ke array
+                }
+
+                // Hitung jumlah testimonial dan buat grup slide
+                $isActive = true;
+                for ($i = 0; $i < count($items); $i += 2) { ?>
+                    <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>">
+                        <div class="row justify-content-center">
+                            <?php
+                            // Tampilkan 2 testimonial per slide
+                            for ($j = $i; $j < $i + 2; $j++) {
+                                if (isset($items[$j])) { ?>
+                                    <div class="col-md-6">
+                                        <div class="card bg-secondary border-0 rounded-4 text-center p-4">
+                                            <img src="../assets/img/testimonial/<?php echo $items[$j]['testi_image']; ?>" alt="Client Image" class="rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                                            <blockquote class="blockquote mb-0">
+                                                <p class="mb-2"><?php echo $items[$j]['testi_text']; ?></p>
+                                                <footer class="blockquote-footer text-light"><cite title="<?php echo $items[$j]['testi_client']; ?>"><?php echo $items[$j]['testi_client']; ?></cite></footer>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                            <?php }
+                            } ?>
+                        </div>
+                    </div>
+                    <?php $isActive = false;
+                } ?>
+            </div>
+            <!-- Indikator Garis -->
+            <div class="carousel-indicators">
+                <?php
+                // Buat indikator sebanyak jumlah slide
+                $slideCount = ceil(count($items) / 2); // 2 item per slide
+                for ($i = 0; $i < $slideCount; $i++) { ?>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="<?php echo $i; ?>" class="<?php echo $i === 0 ? 'active' : ''; ?>" aria-current="<?php echo $i === 0 ? 'true' : 'false'; ?>" aria-label="Slide <?php echo $i + 1; ?>"></button>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- testimonial End -->
 
     <!-- About-->
     <section id="about" class="about">
@@ -338,7 +432,7 @@ require '../db-connect.php';
 </div>
         </div>
     </section>
-    
+ 
     <!-- Team-->
     <section class="page-section bg-light" id="team">
       <div class="container">
@@ -450,7 +544,7 @@ require '../db-connect.php';
     </section>
 
     <!-- Clients-->
-    <div class="py-5">
+    <!-- <div class="py-5">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-3 col-sm-6 my-3">
@@ -491,7 +585,7 @@ require '../db-connect.php';
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Contact-->
 <section class="page-section" id="contact">
@@ -577,7 +671,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a
               class="btn btn-dark btn-social mx-2"
               href="https://polsub.ac.id/" target="_blank"
-              ><i class="fab fa-linkedin"></i
+              ><i class="fab fa-google"></i
             ></a>
             <a
               class="btn btn-dark btn-social mx-2" 
@@ -602,7 +696,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
     <!-- Footer End -->
     <!-- Portfolio Modals-->
-    <?php
+    <!-- <?php
 $query = "SELECT * FROM gallery ORDER BY id ASC";
 $result = mysqli_query($koneksi, $query);
 if (!$result) {
@@ -621,7 +715,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                       <div class="col-lg-8">
                         <div class="modal-body">
                           <h2 class="text-uppercase">Detail Pernikahan</h2>
-                          <!-- <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
+                          <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
                           <img src="../assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid d-block mx-auto">
                           <ul class="list-inline">
                             <li>
@@ -650,12 +744,13 @@ while ($row = mysqli_fetch_assoc($result)) {
               ?>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
 
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

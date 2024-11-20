@@ -254,7 +254,7 @@
                                                     </div>
                                                     <div class="ps-3">
                                                         <h6><?php echo $row['gallery_heading']; ?></h6>
-                                                        <p class="fw-light" style="font-size: 11px;"><?php echo $row['gallery_desc']; ?></p>
+                                                        <p class="fw-light" style="font-size: 11px;"><?php echo $row['gallery_text']; ?></p>
                                                     </div>
                                                 </div>
 

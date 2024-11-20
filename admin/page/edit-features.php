@@ -5,10 +5,6 @@ if (!empty($_SESSION)) {
     session_start();
 }
 require '../db-connect.php';
-if (!empty($_SESSION['Owner'] || $_SESSION['Admin'] || $_SESSION['Vendor'])) {
-} else {
-    echo '<script>alert("Maaf Login Dahulu !");window.location="../login/login.php"</script>';
-}
 
 if (isset($_GET['id'])) {
     $id = ($_GET["id"]);
@@ -34,8 +30,8 @@ if (isset($_GET['id'])) {
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php?page=dashboard">Home</a></li>
-            <li class="breadcrumb-item"><a href="index.php?page=features">Features</a></li>
-            <li class="breadcrumb-item active">Edit Features</li>
+            <li class="breadcrumb-item"><a href="index.php?page=features">Pelayanan</a></li>
+            <li class="breadcrumb-item active">Edit Pelayanan</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -47,16 +43,20 @@ if (isset($_GET['id'])) {
         <div class="col-12">
             <div class="card features-card">
                 <div class="card-body">
-                    <h5 class="card-title">Edit Data Features</h5>
+                    <h5 class="card-title">Edit Pelayanan</h5>
 
                     <form class="row g-3" method="POST" action="../action.php?act=edit-features" enctype="multipart/form-data">
                         <div class="col-md-6">
                             <input name="id" value="<?php echo $data['id']; ?>" hidden />
-                            <label class="form-label">Features Name</label>
+                            <label class="form-label">Nama Pelayanan</label>
                             <input type="text" class="form-control" name="features_name" value="<?php echo $data['features_name']; ?>">
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Deskripsi</label>
+                            <input type="text" class="form-control" name="description" value="<?php echo $data['description']; ?>">
+                        </div>
                         <div class="col-12">
-                            <label class="form-label">Feature Icon</label>
+                            <label class="form-label">Ikon Pelayanan</label>
                             <p class="example">Untuk Menambahkan Icon anda bisa cari di <code>fontawesome.com/icons</code> </p>
                             <input type="text" class="form-control" name="features_icon" value="<?php echo $data['features_icon']; ?>">
                         </div>

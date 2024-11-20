@@ -47,10 +47,14 @@ $menus = [
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
     <title><?php echo htmlspecialchars($role); ?> - Irma Wedding</title>
     
-    <!-- Vendor CSS Files -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tiny.cloud/1/2ol7w9hdbi0pdtg3hjanp13h87pvosj3pqzcdaezfpne0qj1/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="assets/css/style.css" rel="stylesheet">
+
 </head>
 <body>
     <!-- Header -->
@@ -58,7 +62,7 @@ $menus = [
 
 <div class="d-flex align-items-center justify-content-between">
   <a href="#" class="logo d-flex align-items-center">
-    <span class="d-none d-lg-block">Wedding Organizer</span>
+    <span class="d-none d-lg-block">Irma Wedding</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
