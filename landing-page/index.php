@@ -73,7 +73,7 @@ require '../db-connect.php';
               <a class="nav-link" href="#contact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../login.php">Log In</a>
+              <a class="nav-link" href="../login/login.php">Log In</a>
             </li>
           </ul>
         </div>

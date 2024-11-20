@@ -1,6 +1,6 @@
 <?php
 session_start(); // Memulai session
-include_once "db-connect.php"; // Pastikan Anda memiliki koneksi database
+include_once "../db-connect.php"; // Pastikan Anda memiliki koneksi database
 
 // Cek koneksi
 if (!$koneksi) {
@@ -63,14 +63,14 @@ if (isset($_POST['reset'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/img/logo/polsub.png" />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
     <title>Reset Password</title>
     <link rel="stylesheet" href="style.css"> <!-- Menggunakan file CSS yang sama -->
 </head>
 <body>
     <div class="kotak_login">
-        <h3><b>Sistem Informasi Weding Organizer </b> <br/> Politeknik Negeri Subang</h3>
-        <center><img src="assets/img/logo/polsub.png" width="200" height="200"></center>
+        <h3><b>Sistem Informasi Irma Wedding </b> <br/> Politeknik Negeri Subang</h3>
+        <center><img src="../assets/img/logo/polsub.png" width="200" height="200"></center>
     </div>
     <div class="kotak_login2 signup-form"> <!-- Tambahkan kelas khusus -->
         <p class="tulisan_login">Silahkan Isi Data</p>
@@ -93,10 +93,6 @@ if (isset($_POST['reset'])) {
             </div>
             <input type="submit" name="reset" class="tombol_login" value="RESET"/>&nbsp;
         </form>
-        <div class="signup">
-            Sudah punya akun?
-            <a href="login.php">Login di sini</a>
-        </div>
     </div>
 </body>
 </html>

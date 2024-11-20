@@ -80,9 +80,29 @@ switch ($page) {
     include "contact.php";
     break;
 
+  case 'edit-pelanggan':
+    include "edit-pelanggan.php";
+    break;
+
+  case 'pelanggan':
+    include "pelanggan.php";
+    break;
+  
+  case 'add-vendor':
+    include "add-vendor.php";
+    break;
+
+  case 'edit-vendor':
+    include "edit-vendor.php";
+    break;
+    
+  case 'vendor':
+    include "vendor.php";
+    break;
+
 
 
 
   default:
-    include "features.php";
+    include "dashboard.php";
 }

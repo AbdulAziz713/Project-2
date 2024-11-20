@@ -78,7 +78,7 @@
                             <p style="font-size: 11px;"><?php echo date('M d Y H:i:s' , strtotime($row['contact_date'])); ?></p>
                             <h3 class="">Nama Pengirim : <?php echo $row['contact_name']; ?></h3>
                             <hr>
-                            <h5>Subject : <?php echo $row['contact_subject']; ?></h5>
+                            <h5>Telepon : <?php echo $row['telepon']; ?></h5>
                             <p style="font-size: 14px; font-weight: 200;">Message : <?php echo $row['contact_message']; ?></p>
                         </div>
 

@@ -4,9 +4,9 @@ if (!empty($_SESSION)) {
 } else {
     session_start();
 }
-if (!empty($_SESSION['ADMIN'])) {
+if (!empty($_SESSION['Owner'] || $_SESSION['Admin'] || $_SESSION['Vendor'])) {
 } else {
-    echo '<script>alert("Maaf Login Dahulu !");window.location="login.php"</script>';
+    echo '<script>alert("Maaf Login Dahulu !");window.location="../login/login.php"</script>';
 }
 
 if (isset($_GET['id'])) {

@@ -4,15 +4,16 @@ if (!empty($_SESSION)) {
 } else {
     session_start();
 }
-if (!empty($_SESSION['SUPER_ADMIN'])) {
+require '../db-connect.php';
+if (!empty($_SESSION['Owner'] || $_SESSION['Admin'] || $_SESSION['Vendor'])) {
 } else {
-    echo '<script>alert("Maaf Login Dahulu !");window.location="login.php"</script>';
+    echo '<script>alert("Maaf Login Dahulu !");window.location="../login/login.php"</script>';
 }
 
 if (isset($_GET['id'])) {
     $id = ($_GET["id"]);
 
-    $query = "SELECT * FROM testimonial WHERE id='$id'";
+    $query = "SELECT * FROM gallery WHERE id='$id'";
     $result = mysqli_query($koneksi, $query);
     if (!$result) {
         die("Query Error: " . mysqli_errno($koneksi) .
@@ -29,12 +30,12 @@ if (isset($_GET['id'])) {
 ?>
 
 <div class="pagetitle">
-    <h1>Testimonial</h1>
+    <h1>Gallery</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php?page=dashboard">Home</a></li>
-            <li class="breadcrumb-item"><a href="index.php?page=testi">Testimonial</a></li>
-            <li class="breadcrumb-item active">Edit Testimonial</li>
+            <li class="breadcrumb-item"><a href="index.php?page=gallery">Gallery</a></li>
+            <li class="breadcrumb-item active">Edit Gallery</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -44,23 +45,23 @@ if (isset($_GET['id'])) {
 
 
         <div class="col-12">
-            <div class="card testimonial-card">
+            <div class="card gallery-card">
                 <div class="card-body">
-                    <h5 class="card-title">Edit Data testimonial</h5>
+                    <h5 class="card-title">Edit Data Gallery</h5>
 
-                    <form class="row g-3" method="POST" action="../action.php?act=edit-testi" enctype="multipart/form-data">
+                    <form class="row g-3" method="POST" action="../action.php?act=edit-gallery" enctype="multipart/form-data">
                         <div class="col-md-4">
                             <input name="id" value="<?php echo $data['id']; ?>" hidden />
                             <label class="form-label">Image</label>
-                            <input type="file" class="form-control" id="inputGroupFile02" name="testi_image">
+                            <input type="file" class="form-control" id="inputGroupFile02" name="gallery_image">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Client</label>
-                            <input type="text" class="form-control" name="testi_client" required="required" autocomplete="off" value="<?php echo $data['testi_client']; ?>">
+                            <label class="form-label">Heading</label>
+                            <input type="text" class="form-control" name="gallery_heading" required="required" autocomplete="off" value="<?php echo $data['gallery_heading']; ?>">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Description</label>
-                            <textarea class="form-control" name="testi_text" rows="5"><?php echo $data['testi_text']; ?></textarea>
+                            <textarea class="form-control" name="gallery_desc" rows="5"><?php echo $data['gallery_desc']; ?></textarea>
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success">Submit</button>

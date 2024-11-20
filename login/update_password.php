@@ -1,6 +1,6 @@
 <?php
 session_start(); // Memulai session
-require "db-connect.php"; // Pastikan Anda memiliki koneksi database
+require "../db-connect.php"; // Pastikan Anda memiliki koneksi database
 
 // Cek koneksi
 if (!$koneksi) {
@@ -38,14 +38,14 @@ if (isset($_GET['token']) || isset($_POST['token'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
   <title>Lupa Password</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="kotak_login">
         <h3><b>Sistem Informasi Wedding Organizer </b> <br/> Politeknik Negeri Subang</h3>
-        <center><img src="assets/img/logo/polsub.png" width="200" height="200"></center>
+        <center><img src="../assets/img/logo/polsub.png" width="200" height="200"></center>
     </div>
     <div class="kotak_login2">
         <p class="tulisan_login">Form Lupa Password</p>

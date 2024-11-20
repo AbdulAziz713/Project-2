@@ -1,6 +1,6 @@
 <?php
 session_start(); // Memulai session
-include_once "db-connect.php"; // Pastikan Anda memiliki koneksi database
+include_once "../db-connect.php"; // Pastikan Anda memiliki koneksi database
 
 // Cek koneksi
 if (!$koneksi) {
@@ -61,14 +61,14 @@ if (isset($_POST['register'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
     <title>Buat Akun</title>
     <link rel="stylesheet" href="style.css"> <!-- Menggunakan file CSS yang sama -->
 </head>
 <body>
     <div class="kotak_login">
     <h3><b>Sistem Informasi Wedding Organizer </b> <br/> Politeknik Negeri Subang</h3>
-    <center><img src="assets/img/logo/polsub.png" width="200" height="200"></center>
+    <center><img src="../assets/img/logo/polsub.png" width="200" height="200"></center>
     </div>
     <div class="kotak_login2 signup-form"> <!-- Tambahkan kelas khusus -->
         <p class="tulisan_login">Silahkan Isi Data</p>

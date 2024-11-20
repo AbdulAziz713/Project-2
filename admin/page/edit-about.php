@@ -5,15 +5,15 @@ if (!empty($_SESSION)) {
     session_start();
 }
 require '../db-connect.php';
-if (!empty($_SESSION['VENDOR'])) {
+if (!empty($_SESSION['Owner'] || $_SESSION['Admin'] || $_SESSION['Vendor'])) {
 } else {
-    echo '<script>alert("Maaf Login Dahulu !");window.location="login.php"</script>';
+    echo '<script>alert("Maaf Login Dahulu !");window.location="../login/login.php"</script>';
 }
 
 if (isset($_GET['id'])) {
     $id = ($_GET["id"]);
 
-    $query = "SELECT * FROM blog WHERE id='$id'";
+    $query = "SELECT * FROM about WHERE id='$id'";
     $result = mysqli_query($koneksi, $query);
     if (!$result) {
         die("Query Error: " . mysqli_errno($koneksi) .
@@ -30,12 +30,12 @@ if (isset($_GET['id'])) {
 ?>
 
 <div class="pagetitle">
-    <h1>blog</h1>
+    <h1>About</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php?page=dashboard">Home</a></li>
-            <li class="breadcrumb-item"><a href="index.php?page=blog">blog</a></li>
-            <li class="breadcrumb-item active">Edit blog</li>
+            <li class="breadcrumb-item"><a href="index.php?page=about">About</a></li>
+            <li class="breadcrumb-item active">Edit About</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -45,30 +45,23 @@ if (isset($_GET['id'])) {
 
 
         <div class="col-12">
-            <div class="card blog-card">
+            <div class="card about-card">
                 <div class="card-body">
-                    <h5 class="card-title">Edit Data blog</h5>
+                    <h5 class="card-title">Edit Data About</h5>
 
-                    <form class="row g-3" method="POST" action="../action.php?act=edit-blog" enctype="multipart/form-data">
-                    
-                        <div class="col-md-4">
-                            <input name="id" value="<?php echo $data['id']; ?>" hidden />
-                            <label class="form-label">Image</label>
-                            <input type="file" class="form-control" id="inputGroupFile02" name="blog_image">
-                        </div>
+                    <form class="row g-3" method="POST" action="../action.php?act=edit-about" enctype="multipart/form-data">
                         <div class="col-md-6">
+                            <input name="id" value="<?php echo $data['id']; ?>" hidden />
                             <label class="form-label">Heading</label>
-                            <input type="text" class="form-control" name="blog_heading" required="required" autocomplete="off" value="<?php echo $data['blog_heading']; ?>">
+                            <input type="text" class="form-control" name="about_heading" value="<?php echo $data['about_heading']; ?>">
                         </div>
                         <div class="col-12">
-                            <label class="form-label">Description</label>
-                            <textarea id="editor1" class="form-control" name="blog_text" rows="5"><?php echo $data['blog_text']; ?></textarea>
-                            
+                            <label class="form-label">About Text</label>
+                            <textarea class="form-control" name="about_text" rows="5"><?php echo $data['about_text']; ?></textarea>
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
-
                     </form>
                 </div>
             </div>

@@ -10,6 +10,10 @@ if (!empty($_GET['act'] == 'logout')) {
   echo "<script>window.location='landing-page/index.php';</script>";
 }
 
+if (!empty($_GET['act'] == 'rubah-password')) {
+  session_destroy();
+  echo "<script>window.location='login/reset_password.php';</script>";
+}
 
 // TAMBAH Features
 if (!empty($_GET['act'] == "add-features")) {
@@ -610,3 +614,74 @@ if (!empty($_GET['act'] == "delete-contact")) {
   }
 }
 //  END Delete contact
+
+// TAMBAH vendor
+if (!empty($_GET['act'] == "add-vendor")) {
+  $nama_vendor = $_POST['nama_vendor'];
+  $email_vendor = $_POST['email_vendor'];
+  $jenis_kelamin = $_POST['jenis_kelamin'];
+  $telepon_vendor = $_POST['telepon_vendor'];
+  $jenis_layanan = $_POST['jenis_layanan'];
+  $alamat_vendor = $_POST['alamat_vendor'];
+
+  // Periksa duplikasi data berdasarkan email
+  $cek_duplikat = mysqli_query($koneksi, "SELECT * FROM tb_vendor WHERE email = '$email_vendor'");
+  
+  if (mysqli_num_rows($cek_duplikat) > 0) {
+      // Jika data sudah ada
+      echo '<script>alert("Data dengan email tersebut sudah ada!");</script>';
+      echo '<script>window.location = "admin/index.php?page=add-vendor";</script>';
+  } else {
+      // Jika tidak ada duplikat, masukkan data ke database
+      $query = mysqli_query($koneksi, "INSERT INTO tb_vendor(nama, email, jenis_kelamin, telepon, jenis_layanan, alamat) VALUES ('$nama_vendor', '$email_vendor', '$jenis_kelamin', '$telepon_vendor', '$jenis_layanan', '$alamat_vendor')");
+
+      if ($query) {
+        header("location:admin/index.php?page=vendor&pesan=tambah");
+      } else {
+        header("location:admin/index.php?page=vendor&pesan=gagal");
+      }
+  }
+}
+//  END TAMBAH vendor
+
+// Delete vendor
+if (!empty($_GET['act'] == "delete-vendor")) {
+  if (isset($_GET['id'])) {
+    if ($_GET['id'] != "") {
+
+      $id = $_GET['id'];
+      $query = mysqli_query($koneksi, "DELETE FROM tb_vendor WHERE id_vendor='$id'");
+      if ($query) {
+        header("location:admin/index.php?page=vendor&pesan=hapus");
+      } else {
+        header("location:admin/index.php?page=vendor&pesan=gagalhapus");
+      }
+    } else {
+      header("location:admin/index.php?page=vendor");
+    }
+  } else {
+    header("location:admin/index.php?page=vendor");
+  }
+}
+//  END Delete vendor
+
+// Delete pelanggan
+if (!empty($_GET['act'] == "delete-pelanggan")) {
+  if (isset($_GET['id'])) {
+    if ($_GET['id'] != "") {
+
+      $id = $_GET['id'];
+      $query = mysqli_query($koneksi, "DELETE FROM tb_pelanggan WHERE id_pelanggan='$id'");
+      if ($query) {
+        header("location:admin/index.php?page=pelanggan&pesan=hapus");
+      } else {
+        header("location:admin/index.php?page=pelanggan&pesan=gagalhapus");
+      }
+    } else {
+      header("location:admin/index.php?page=pelanggan");
+    }
+  } else {
+    header("location:admin/index.php?page=pelanggan");
+  }
+}
+//  END Delete pelanggan

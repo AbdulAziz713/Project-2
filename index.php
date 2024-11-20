@@ -5,11 +5,11 @@ if (!empty($_SESSION)) {
   session_start();
 }
 require 'db-connect.php';
-if (!empty($_SESSION['USER'])) {
-} else {
-  echo '<script>alert("Required Login Authorization!");window.location="../login.php"</script>';
-} 
-$username = isset($_SESSION['USER']['name']) ? $_SESSION['USER']['name'] : 'Guest';
+if (!isset($_SESSION['role'])) {
+  echo '<script>alert("Required Login Authorization!");window.location="../login.php";</script>';
+  exit();
+}
+$username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ $username = isset($_SESSION['USER']['name']) ? $_SESSION['USER']['name'] : 'Gues
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Wedding Organizer</title>
+    <title><?php echo htmlspecialchars($username); ?> - Irma Wedding</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -85,7 +85,7 @@ $username = isset($_SESSION['USER']['name']) ? $_SESSION['USER']['name'] : 'Gues
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li>
-        <a class="dropdown-item" href="reset_password.php">Rubah Password</a>
+        <a class="dropdown-item" href="action.php?act=rubah-password">Rubah Password</a>
       </li>
       <li>
         <a class="dropdown-item" href="action.php?act=logout">Log Out</a>

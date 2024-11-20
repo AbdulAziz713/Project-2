@@ -1,6 +1,6 @@
 <?php
 session_start(); // Memulai session
-include_once "db-connect.php";
+include_once "../db-connect.php";
 $koneksi = mysqli_connect("localhost", "root", "", "wedding_organizer");
 
 // Cek koneksi
@@ -8,45 +8,29 @@ if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
 
-function redirectUser ($user) {
-    $role = strtoupper(trim($user['role'])); // Normalisasi role ke uppercase dan hilangkan spasi
-switch ($role) {
-    case 'SUPER_ADMIN':
-        $_SESSION['SUPER_ADMIN'] = [
-            'id' => $user['id_user'],
-            'name' => $user['username'],
-            'role' => $role
-        ];
-        header("Location: superadmin/index.php");
-        exit();
-    case 'ADMIN':
-        $_SESSION['ADMIN'] = [
-            'id' => $user['id_user'],
-            'name' => $user['username'],
-            'role' => $role
-        ];
-        header("Location: admin/index.php");
-        exit();
-    case 'VENDOR':
-        $_SESSION['VENDOR'] = [
-            'id' => $user['id_user'],
-            'name' => $user['username'],
-            'role' => $role
-        ];
-        header("Location: vendor/index.php");
-        exit();
-    case 'USER':
-        $_SESSION['USER'] = [
-            'id' => $user['id_user'],
-            'name' => $user['username'],
-            'role' => $role
-        ];
-        header("Location: index.php");
-        exit();
-    default:
-        echo "<script>alert('Role tidak dikenali! Role saat ini: $role');</script>";
-        exit();
-    } 
+function redirectUser($user) {
+    $role = trim($user['role']); // Normalisasi role ke uppercase dan hilangkan spasi
+    $_SESSION['id'] = $user['id_user'];     // ID pengguna
+    $_SESSION['name'] = $user['username']; // Username pengguna
+    $_SESSION['role'] = $role;             // Role pengguna
+
+    switch ($role) {
+        case 'Owner':
+            header("Location: ../admin/index.php");
+            exit();
+        case 'Admin':
+            header("Location: ../admin/index.php");
+            exit();
+        case 'Vendor':
+            header("Location: ../admin/index.php");
+            exit();
+        case 'User':
+            header("Location: ../index.php");
+            exit();
+        default:
+            echo "<script>alert('Role tidak dikenali! Role saat ini: $role');</script>";
+            exit();
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -80,14 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
   <title>Form Login</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="kotak_login">
         <h3><b>Sistem Informasi Wedding Organizer </b> <br/> Politeknik Negeri Subang</h3>
-        <center><img src="assets/img/logo/polsub.png" width="200" height="200"></center>
+        <center><img src="../assets/img/logo/polsub.png" width="200" height="200"></center>
     </div>
     <div class="kotak_login2">
         <p class="tulisan_login">Silahkan Login</p>

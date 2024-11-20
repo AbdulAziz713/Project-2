@@ -1,12 +1,12 @@
 <?php
 session_start(); // Memulai session
-require "db-connect.php"; // Koneksi ke database
+require "../db-connect.php"; // Koneksi ke database
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
+require '../PHPMailer/src/Exception.php';
 
 // Cek apakah form dikirim
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -69,14 +69,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
   <title>Lupa Password</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="kotak_login">
         <h3><b>Sistem Informasi Wedding Organizer </b> <br/> Politeknik Negeri Subang</h3>
-        <center><img src="assets/img/logo/polsub.png" width="200" height="200"></center>
+        <center><img src="../assets/img/logo/polsub.png" width="200" height="200"></center>
     </div>
     <div class="kotak_login2">
         <p class="tulisan_login">Form Lupa Password</p>
