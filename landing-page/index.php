@@ -213,10 +213,11 @@ require '../db-connect.php';
     </section>
 
 <!-- testimonial Start -->
-<section class="testimonial bg-dark text-light py-5">
+<section class="page-section" id="testimonials">
     <div class="container">
-        <h2 class="text-center mb-5" style="font-family: 'Comic Sans MS', sans-serif;">Apa Kata Client Kami?</h2>
-        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="text-center">
+        <h2 class="section-heading text-uppercase" style="font-family: 'Comic Sans MS', sans-serif;">Apa Kata Pelanggan Kami?</h2>
+        <div id="testimonialCarousel" class="row justify-content-center text-center carousel slide" data-bs-ride="carousel">
             <!-- Wrapper untuk item carousel -->
             <div class="carousel-inner">
                 <?php
@@ -259,16 +260,8 @@ require '../db-connect.php';
                     <?php $isActive = false;
                 } ?>
             </div>
-            <!-- Indikator Garis -->
-            <div class="carousel-indicators">
-                <?php
-                // Buat indikator sebanyak jumlah slide
-                $slideCount = ceil(count($items) / 2); // 2 item per slide
-                for ($i = 0; $i < $slideCount; $i++) { ?>
-                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="<?php echo $i; ?>" class="<?php echo $i === 0 ? 'active' : ''; ?>" aria-current="<?php echo $i === 0 ? 'true' : 'false'; ?>" aria-label="Slide <?php echo $i + 1; ?>"></button>
-                <?php } ?>
-            </div>
         </div>
+    </div>
     </div>
 </section>
 <!-- testimonial End -->

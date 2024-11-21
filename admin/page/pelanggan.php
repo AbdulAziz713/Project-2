@@ -90,8 +90,8 @@
                 <td><?php echo $row['telepon']; ?></td>
                 <td><?php echo $row['alamat']; ?></td>
                 <td class="text-center">
-                    <a href="edit_customer.php?id=<?php echo $row['id_pelanggan']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="hapus_customer.php?id=<?php echo $row['id_pelanggan']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this customer?');">Hapus</a>
+                  <a href="index.php?page=edit-pelanggan&id=<?php echo $row['id_pelanggan']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                  <a href="../action.php?act=delete-pelanggan&id=<?php echo $row['id_pelanggan']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this pelanggan?');">Hapus</a>
                 </td>
             </tr>
             <?php endwhile; ?>

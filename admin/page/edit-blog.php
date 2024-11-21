@@ -5,10 +5,6 @@ if (!empty($_SESSION)) {
     session_start();
 }
 require '../db-connect.php';
-if (!empty($_SESSION['Owner'] || $_SESSION['Admin'] || $_SESSION['Vendor'])) {
-} else {
-    echo '<script>alert("Maaf Login Dahulu !");window.location="../login/login.php"</script>';
-}
 
 if (isset($_GET['id'])) {
     $id = ($_GET["id"]);

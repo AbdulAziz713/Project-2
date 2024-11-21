@@ -197,6 +197,58 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
         </div>
     </section>
 
+    <!-- testimonial Start -->
+<section class="testimonial bg-dark text-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" style="font-family: 'Comic Sans MS', sans-serif;">Apa Kata Client Kami?</h2>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Wrapper untuk item carousel -->
+            <div class="carousel-inner">
+                <?php
+                // Jalankan query untuk mengambil semua testimonial
+                $query = "SELECT * FROM testimonial ORDER BY id ASC";
+                $result = mysqli_query($koneksi, $query);
+
+                // Mengecek apakah ada error ketika menjalankan query
+                if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) . " - " . mysqli_error($koneksi));
+                }
+
+                $items = []; // Array untuk menyimpan data testimonial
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $items[] = $row; // Simpan data ke array
+                }
+
+                // Hitung jumlah testimonial dan buat grup slide
+                $isActive = true;
+                for ($i = 0; $i < count($items); $i += 2) { ?>
+                    <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>">
+                        <div class="row justify-content-center">
+                            <?php
+                            // Tampilkan 2 testimonial per slide
+                            for ($j = $i; $j < $i + 2; $j++) {
+                                if (isset($items[$j])) { ?>
+                                    <div class="col-md-6">
+                                        <div class="card bg-secondary border-0 rounded-4 text-center p-4">
+                                            <img src="../assets/img/testimonial/<?php echo $items[$j]['testi_image']; ?>" alt="Client Image" class="rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                                            <blockquote class="blockquote mb-0">
+                                                <p class="mb-2"><?php echo $items[$j]['testi_text']; ?></p>
+                                                <footer class="blockquote-footer text-light"><cite title="<?php echo $items[$j]['testi_client']; ?>"><?php echo $items[$j]['testi_client']; ?></cite></footer>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                            <?php }
+                            } ?>
+                        </div>
+                    </div>
+                    <?php $isActive = false;
+                } ?>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- testimonial End -->
+ 
     <!-- About-->
     <section id="about" class="about">
         <div class="container">
@@ -356,45 +408,6 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
 </div>
         </div>
     </section>
-    
-    <!-- testimonial Start -->
-<section class="testimonial bg-dark text-light py-5">
-    <div class="container">
-        <h2 class="text-center mb-5" style="font-family: 'Comic Sans MS', sans-serif;">Apa Kata Client Kami?</h2>
-        <div class="row justify-content-center">
-            <?php
-            // Jalankan query untuk menampilkan data
-            $query = "SELECT * FROM testimonial ORDER BY id ASC";
-            $result = mysqli_query($koneksi, $query);
-
-            // Mengecek apakah ada error ketika menjalankan query
-            if (!$result) {
-                die("Query Error: " . mysqli_errno($koneksi) . " - " . mysqli_error($koneksi));
-            }
-
-            // Loop untuk menampilkan data
-            while ($row = mysqli_fetch_assoc($result)) {
-            ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card bg-secondary border-0 rounded-4 text-center p-4">
-                        <img src="assets/img/testimonial/<?php echo $row['testi_image']; ?>" alt="Client Image" class="rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; object-fit: cover;">
-                        <blockquote class="blockquote mb-0">
-                            <p class="mb-2"><?php echo $row['testi_text']; ?></p>
-                            <footer class="blockquote-footer text-light"><cite title="<?php echo $row['testi_client']; ?>"><?php echo $row['testi_client']; ?></cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
-        <div class="text-center mt-4">
-            <button class="btn btn-pink me-2">&lt;</button>
-            <button class="btn btn-pink">&gt;</button>
-        </div>
-    </div>
-</section>
-<!-- testimonial End -->
 
     <!-- Team-->
     <section class="page-section bg-light" id="team">

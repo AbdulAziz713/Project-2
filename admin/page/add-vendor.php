@@ -19,37 +19,45 @@
                     <h5 class="card-title">Tambah Data Vendor</h5>
 
                     <form class="row g-3" method="POST" action="../action.php?act=add-vendor" enctype="multipart/form-data">
-                        <div class="col-lg-2 col-md-9 col-sm-8">
+                        <div class="col-lg-3 col-md-9 col-sm-8">
+                            <input name="id_vendor" value="<?php echo $data['id_user']; ?>" hidden />
                             <label class="form-label">Nama</label>
                             <input type="text" class="form-control" name="nama_vendor" required="required" autocomplete="off">
                         </div>
-                        <div class="col-lg-2 col-md-9 col-sm-8">
+                        <div class="col-lg-3 col-md-9 col-sm-8">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" required="required" autocomplete="off">
+                        </div>
+                        <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email_vendor" required="required" autocomplete="off">
+                            <input type="text" class="form-control" name="email" required="required" autocomplete="off">
                         </div>
-                        <div class="col-lg-2 col-md-9 col-sm-8">
-                            <label class="form-label">Telepon</label>
-                            <input type="text" class="form-control" name="telepon_vendor" required="required" autocomplete="off">
+                        <div class="col-lg-3 col-md-9 col-sm-8">
+                            <label class="form-label">Password</label>
+                            <input type="Password" class="form-control" name="password" autocomplete="off">
                         </div>
-                        <div class="col-lg-2 col-md-9 col-sm-8">
+                        <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control input-fixed" required>
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 col-md-9 col-sm-8">
-                            <label class="form-label">Jenis Layanan</label>
-                            <select name="jenis_layanan" class="form-control input-fixed" required>
-                                <option value="Cattering">Cattering</option>
-                                <option value="Dekorasi">Dekorasi</option>
-                                <option value="Hiburan">Hiburan</option>
-                                <option value="Makeup">Makeup</option>
+                        <div class="col-lg-3 col-md-9 col-sm-8">
+                            <label class="form-label">Telepon</label>
+                            <input type="text" class="form-control" name="telepon" required="required" autocomplete="off">
+                        </div>
+                        <div class="col-lg-3 col-md-9 col-sm-8">
+                            <label class="form-label">Role</label>
+                            <select name="role" class="form-control input-fixed" required>
+                                <option value="Admin">Admin</option>
+                                <option value="Vendor">Vendor</option>
+                                <option value="User">Pelanggan</option>
                             </select>
                         </div>
                         <div class="col-12">
                             <label class="form-label">Alamat</label>
-                            <textarea class="form-control" name="alamat_vendor" rows="5"></textarea>
+                            <textarea class="form-control" name="alamat" rows="5"></textarea>
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success">Submit</button>

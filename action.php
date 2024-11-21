@@ -617,17 +617,70 @@ if (!empty($_GET['act'] == "delete-contact")) {
 }
 //  END Delete contact
 
+// Edit Vendor
+if (!empty($_GET['act'] == "edit-vendor")) {
+  if (isset($_POST['id_vendor'])) {
+    if ($_POST['id_vendor'] != "") {
+
+      $id = $_POST['id_vendor'];
+      $nama_vendor = $_POST['nama_vendor'];
+      $username_vendor = $_POST['username'];
+      $email_vendor = $_POST['email'];
+      $password_vendor = $_POST['password'];
+      $jenis_kelamin = $_POST['jenis_kelamin'];
+      $telepon_vendor = $_POST['telepon'];
+      $role_vendor = $_POST['role'];
+      $alamat_vendor = $_POST['alamat'];
+
+      // Jika password diisi, hash passwordnya
+      if (!empty($password_vendor)) {
+        $hashed_password = password_hash($password_vendor, PASSWORD_DEFAULT);
+        $query = mysqli_query($koneksi, "UPDATE users SET 
+          nama='$nama_vendor', 
+          username='$username_vendor', 
+          password='$hashed_password', 
+          email='$email_vendor', 
+          role='$role_vendor', 
+          alamat='$alamat_vendor'
+          WHERE id_user='$id'");
+      } else {
+        // Jika password tidak diisi, update data tanpa mengubah password
+        $query = mysqli_query($koneksi, "UPDATE users SET 
+          nama='$nama_vendor', 
+          username='$username_vendor', 
+          email='$email_vendor', 
+          role='$role_vendor', 
+          alamat='$alamat_vendor'
+          WHERE id_user='$id'");
+      }
+
+      if ($query) {
+        header("location:admin/index.php?page=vendor&pesan=berhasil");
+      } else {
+        header("location:admin/index.php?page=vendor&pesan=gagal");
+      }
+    } else {
+      header("location:admin/index.php?page=vendor");
+    }
+  }
+}
+// END Edit Vendor
+
+
 // TAMBAH vendor
 if (!empty($_GET['act'] == "add-vendor")) {
+  $id = $_POST['id_vendor'];
   $nama_vendor = $_POST['nama_vendor'];
-  $email_vendor = $_POST['email_vendor'];
+  $username_vendor = $_POST['username'];
+  $email_vendor = $_POST['email'];
+  $password_vendor = $_POST['password'];
   $jenis_kelamin = $_POST['jenis_kelamin'];
-  $telepon_vendor = $_POST['telepon_vendor'];
-  $jenis_layanan = $_POST['jenis_layanan'];
-  $alamat_vendor = $_POST['alamat_vendor'];
+  $telepon_vendor = $_POST['telepon'];
+  $role_vendor = $_POST['role'];
+  $alamat_vendor = $_POST['alamat'];
 
   // Periksa duplikasi data berdasarkan email
-  $cek_duplikat = mysqli_query($koneksi, "SELECT * FROM tb_vendor WHERE email = '$email_vendor'");
+  $cek_duplikat = mysqli_query($koneksi, "SELECT * FROM users WHERE email='$email_vendor'");
   
   if (mysqli_num_rows($cek_duplikat) > 0) {
       // Jika data sudah ada
@@ -635,7 +688,7 @@ if (!empty($_GET['act'] == "add-vendor")) {
       echo '<script>window.location = "admin/index.php?page=add-vendor";</script>';
   } else {
       // Jika tidak ada duplikat, masukkan data ke database
-      $query = mysqli_query($koneksi, "INSERT INTO tb_vendor(nama, email, jenis_kelamin, telepon, jenis_layanan, alamat) VALUES ('$nama_vendor', '$email_vendor', '$jenis_kelamin', '$telepon_vendor', '$jenis_layanan', '$alamat_vendor')");
+      $query = mysqli_query($koneksi, "INSERT INTO users (nama, username, email, password, jenis_kelamin, telepon, alamat, role) VALUES ('$nama_vendor', '$username_vendor', '$email_vendor', '$password_vendor', '$jenis_kelamin', '$telepon_vendor', '$alamat_vendor', '$role_vendor')");
 
       if ($query) {
         header("location:admin/index.php?page=vendor&pesan=tambah");
@@ -652,7 +705,7 @@ if (!empty($_GET['act'] == "delete-vendor")) {
     if ($_GET['id'] != "") {
 
       $id = $_GET['id'];
-      $query = mysqli_query($koneksi, "DELETE FROM tb_vendor WHERE id_vendor='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM users WHERE id_user='$id'");
       if ($query) {
         header("location:admin/index.php?page=vendor&pesan=hapus");
       } else {
@@ -667,13 +720,62 @@ if (!empty($_GET['act'] == "delete-vendor")) {
 }
 //  END Delete vendor
 
+// Edit Pelanggan
+if (!empty($_GET['act'] == "edit-pelanggan")) {
+  if (isset($_POST['id_pelanggan'])) {
+    if ($_POST['id_pelanggan'] != "") {
+
+      $id = $_POST['id_pelanggan'];
+      $nama_pelanggan = $_POST['nama_pelanggan'];
+      $username_pelanggan = $_POST['username'];
+      $email_pelanggan = $_POST['email'];
+      $password_pelanggan = $_POST['password'];
+      $jenis_kelamin = $_POST['jenis_kelamin'];
+      $telepon_pelanggan = $_POST['telepon'];
+      $role_pelanggan = $_POST['role'];
+      $alamat_pelanggan = $_POST['alamat'];
+
+      // Jika password diisi, hash passwordnya
+      if (!empty($password_pelanggan)) {
+        $hashed_password = password_hash($password_pelanggan, PASSWORD_DEFAULT);
+        $query = mysqli_query($koneksi, "UPDATE users SET 
+          nama='$nama_pelanggan', 
+          username='$username_pelanggan', 
+          password='$hashed_password', 
+          email='$email_pelanggan', 
+          role='$role_pelanggan', 
+          alamat='$alamat_pelanggan' 
+          WHERE id_user='$id'");
+      } else {
+        // Jika password tidak diisi, update data tanpa mengubah password
+        $query = mysqli_query($koneksi, "UPDATE users SET 
+          nama='$nama_pelanggan', 
+          username='$username_pelanggan', 
+          email='$email_pelanggan', 
+          role='$role_pelanggan', 
+          alamat='$alamat_pelanggan' 
+          WHERE id_user='$id'");
+      }
+
+      if ($query) {
+        header("location:admin/index.php?page=pelanggan&pesan=berhasil");
+      } else {
+        header("location:admin/index.php?page=pelanggan&pesan=gagal");
+      }
+    } else {
+      header("location:admin/index.php?page=pelanggan");
+    }
+  }
+}
+// END Edit Pelanggan
+
 // Delete pelanggan
 if (!empty($_GET['act'] == "delete-pelanggan")) {
   if (isset($_GET['id'])) {
     if ($_GET['id'] != "") {
 
       $id = $_GET['id'];
-      $query = mysqli_query($koneksi, "DELETE FROM tb_pelanggan WHERE id_pelanggan='$id'");
+      $query = mysqli_query($koneksi, "DELETE FROM users WHERE id_user='$id'");
       if ($query) {
         header("location:admin/index.php?page=pelanggan&pesan=hapus");
       } else {
