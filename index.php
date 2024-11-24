@@ -42,6 +42,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="landing-page/css/styles.css" rel="stylesheet" />
   </head>
   <body id="page-top">
@@ -96,14 +97,15 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
         </div>
     </div>
   </nav>
+  <!-- End Navigation -->
 
     <!-- Masthead-->
     <header class="masthead">
       <div class="container">
         <div class="masthead-heading">Selamat Datang di Irma Wedding!</div>
         <div class="masthead-subheading">Tempat dimana anda akan merayakan pernikahan</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#services"
-          >Selengkapnya!</a
+        <a class="btn btn-primary btn-xl text-uppercase" href="product/index.php"
+          >Pesan Sekarang!</a
         >
       </div>
     </header>
@@ -230,7 +232,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
                                 if (isset($items[$j])) { ?>
                                     <div class="col-md-6">
                                         <div class="card bg-secondary border-0 rounded-4 text-center p-4">
-                                            <img src="../assets/img/testimonial/<?php echo $items[$j]['testi_image']; ?>" alt="Client Image" class="rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                                            <img src="assets/img/testimonial/<?php echo $items[$j]['testi_image']; ?>" alt="Client Image" class="rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; object-fit: cover;">
                                             <blockquote class="blockquote mb-0">
                                                 <p class="mb-2"><?php echo $items[$j]['testi_text']; ?></p>
                                                 <footer class="blockquote-footer text-light"><cite title="<?php echo $items[$j]['testi_client']; ?>"><?php echo $items[$j]['testi_client']; ?></cite></footer>
@@ -722,7 +724,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div> -->
     <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="landing-page/js/scripts.js"></script>
 

@@ -117,8 +117,8 @@ require '../db-connect.php';
       <div class="container">
         <div class="masthead-heading">Selamat Datang di Irma Wedding!</div>
         <div class="masthead-subheading">Tempat dimana anda akan merayakan pernikahan</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#services"
-          >Selengkapnya!</a
+        <a class="btn btn-primary btn-xl text-uppercase" href="../login/login.php"
+          >Pesan Sekarang!</a
         >
       </div>
     </header>
