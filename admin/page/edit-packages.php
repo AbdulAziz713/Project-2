@@ -9,7 +9,7 @@ require '../db-connect.php';
 if (isset($_GET['id'])) {
     $id = ($_GET["id"]);
 
-    $query = "SELECT * FROM packages WHERE id='$id'";
+    $query = "SELECT * FROM packages WHERE id_paket='$id'";
     $result = mysqli_query($koneksi, $query);
     if (!$result) {
         die("Query Error: " . mysqli_errno($koneksi) .
@@ -47,7 +47,7 @@ if (isset($_GET['id'])) {
 
                     <form class="row g-3" method="POST" action="../action.php?act=edit-packages" enctype="multipart/form-data">
                         <div class="col-md-6">
-                            <input name="id" value="<?php echo $data['id']; ?>" hidden />
+                            <input name="id" value="<?php echo $data['id_paket']; ?>" hidden />
                             <label class="form-label">Heading</label>
                             <input type="text" class="form-control" name="packages_heading" required="required" autocomplete="off" value="<?php echo $data['packages_heading']; ?>">
                         </div>

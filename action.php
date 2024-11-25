@@ -143,7 +143,7 @@ if (!empty($_GET['act'] == "edit-packages")) {
       header("location:admin/index.php?page=packages");
     }
 
-    $query = mysqli_query($koneksi, "UPDATE packages SET packages_heading='$packages_heading', packages_price='$packages_price', packages_list='$packages_list' WHERE id='$id'");
+    $query = mysqli_query($koneksi, "UPDATE packages SET packages_heading='$packages_heading', packages_price='$packages_price', packages_list='$packages_list' WHERE id_paket='$id'");
 
     if ($query) {
       header("location:admin/index.php?page=packages&pesan=berhasil");
@@ -200,7 +200,7 @@ if (!empty($_GET['act'] == "add-gallery")) {
       if (in_array($ekstensi, $ekstensi_izin) === true) {
 
         move_uploaded_file($file_tmp, 'assets/img/gallery/' . $gallery_image_name_new);
-        $query = mysqli_query($koneksi, "INSERT INTO gallery( gallery_heading, gallery_desc, gallery_image) VALUES ('$gallery_heading', '$gallery_desc', '$gallery_image_name_new')");
+        $query = mysqli_query($koneksi, "INSERT INTO gallery( gallery_heading, gallery_text, gallery_image) VALUES ('$gallery_heading', '$gallery_desc', '$gallery_image_name_new')");
 
         if ($query) {
           header("location:admin/index.php?page=gallery&pesan=tambah");
@@ -252,7 +252,7 @@ if (!empty($_GET['act'] == "edit-gallery")) {
 
           move_uploaded_file($file_tmp, 'assets/img/gallery/' . $gallery_image_new);
 
-          $query = mysqli_query($koneksi, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_desc='$gallery_desc', gallery_image='$gallery_image_new' WHERE id='$id'");
+          $query = mysqli_query($koneksi, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_text='$gallery_desc', gallery_image='$gallery_image_new' WHERE id='$id'");
 
           if ($query) {
             header("location:admin/index.php?page=gallery&pesan=berhasil");
@@ -263,7 +263,7 @@ if (!empty($_GET['act'] == "edit-gallery")) {
           header("location:admin/index.php?page=gallery&pesan=ekstensi");
         }
       } else {
-        $query = mysqli_query($koneksi, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_desc='$gallery_desc' WHERE id='$id'");
+        $query = mysqli_query($koneksi, "UPDATE gallery SET gallery_heading='$gallery_heading', gallery_text='$gallery_desc' WHERE id='$id'");
 
         if ($query) {
           header("location:admin/index.php?page=gallery&pesan=berhasil");
@@ -719,6 +719,76 @@ if (!empty($_GET['act'] == "delete-vendor")) {
   }
 }
 //  END Delete vendor
+
+// Edit Pelanggan
+if (!empty($_GET['act'] == "edit-pelanggan")) {
+  if (isset($_POST['id_pelanggan'])) {
+    if ($_POST['id_pelanggan'] != "") {
+
+      $id = $_POST['id_pelanggan'];
+      $nama_pelanggan = $_POST['nama_pelanggan'];
+      $username_pelanggan = $_POST['username'];
+      $email_pelanggan = $_POST['email'];
+      $password_pelanggan = $_POST['password'];
+      $jenis_kelamin = $_POST['jenis_kelamin'];
+      $telepon_pelanggan = $_POST['telepon'];
+      $role_pelanggan = $_POST['role'];
+      $alamat_pelanggan = $_POST['alamat'];
+
+      // Jika password diisi, hash passwordnya
+      if (!empty($password_pelanggan)) {
+        $hashed_password = password_hash($password_pelanggan, PASSWORD_DEFAULT);
+        $query = mysqli_query($koneksi, "UPDATE users SET 
+          nama='$nama_pelanggan', 
+          username='$username_pelanggan', 
+          password='$hashed_password', 
+          email='$email_pelanggan', 
+          role='$role_pelanggan', 
+          alamat='$alamat_pelanggan' 
+          WHERE id_user='$id'");
+      } else {
+        // Jika password tidak diisi, update data tanpa mengubah password
+        $query = mysqli_query($koneksi, "UPDATE users SET 
+          nama='$nama_pelanggan', 
+          username='$username_pelanggan', 
+          email='$email_pelanggan', 
+          role='$role_pelanggan', 
+          alamat='$alamat_pelanggan' 
+          WHERE id_user='$id'");
+      }
+
+      if ($query) {
+        header("location:admin/index.php?page=pelanggan&pesan=berhasil");
+      } else {
+        header("location:admin/index.php?page=pelanggan&pesan=gagal");
+      }
+    } else {
+      header("location:admin/index.php?page=pelanggan");
+    }
+  }
+}
+// END Edit Pelanggan
+
+// Delete pelanggan
+if (!empty($_GET['act'] == "delete-pelanggan")) {
+  if (isset($_GET['id'])) {
+    if ($_GET['id'] != "") {
+
+      $id = $_GET['id'];
+      $query = mysqli_query($koneksi, "DELETE FROM users WHERE id_user='$id'");
+      if ($query) {
+        header("location:admin/index.php?page=pelanggan&pesan=hapus");
+      } else {
+        header("location:admin/index.php?page=pelanggan&pesan=gagalhapus");
+      }
+    } else {
+      header("location:admin/index.php?page=pelanggan");
+    }
+  } else {
+    header("location:admin/index.php?page=pelanggan");
+  }
+}
+//  END Delete pelanggan
 
 // Edit Pelanggan
 if (!empty($_GET['act'] == "edit-pelanggan")) {

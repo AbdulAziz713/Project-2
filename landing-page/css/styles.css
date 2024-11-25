@@ -8467,6 +8467,11 @@ fieldset:disabled .btn {
     var(--bs-secondary-rgb),
     var(--bs-bg-opacity)
   ) !important;
+  background: linear-gradient(
+    to bottom,
+    #6c757d,
+    #f8f9fa
+  ); /* Warna abu-abu ke putih */
 }
 
 .bg-success {
@@ -11181,6 +11186,7 @@ p {
 }
 
 .page-section {
+  margin: 0;
   padding: 6rem 0;
 }
 .page-section h2.section-heading,

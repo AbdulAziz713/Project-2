@@ -1,23 +1,29 @@
+<style>
+    .custom-text-color td {
+        color: rgba(254, 70, 174, 1) !important;
+    }
+</style>
 <div class="pagetitle">
-    <h1>Packages</h1>
+    <h1>Pesanan</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php?page=dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Packages</li>
+            <li class="breadcrumb-item active">Pesanan</li>
         </ol>
     </nav>
-</div><!-- End Page Title -->
+</div>
+<!-- End Page Title -->
 
 <div class=" mt-2">
   <?php if (isset($_GET['pesan'])) { ?>
     <?php if ($_GET['pesan'] == "berhasil") { ?>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Successfully Changed Packages Data
+        Berhasil Mengubah Data Pelanggan
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <?php } elseif ($_GET['pesan'] == "gagal") { ?>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Failed to Change Packages Data
+        Gagal Mengubah Data Pelanggan
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <?php } elseif ($_GET['pesan'] == "ekstensi") { ?>
@@ -32,67 +38,66 @@
       </div>
     <?php } elseif ($_GET['pesan'] == "hapus") { ?>
       <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        Successfully Deleting Packages Data
+        Berhasil Menghapus Data Pelanggan
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <?php } elseif ($_GET['pesan'] == "gagalhapus") { ?>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Failed to Delete Packages Data
+        Gagal Menghapus Data Pelanggan
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <?php } elseif ($_GET['pesan'] == "tambah") { ?>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Successfully Added Packages Data
+        Berhasil Menambah Data Pelanggan
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <?php } ?>
   <?php } ?>
 </div>
 
-<section class="section packages">
-    <a href="index.php?page=add-packages" class="btn btn-primary my-3">Add Data</a>
+<section class="section dashboard">
     <div class="row">
         <?php
         // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-        $query = "SELECT * FROM packages ORDER BY id_paket ASC";
+        $query = "SELECT * FROM pesanan";
         $result = mysqli_query($koneksi, $query);
-        //mengecek apakah ada error ketika menjalankan query
+        // mengecek apakah ada error ketika menjalankan query
         if (!$result) {
             die("Query Error: " . mysqli_errno($koneksi) .
                 " - " . mysqli_error($koneksi));
         }
-        $no = 1;
-        while ($row = mysqli_fetch_assoc($result)) {
         ?>
+        
+        <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Pesanan</th>
+                <th>Nama Pelanggan</th>
+                <th>Layanan</th>
+                <th>Harga</th>
+                <th>Status</th>
+                <th>Keterangan</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <tr class="custom-text-color">
+                <td><?php echo $row['id_pesanan']; ?></td>
+                <td><?php echo $row['nama_pelanggan']; ?></td>
+                <td><?php echo $row['Layanan']; ?></td>
+                <td><?php echo $row['Harga']; ?></td>
+                <td><?php echo $row['Status']; ?></td>
+                <td><?php echo $row['Keterangan']; ?></td>
+                <td class="text-center">
+                  <a href="index.php?page=edit-pesanan&id=<?php echo $row['id_pesanan']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                  <a href="../action.php?act=delete-pesanan&id=<?php echo $row['id_pesanan']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this pelanggan?');">Hapus</a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
 
-            <div class="package-item col-md-3">
-                <div class="d-flex justify-content-between">
-                    <div class="name">
-                        <h5 class="card-title">Package <?php echo $no ?></h5>
-                        <br>
-                    </div>
-                    <div class="opsi py-3">
-                        <a href="index.php?page=edit-packages&id=<?php echo $row['id_paket']; ?>" class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i></a>
-                        <a href="../action.php?act=delete-packages&id=<?php echo $row['id_paket']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin akan menghapus data ini?')"><i class="bi bi-trash-fill"></i></a>
-                    </div>
-                </div>
-                <div class="head-package text-center">
-                    <h4 class="text-uppercase mb-1"><?php echo $row['packages_heading']; ?></h4>
-                    <p class="price fs-2 fw-semibold"><?php echo $row['packages_price']; ?></p>
-                    <br>
-                </div>
-                <div class="body-package">
-                    <?php echo $row['packages_list']; ?>
-                    <div class="text-center">
-                        <a href="" class="second-btn">Lihat Detail!</a>
-                    </div>
-                </div>
-            </div>
-
-        <?php
-            $no++;
-        }
-        ?>
-
-    </div>
 </section>

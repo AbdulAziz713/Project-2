@@ -30,6 +30,7 @@ $menus = [
         ['icon' => 'bi bi-telephone', 'text' => 'Contact', 'link' => 'index.php?page=contact'],
         ['icon' => 'bi bi-file-earmark-text', 'text' => 'Vendor', 'link' => 'index.php?page=vendor'],
         ['icon' => 'bi bi-file-earmark-text', 'text' => 'Pelanggan', 'link' => 'index.php?page=pelanggan'],
+        ['icon' => 'bi bi-file-earmark-text', 'text' => 'Pesanan', 'link' => 'index.php?page=pesanan'],
     ],
     'Vendor' => [
         ['icon' => 'bi bi-archive', 'text' => 'Packages', 'link' => 'index.php?page=packages'],

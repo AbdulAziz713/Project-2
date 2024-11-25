@@ -57,7 +57,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <div class="col-12">
                             <label class="form-label">Description</label>
-                            <textarea class="form-control" name="gallery_desc" rows="5"><?php echo $data['gallery_desc']; ?></textarea>
+                            <textarea class="form-control" name="gallery_desc" rows="5"><?php echo $data['gallery_text']; ?></textarea>
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success">Submit</button>

@@ -100,6 +100,13 @@ switch ($page) {
     include "vendor.php";
     break;
 
+  case 'pesanan':
+    include "pesanan.php";
+    break;
+
+  case 'edit-pesanan':
+    include "edit-pesanan.php";
+    break;
 
 
 

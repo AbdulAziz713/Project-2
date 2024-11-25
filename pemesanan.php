@@ -63,92 +63,249 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
           Menu
           <i class="fas fa-bars ms-1"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="collapse navbar-collapse d-flex justify-content-between align-items-center" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#services">Pelayanan</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#portfolio">Gallery</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">Tentang Kami</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#team">Tim</a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Kontak</a>
+            <li class="nav-item"><a class="nav-link" href="index.php">Beranda</a></li>
+            <li class="nav-item"><a class="nav-link" href="action.php?act=pesanan">Pesanan</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#services">Pelayanan</a></li>
+                <li><a class="dropdown-item" href="#portfolio">Gallery</a></li>
+                <li><a class="dropdown-item" href="#about">Tentang Kami</a></li>
+                <li><a class="dropdown-item" href="#team">Tim</a></li>
+                <li><a class="dropdown-item" href="#contact">Kontak</a></li>
+              </ul>
             </li>
           </ul>
           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <?php echo htmlspecialchars($username); ?>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <li>
-        <a class="dropdown-item" href="action.php?act=rubah-password">Rubah Password</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="action.php?act=logout">Log Out</a>
-      </li>
-    </ul>
-  </li>
-</ul>
-        </div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php echo htmlspecialchars($username); ?>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="action.php?act=rubah-password">Rubah Password</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="action.php?act=logout">Log Out</a>
+                </li>
+              </ul>
+            </li>
+        </ul>
+      </div>
     </div>
   </nav>
   <!-- End Navigation -->
 
-    <!-- Masthead-->
-    <header class="masthead">
-      <div class="container">
-        <div class="masthead-heading">Selamat Datang di Irma Wedding!</div>
-        <div class="masthead-subheading">Tempat dimana anda akan merayakan pernikahan</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="pemesanan.php"
-          >Pesan Sekarang!</a
-        >
-      </div>
-    </header>
-
-    <!-- Services-->
-    <section id="services" class="page-section">
-        <div class="container">
-            <div class="text-center">
-            <h2 class="section-heading text-uppercase">Pelayanan</h2>
-            <h3 class="section-subheading text-muted">
-            Irma Wedding menawarkan rangkaian lengkap layanan pernikahan, mulai dari dekorasi elegan, tata rias pengantin profesional, hingga fotografi dan videografi untuk mengabadikan momen spesial Anda. Kami juga menawarkan persewaan gaun pengantin dan jaket, serta paket pernikahan yang sesuai dengan kebutuhan dan budget pasangan. Pelayanan Irma Wedding yang personal dan penuh perhatian memastikan setiap elemen pernikahan Anda berjalan lancar dan menciptakan kenangan yang tak terlupakan.
-            </h3>
-            </div>
-            <div class="row justify-content-center text-center">
-                <?php
-                // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                $query = "SELECT * FROM features ORDER BY id ASC";
-                $result = mysqli_query($koneksi, $query);
-                //mengecek apakah ada error ketika menjalankan query
-                if (!$result) {
-                    die("Query Error: " . mysqli_errno($koneksi) .
-                        " - " . mysqli_error($koneksi));
-                }
-                $no = 1;
-                while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                    <div class="features-item col-md-4 text-center">
-                      <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary <?php echo $row['features_icon']; ?>"></i>
-                      </span>
-                      <h5 class="my-3"><?php echo $row['features_name']; ?></h5>
-                      <p class="text-muted">
-                      <?php echo $row['description']; ?>
-                      </p>
+  <!-- Paket Start -->
+  <section id="package" class="package py-5 page-section bg-secondary">
+    <div class="container">
+        <div class="heading-text text-center mb-4">
+            <h2 class="section-heading text-uppercase text-dark" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px">Paket Terbaik Untuk Anda</h2>
+        </div>
+        <div class="row justify-content-center">
+            <?php
+            $query = "SELECT * FROM packages ORDER BY id_paket ASC";
+            $result = mysqli_query($koneksi, $query);
+            if (!$result) {
+                die("Query Error: " . mysqli_errno($koneksi) . " - " . mysqli_error($koneksi));
+            }
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Pisahkan daftar fitur berdasarkan newline
+                $features = explode("\n", $row['packages_list']);
+            ?>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 border-2 shadow-sm">
+                        <div class="card-header text-center bg-light">
+                            <h5 class="text-uppercase fw-bold text-dark mb-1"><?php echo $row['packages_heading']; ?></h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="price fs-4 fw-bold text-warning text-center"><?php echo $row['packages_price']; ?></p>
+                            <button class="btn btn-warning w-100 mb-3 text-white fw-bold">Pilih Paket</button>
+                            <div class="body-package">
+                                <ul class="list-unstyled">
+                                    <?php
+                                    // Tampilkan maksimal 10 fitur di halaman
+                                    $max_visible_features = 11;
+                                    for ($i = 0; $i < count($features) && $i < $max_visible_features; $i++) {
+                                        echo html_entity_decode($features[$i]);
+                                    }
+                                    ?>
+                                </ul>
+                                <div class="text-center">
+                                    <!-- Tombol untuk membuka modal -->
+                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalPaket<?php echo $row['id_paket']; ?>">
+                                        Detail Paket <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                <?php
-                    $no++;
-                }
-                ?>
+                <!-- Modal untuk paket -->
+                <div class="modal fade" id="ModalPaket<?php echo $row['id_paket']; ?>" tabindex="-1" aria-labelledby="ModalPaketLabel<?php echo $row['id_paket']; ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold" id="ModalPaketLabel<?php echo $row['id_paket']; ?>">
+                                    <?php echo $row['packages_heading']; ?>
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+    <ul class="list-unstyled">
+    <?php echo html_entity_decode($row['packages_list']); ?>
+    </ul>
+</div>
+
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
+</section>
+    <!-- Paket End -->
+
+  <!-- Dekorasi Start -->
+  <section id="Dekorasi" class="dekorasi py-5 page-section bg-light">
+  <style>
+        /* Membatasi ukuran gambar untuk konsistensi */
+    .carousel img.dekorasi{
+        height: 550px; /* Tinggi default untuk dekorasi */
+        width: 100%;
+        object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+        border-radius: 10px; /* Membuat sudut gambar melengkung */
+    }
+    </style>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase text-dark" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px">DEKORASI</h2>
+    </div>
+    <div id="carouselDekorasi" class="carousel slide" data-bs-ride="carousel">
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row g-3 justify-content-center">
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_1.jpg" alt="dekor1">
+                    </div>
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_2.jpg" alt="dekor2">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_3.jpg" alt="dekor3">
+                    </div>
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_4.jpg" alt="dekor4">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_5.jpg" alt="mua3">
+                    </div>
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_6.jpg" alt="dekor3">
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDekorasi" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselDekorasi" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+  </div>
+  </section>
+  <!-- End Dekorasi -->
+
+    <!-- Makeup Start -->
+  <section id="Makeup" class="makeup py-5 page-section bg-light">
+  <style>
+    /* Gambar dengan class makeup dibuat potret */
+    .carousel img.makeup {
+        height: 550px; /* Tinggi tetap */
+        width: auto; /* Lebar menyesuaikan agar menjadi potret */
+        object-fit: cover; /* Pastikan gambar tidak terdistorsi */
+        border-radius: 10px; /* Membuat sudut gambar melengkung */
+    }
+
+    </style>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase text-dark" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px">MAKEUP</h2>
+    </div>
+    <div id="carouselMakeup" class="carousel slide" data-bs-ride="carousel">
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row g-3 justify-content-center">
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="assets/img/makeup/mua_1.jpg" alt="dekor1">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="assets/img/makeup/mua_2.jpg" alt="dekor2">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="assets/img/makeup/mua_3.jpg" alt="dekor3">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="assets/img/makeup/mua_4.jpg" alt="dekor4">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="assets/img/makeup/mua_5.jpg" alt="mua3">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="assets/img/makeup/mua_6.jpg" alt="dekor3">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselMakeup" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselMakeup" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+  </div>
+  </section>
+  <!-- End Makeup -->
 
     <!-- Portfolio Grid-->
     <section id="portfolio" class="page-section bg-light">
@@ -156,7 +313,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
             <div class="text-center">
             <h2 class="section-heading text-uppercase">gallery</h2>
             <h3 class="section-subheading text-muted">
-              Lorem ipsum dolor sit amet consectetur.
+              Sebuah Kenangan yang Terabadikan.
             </h3>
             </div>
             <div class="row">
@@ -200,9 +357,9 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     </section>
 
     <!-- testimonial Start -->
-<section class="testimonial bg-light text-dark py-5">
+<section class="testimonial text-center py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-5" style="font-family: 'Comic Sans MS', sans-serif;">Apa Kata Client Kami?</h2>
+        <h2 class="section-heading text-uppercase">Apa Kata Client Kami?</h2>
         <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
             <!-- Wrapper untuk item carousel -->
             <div class="carousel-inner">
@@ -250,166 +407,6 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     </div>
 </section>
 <!-- testimonial End -->
- 
-    <!-- About-->
-    <section id="about" class="about">
-        <div class="container">
-            <?php
-            // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-            $query = "SELECT * FROM about ORDER BY id ASC";
-            $result = mysqli_query($koneksi, $query);
-            //mengecek apakah ada error ketika menjalankan query
-            if (!$result) {
-                die("Query Error: " . mysqli_errno($koneksi) .
-                    " - " . mysqli_error($koneksi));
-            }
-            $row = mysqli_fetch_assoc($result)
-            ?>
-            <div class="about-content">
-                <div class="text-center mb-4">
-                    <h4><?php echo $row['about_heading']; ?></h4>
-                </div>
-                <div class="row justify-content-center text-center">
-                    <div class="col">
-                        <p><?php echo $row['about_text']; ?></p>
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Know More <i class="fa-solid fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">About Us</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-      <section class="page-section" id="about">
-      <div class="container">
-        <ul class="timeline">
-          <li>
-            <div class="timeline-image">
-              <img
-                class="rounded-circle img-fluid"
-                src="assets/img/about/1.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>2009-2011</h4>
-                <h4 class="subheading">Our Humble Beginnings</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
-                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
-                  dolore laudantium consectetur!
-                </p>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <img  
-                class="rounded-circle img-fluid"
-                src="assets/img/about/2.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>March 2011</h4>
-                <h4 class="subheading">An Agency is Born</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
-                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
-                  dolore laudantium consectetur!
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="timeline-image">
-              <img
-                class="rounded-circle img-fluid"
-                src="assets/img/about/3.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>December 2015</h4>
-                <h4 class="subheading">Transition to Full Service</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
-                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
-                  dolore laudantium consectetur!
-                </p>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <img
-                class="rounded-circle img-fluid"
-                src="assets/img/about/4.jpg"
-                alt="..."
-              />
-            </div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <h4>July 2020</h4>
-                <h4 class="subheading">Phase Two Expansion</h4>
-              </div>
-              <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                  ut voluptatum eius sapiente, totam reiciendis temporibus qui
-                  quibusdam, recusandae sit vero unde, sed, incidunt et ea quo
-                  dolore laudantium consectetur!
-                </p>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-image">
-              <h4>
-                Be Part
-                <br />
-                Of Our
-                <br />
-                Story!
-              </h4>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-        </div>
-    </section>
 
     <!-- Team-->
     <section class="page-section bg-light" id="team">
@@ -566,7 +563,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     </div> -->
 
     <!-- Contact-->
-<section class="page-section" id="contact">
+<section class="page-section bg-dark" id="contact">
   <div class="container">
     <div class="text-center">
       <h2 class="section-heading text-uppercase">Contact Us</h2>
