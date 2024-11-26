@@ -17,6 +17,75 @@
   --second-font-color: rgba(255, 255, 255, 0.6);
 }
 
+/* Loader Container */
+#loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--second-color); /* Warna latar semi-transparan */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Loader */
+.loader {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: grid;
+  background: #fff;
+  filter: blur(4px) contrast(10) hue-rotate(240deg);
+  mix-blend-mode: darken;
+}
+.loader:before {
+  content: "";
+  grid-area: 1/1;
+  margin: 30px 0;
+  border-radius: 100px;
+  background: #00ffff;
+}
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  height: 35px;
+  width: 35px;
+  margin: auto;
+  border-radius: 50%;
+  background: #00ffff;
+  animation: l5 2s infinite linear;
+}
+
+/* Animasi */
+@keyframes l5 {
+  0% {
+    transform: translate(30px);
+  }
+  25% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translate(-30px);
+  }
+  75% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(30px);
+  }
+}
+
+/* Sembunyikan semua <section> */
+section {
+  visibility: hidden; /* Tidak terlihat */
+  opacity: 0; /* Transparan */
+  transition: visibility 0s, opacity 0.5s ease-in-out; /* Efek transisi */
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   background: rgba(23, 22, 31, 1);
@@ -406,6 +475,9 @@ h6 {
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   background-color: var(--second-color);
   padding-left: 20px;
+  visibility: hidden; /* Tidak terlihat */
+  opacity: 0; /* Transparan */
+  transition: visibility 0s, opacity 0.5s ease-in-out; /* Efek transisi */
   /* Toggle Sidebar Button */
   /* Search Bar */
 }

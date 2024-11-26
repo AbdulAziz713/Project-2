@@ -72,6 +72,9 @@ require '../db-connect.php';
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body id="page-top">
+  <div id="loader-container">
+  <div class="loader"></div>
+</div>
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -745,5 +748,26 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Tambahkan class "loading" ke body untuk mencegah interaksi selama loading
+    document.body.classList.add("loading");
+
+    // Setelah 5 detik, tampilkan konten dan sembunyikan loader
+    setTimeout(() => {
+      // Sembunyikan loader
+      document.getElementById("loader-container").style.display = "none";
+
+      // Tampilkan semua <section>
+      document.querySelectorAll("section, header").forEach(section => {
+        section.style.visibility = "visible";
+        section.style.opacity = "1";
+      });
+
+      // Hapus class "loading" dari body
+      document.body.classList.remove("loading");
+    }, 2000); // Durasi loader dalam milidetik (5 detik)
+  });
+</script>
   </body>
 </html>

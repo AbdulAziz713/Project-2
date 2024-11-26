@@ -6,7 +6,7 @@ if (!empty($_SESSION)) {
 }
 require 'db-connect.php';
 if (!isset($_SESSION['role'])) {
-  echo '<script>alert("Required Login Authorization!");window.location="../login.php";</script>';
+  echo '<script>alert("Required Login Authorization!");window.location="login/login.php";</script>';
   exit();
 }
 $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
@@ -45,12 +45,15 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="landing-page/css/styles.css" rel="stylesheet" />
   </head>
+  <div id="loader-container">
+  <div class="loader"></div>
+</div>
   <body id="page-top">
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a href="#page-top" class="navbar-brand">Irma <span>Wedding</span></a>
+        <a href="#page-top" class="navbar-brand">Irma Wedding</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -102,7 +105,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     <!-- Masthead-->
     <header class="masthead">
       <div class="container">
-        <div class="masthead-heading">Selamat Datang di Irma Wedding!</div>
+        <div class="masthead-heading">Selamat Datang di <span style="color: #ffc800">Irma Wedding!</span></div>
         <div class="masthead-subheading">Tempat dimana anda akan merayakan pernikahan</div>
         <a class="btn btn-primary btn-xl text-uppercase" href="pemesanan.php"
           >Pesan Sekarang!</a
@@ -729,5 +732,26 @@ while ($row = mysqli_fetch_assoc($result)) {
     <script src="landing-page/js/scripts.js"></script>
 
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Tambahkan class "loading" ke body untuk mencegah interaksi selama loading
+    document.body.classList.add("loading");
+
+    // Setelah 5 detik, tampilkan konten dan sembunyikan loader
+    setTimeout(() => {
+      // Sembunyikan loader
+      document.getElementById("loader-container").style.display = "none";
+
+      // Tampilkan semua <section>
+      document.querySelectorAll("section, header").forEach(section => {
+        section.style.visibility = "visible";
+        section.style.opacity = "1";
+      });
+
+      // Hapus class "loading" dari body
+      document.body.classList.remove("loading");
+    }, 2000); // Durasi loader dalam milidetik (5 detik)
+  });
+</script>
   </body>
 </html>

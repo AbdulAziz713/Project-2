@@ -6,7 +6,7 @@ if (!empty($_SESSION)) {
 }
 require 'db-connect.php';
 if (!isset($_SESSION['role'])) {
-  echo '<script>alert("Required Login Authorization!");window.location="../login.php";</script>';
+  echo '<script>alert("Required Login Authorization!");window.location="login/login.php";</script>';
   exit();
 }
 $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
@@ -46,11 +46,14 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     <link href="landing-page/css/styles.css" rel="stylesheet" />
   </head>
   <body id="page-top">
+  <div id="loader-container">
+  <div class="loader"></div>
+</div>
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a href="#page-top" class="navbar-brand">Irma <span>Wedding</span></a>
+        <a href="#page-top" class="navbar-brand">Irma Wedding</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -127,7 +130,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
                                 <ul class="list-unstyled">
                                     <?php
                                     // Tampilkan maksimal 10 fitur di halaman
-                                    $max_visible_features = 11;
+                                    $max_visible_features = 12;
                                     for ($i = 0; $i < count($features) && $i < $max_visible_features; $i++) {
                                         echo html_entity_decode($features[$i]);
                                     }
@@ -311,7 +314,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     <section id="portfolio" class="page-section bg-light">
         <div class="container">
             <div class="text-center">
-            <h2 class="section-heading text-uppercase">gallery</h2>
+            <h2 class="section-heading text-uppercase text-dark" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px">gallery</h2>
             <h3 class="section-subheading text-muted">
               Sebuah Kenangan yang Terabadikan.
             </h3>
@@ -359,7 +362,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     <!-- testimonial Start -->
 <section class="testimonial text-center py-5 bg-light">
     <div class="container">
-        <h2 class="section-heading text-uppercase">Apa Kata Client Kami?</h2>
+        <h2 class="section-heading text-uppercase text-dark" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px; margin-bottom: 35px;">Apa Kata Client Kami?</h2>
         <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
             <!-- Wrapper untuk item carousel -->
             <div class="carousel-inner">
@@ -412,7 +415,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     <section class="page-section bg-light" id="team">
       <div class="container">
         <div class="text-center">
-          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+          <h2 class="section-heading text-uppercase text-dark" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px">Our Amazing Team</h2>
           <h3 class="section-subheading text-muted">
             Lorem ipsum dolor sit amet consectetur.
           </h3>
@@ -566,7 +569,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
 <section class="page-section bg-dark" id="contact">
   <div class="container">
     <div class="text-center">
-      <h2 class="section-heading text-uppercase">Contact Us</h2>
+      <h2 class="section-heading text-uppercase text-light" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px">Contact Us</h2>
       <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.<br></h3>
       <form id="contactForm" method="POST">
         <div class="row align-items-stretch mb-5">
@@ -726,5 +729,27 @@ while ($row = mysqli_fetch_assoc($result)) {
     <script src="landing-page/js/scripts.js"></script>
 
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Tambahkan class "loading" ke body untuk mencegah interaksi selama loading
+    document.body.classList.add("loading");
+
+    // Setelah 5 detik, tampilkan konten dan sembunyikan loader
+    setTimeout(() => {
+      // Sembunyikan loader
+      document.getElementById("loader-container").style.display = "none";
+
+      // Tampilkan semua <section>
+      document.querySelectorAll("section").forEach(section => {
+        section.style.visibility = "visible";
+        section.style.opacity = "1";
+      });
+
+      // Hapus class "loading" dari body
+      document.body.classList.remove("loading");
+    }, 2000); // Durasi loader dalam milidetik (5 detik)
+  });
+</script>
+
   </body>
 </html>

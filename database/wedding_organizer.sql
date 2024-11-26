@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Nov 2024 pada 04.16
+-- Waktu pembuatan: 26 Nov 2024 pada 05.33
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -133,12 +133,11 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`id`, `gallery_heading`, `tgl_pernikahan`, `gallery_image`, `gallery_text`) VALUES
-(1, 'Jhon &  Emma', '14 Maret 2023', '95b66256391cf16df1f716067ed5c885-gallery1.jpg', 'Saya sangat senang dan bangga'),
-(2, 'Candler & Mia', '10 November 2023', '90b0c15d7053da82f8bf2addb32dbdf8-gallery2.jpg', 'Bersyukur sekali mendapatkan suami TNI AL'),
-(4, 'Chris & Rin', '09 September 2023', '42a6599845ab472c68303cb34f6e15d0-gallery3.jpg', 'Tempat Mengucapkan Janji Suci'),
-(5, 'Pernikahan Finn & Alexa', '11 Desember 2022', '03e65ed528a1063814a1e4453b3238c9-gallery4.jpg', 'Bangku Para Tamu Undangan yang Berbahagia'),
-(6, 'Andi & Sinta', '30 September 2019', 'd162b6c93c42dddb860da77f62aaa33c-gallery5.jpg', 'Jamuan yang Mewah akan kuberikan untuk keluarga'),
-(7, 'Bagus & Sriayuningsih', '15 Agustus 2022', '7f49ff22466565c4831d329febcc1736-gallery6.jpg', 'Tradisi Pernikahan yang Sangat Berkesan');
+(1, 'Selvia & Suami', '14 Maret 2023', '95b66256391cf16df1f716067ed5c885-gallery1.jpg', 'Saya sangat senang dan bangga'),
+(2, 'Susi & Suami', '10 November 2023', '90b0c15d7053da82f8bf2addb32dbdf8-gallery2.jpg', 'Bersyukur sekali mendapatkan suami TNI AL'),
+(5, 'Elisa & Bayu', '11 Desember 2022', '03e65ed528a1063814a1e4453b3238c9-gallery4.jpg', 'Bangku Para Tamu Undangan yang Berbahagia'),
+(7, 'Ina & Adi', '15 Agustus 2022', '7f49ff22466565c4831d329febcc1736-gallery6.jpg', 'Tradisi Pernikahan yang Sangat Berkesan'),
+(10, 'Yulia & Nugraha', '', 'dc56fe826a246358f8c6772ca414da44-gallery3.jpg', 'Tunangan yang berbahagia..');
 
 -- --------------------------------------------------------
 
@@ -147,7 +146,7 @@ INSERT INTO `gallery` (`id`, `gallery_heading`, `tgl_pernikahan`, `gallery_image
 --
 
 CREATE TABLE `packages` (
-  `id` int(11) NOT NULL,
+  `id_paket` int(11) NOT NULL,
   `packages_heading` varchar(255) NOT NULL,
   `packages_price` varchar(255) NOT NULL,
   `packages_list` text NOT NULL
@@ -157,10 +156,45 @@ CREATE TABLE `packages` (
 -- Dumping data untuk tabel `packages`
 --
 
-INSERT INTO `packages` (`id`, `packages_heading`, `packages_price`, `packages_list`) VALUES
-(1, 'DIAMOND PACKAGE', '$750', '<ul>\r\n<li>Delicious Main Buffet 300 Servings</li>\r\n<li>Beautiful Makeup, Luxurious Wedding Clothing</li>\r\n<li>Magnificent Aisle Beautiful Decoration</li>\r\n<li>Photo and Video Shooting &amp; Exclusive Collage Album</li>\r\n<li>Master Of Ceremony (MC) With A Sweet Voice</li>\r\n<li>GEDUNG</li>\r\n</ul>'),
-(2, 'SILVER PACKAGE', '$1000', '<ul>\r\n<li>Delicious Main Buffet 300 Servings</li>\r\n<li>Beautiful Makeup, Luxurious Wedding Clothing</li>\r\n<li>Magnificent Aisle Beautiful Decoration</li>\r\n<li>Photo and Video Shooting &amp; Exclusive Collage Album</li>\r\n<li>Master Of Ceremony (MC) With A Sweet Voice</li>\r\n</ul>'),
-(3, 'GOLD PACKAGE', '$1200', '<ul>\r\n<li>Delicious Main Buffet 300 Servings</li>\r\n<li>Beautiful Makeup, Luxurious Wedding Clothing</li>\r\n<li>Magnificent Aisle Beautiful Decoration</li>\r\n<li>Photo and Video Shooting &amp; Exclusive Collage Album</li>\r\n<li>Master Of Ceremony (MC) With A Sweet Voice</li>\r\n</ul>');
+INSERT INTO `packages` (`id_paket`, `packages_heading`, `packages_price`, `packages_list`) VALUES
+(1, 'MAWAR PACKAGE', 'Rp.15.000.000', '<p>Makeup</p>\r\n<ul>\r\n<li>Makeup &amp; Hair/Hijab Bride</li>\r\n<li>Makeup 2 Ibu Pengantin</li>\r\n<li>Busana akad 1 &amp; Resepsi Pengantin 1</li>\r\n<li>Busana Ibu CPW &amp; CPP</li>\r\n<li>Beskap Bpk CPW &amp; CPP</li>\r\n<li>Fresh Flowers (Melati)</li>\r\n<li>Accesories hair/hijab</li>\r\n<li>4 Makeup + busana pagar ayu</li>\r\n<li>2 Makeup + busana jaga prasmanan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dekorasi</p>\r\n<ul>\r\n<li>Dekorasi Pelaminan 6m</li>\r\n<li>Kursi Pengantin</li>\r\n<li>Fresh Flowers (Bunga Hidup)</li>\r\n<li>Gapura Masuk</li>\r\n<li>Kotak Uang 2 Unit</li>\r\n<li>Mini Garden</li>\r\n<li>Meja Jaga Tamu</li>\r\n<li>Karpet Jalan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Bonus</p>\r\n<ul>\r\n<li>Alat Prasmanan</li>\r\n<li>Piring Hoe 100pcs</li>\r\n<li>Sendok 100pcs</li>\r\n</ul>'),
+(2, 'MELATI PACKAGE', 'Rp.18.000.000', '<p>Makeup</p>\r\n<ul>\r\n<li>Makeup &amp; Hair/Hijab Bride</li>\r\n<li>Makeup 2 Ibu Pengantin</li>\r\n<li>Busana akad 1 &amp; Resepsi Pengantin 2</li>\r\n<li>Busana Ibu CPW &amp; CPP</li>\r\n<li>Beskap Bpk CPW &amp; CPP</li>\r\n<li>Fresh Flowers (Melati)</li>\r\n<li>Accesories hair/hijab</li>\r\n<li>4 Makeup + busana pagar ayu</li>\r\n<li>2 Makeup + busana jaga prasmanan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dekorasi</p>\r\n<ul>\r\n<li>Dekorasi Pelaminan 6m</li>\r\n<li>Kursi Pengantin</li>\r\n<li>Fresh Flowers (Bunga Hidup)</li>\r\n<li>Gapura Masuk</li>\r\n<li>Kotak Uang 2 Unit</li>\r\n<li>Mini Garden</li>\r\n<li>Meja Jaga Tamu</li>\r\n<li>Karpet Jalan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dokumentasi</p>\r\n<ul>\r\n<li>1 Album Sheet 2 Roll</li>\r\n<li>Video Full Liputan</li>\r\n<li>Flashdisk</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Bonus</p>\r\n<ul>\r\n<li>Alat Prasmanan</li>\r\n<li>Piring Hoe 100pcs</li>\r\n<li>Sendok 100pcs</li>\r\n<li>Henna &amp; Kuku</li>\r\n</ul>'),
+(3, 'ANGGREK PACKAGE', 'Rp.22.000.000', '<p>Makeup</p>\r\n<ul>\r\n<li>Makeup &amp; Hair/Hijab Bride</li>\r\n<li>Makeup 2 Ibu Pengantin</li>\r\n<li>Busana akad 1 &amp; Resepsi Pengantin 1</li>\r\n<li>Busana Ibu CPW &amp; CPP</li>\r\n<li>Beskap Bpk CPW &amp; CPP</li>\r\n<li>Fresh Flowers (Melati)</li>\r\n<li>Accesories hair/hijab</li>\r\n<li>4 Makeup + busana pagar ayu</li>\r\n<li>2 Makeup + busana jaga prasmanan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dekorasi</p>\r\n<ul>\r\n<li>Dekorasi Pelaminan 6m</li>\r\n<li>Kursi Pengantin</li>\r\n<li>Fresh Flowers (Bunga Hidup)</li>\r\n<li>Gapura Masuk</li>\r\n<li>Kotak Uang 2 Unit</li>\r\n<li>Mini Garden</li>\r\n<li>Meja Jaga Tamu</li>\r\n<li>Karpet Jalan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dokumentasi</p>\r\n<ul>\r\n<li>1 Album Sheet 2 Roll</li>\r\n<li>Video Full Liputan</li>\r\n<li>Flashdisk</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Tenda</p>\r\n<ul>\r\n<li>Tenda Pelaminan</li>\r\n<li>Tenda Tamu 2 Lokal</li>\r\n<li>Panggung Pelaminan 6x3 cm</li>\r\n<li>Lampu Penerangan 2 Hari 2 Malam</li>\r\n<li>Diesel 1 Hari 2 Malam</li>\r\n<li>Kursi 100pcs Cover&nbsp;</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Bonus</p>\r\n<ul>\r\n<li>Alat Prasmanan</li>\r\n<li>Piring Hoe 100pcs</li>\r\n<li>Sendok 100pcs</li>\r\n<li>Henna &amp; Kuku</li>\r\n</ul>'),
+(4, 'TULIP PACKAGE', 'Rp.25.000.000', '<p>Makeup</p>\r\n<ul>\r\n<li>Makeup &amp; Hair/Hijab Bride</li>\r\n<li>Makeup 2 Ibu Pengantin</li>\r\n<li>Busana akad 1 &amp; Resepsi Pengantin 2</li>\r\n<li>Busana Ibu CPW &amp; CPP</li>\r\n<li>Beskap Bpk CPW &amp; CPP</li>\r\n<li>Fresh Flowers (Melati)</li>\r\n<li>Accesories hair/hijab</li>\r\n<li>4 Makeup + busana pagar ayu</li>\r\n<li>2 Makeup + busana jaga prasmanan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dekorasi</p>\r\n<ul>\r\n<li>Dekorasi Pelaminan 6m</li>\r\n<li>Kursi Pengantin</li>\r\n<li>Fresh Flowers (Bunga Hidup)</li>\r\n<li>Gapura Masuk</li>\r\n<li>Kotak Uang 2 Unit</li>\r\n<li>Mini Garden</li>\r\n<li>Meja Jaga Tamu</li>\r\n<li>Karpet Jalan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dokumentasi</p>\r\n<ul>\r\n<li>1 Album Sheet 2 Roll</li>\r\n<li>Video Full Liputan</li>\r\n<li>Flashdisk</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Tenda</p>\r\n<ul>\r\n<li>Tenda Pelaminan</li>\r\n<li>Tenda Tamu 2 Lokal</li>\r\n<li>Panggung Pelaminan 6x3 cm</li>\r\n<li>Lampu Penerangan 2 Hari 2 Malam</li>\r\n<li>Diesel 1 Hari 2 Malam</li>\r\n<li>Kursi 100pcs Cover&nbsp;</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Hiburan</p>\r\n<ul>\r\n<li>Organ Siang</li>\r\n<li>Penyanyi 2</li>\r\n<li>MC 1</li>\r\n<li>Kendang 1</li>\r\n<li>Player</li>\r\n<li>Sound</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Bonus</p>\r\n<ul>\r\n<li>Alat Prasmanan</li>\r\n<li>Piring Hoe 100pcs</li>\r\n<li>Sendok 100pcs</li>\r\n<li>Henna &amp; Kuku</li>\r\n</ul>'),
+(5, 'LILY PACKAGE', 'Rp.35.000.000', '<p>Makeup</p>\r\n<ul>\r\n<li>Makeup &amp; Hair/Hijab Bride</li>\r\n<li>Makeup 2 Ibu Pengantin</li>\r\n<li>Busana akad 1 &amp; Resepsi Pengantin 1</li>\r\n<li>Busana Ibu CPW &amp; CPP</li>\r\n<li>Beskap Bpk CPW &amp; CPP</li>\r\n<li>Fresh Flowers (Melati)</li>\r\n<li>Accesories hair/hijab</li>\r\n<li>4 Makeup + busana pagar ayu</li>\r\n<li>2 Makeup + busana jaga prasmanan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dekorasi</p>\r\n<ul>\r\n<li>Dekorasi Pelaminan 6m</li>\r\n<li>Kursi Pengantin</li>\r\n<li>Fresh Flowers (Bunga Hidup)</li>\r\n<li>Gapura Masuk</li>\r\n<li>Kotak Uang 2 Unit</li>\r\n<li>Mini Garden</li>\r\n<li>Meja Jaga Tamu</li>\r\n<li>Karpet Jalan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dokumentasi</p>\r\n<ul>\r\n<li>1 Album Sheet 2 Roll</li>\r\n<li>Video Full Liputan</li>\r\n<li>Flashdisk</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Tenda</p>\r\n<ul>\r\n<li>Tenda Pelaminan</li>\r\n<li>Tenda Tamu 2 Lokal</li>\r\n<li>Tenda Lorong 1 Lokal</li>\r\n<li>Panggung Pelaminan 6x3 cm</li>\r\n<li>Lampu Penerangan 2 Hari 2 Malam</li>\r\n<li>Diesel 1 Hari 2 Malam</li>\r\n<li>Kursi 100pcs Cover&nbsp;</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Hiburan</p>\r\n<ul>\r\n<li>Organ Siang</li>\r\n<li>Penyanyi 2</li>\r\n<li>MC 1</li>\r\n<li>Kendang 1</li>\r\n<li>Player</li>\r\n<li>Sound</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Siraman</p>\r\n<ul>\r\n<li>Musik Live : Kecapi, Sinden, Suling</li>\r\n<li>MC Siraman</li>\r\n<li>Soundsystem Siraman</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Galura</p>\r\n<ul>\r\n<li>Pemusik : Kecapi, Kendang, Suling, Juru Kawin, Perkusi, Biola</li>\r\n<li>Penari : Pamayang 4, Baksa 1, Abah Lengser 1, Ambu 1</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Bonus</p>\r\n<ul>\r\n<li>Alat Prasmanan</li>\r\n<li>Piring Hoe 100pcs</li>\r\n<li>Sendok 100pcs</li>\r\n<li>Henna &amp; Kuku</li>\r\n</ul>'),
+(6, 'LAVENDER PACKAGE', 'Rp.38.000.000', '<p>Makeup</p>\r\n<ul>\r\n<li>Makeup &amp; Hair/Hijab Bride</li>\r\n<li>Makeup 2 Ibu Pengantin</li>\r\n<li>Busana akad 1 &amp; Resepsi Pengantin 1</li>\r\n<li>Busana Ibu CPW &amp; CPP</li>\r\n<li>Beskap Bpk CPW &amp; CPP</li>\r\n<li>Fresh Flowers (Melati)</li>\r\n<li>Accesories hair/hijab</li>\r\n<li>4 Makeup + busana pagar ayu</li>\r\n<li>2 Makeup + busana jaga prasmanan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dekorasi</p>\r\n<ul>\r\n<li>Dekorasi Pelaminan 6m</li>\r\n<li>Kursi Pengantin</li>\r\n<li>Fresh Flowers (Bunga Hidup)</li>\r\n<li>Gapura Masuk</li>\r\n<li>Kotak Uang 2 Unit</li>\r\n<li>Mini Garden</li>\r\n<li>Meja Jaga Tamu</li>\r\n<li>Karpet Jalan</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dokumentasi</p>\r\n<ul>\r\n<li>1 Album Sheet 2 Roll</li>\r\n<li>Video Full Liputan</li>\r\n<li>Flashdisk</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Tenda</p>\r\n<ul>\r\n<li>Tenda Pelaminan</li>\r\n<li>Tenda Tamu 2 Lokal</li>\r\n<li>Tenda Lorong 1 Lokal</li>\r\n<li>Panggung Pelaminan 6x3 cm</li>\r\n<li>Lampu Penerangan 2 Hari 2 Malam</li>\r\n<li>Diesel 1 Hari 2 Malam</li>\r\n<li>Kursi 100pcs Cover&nbsp;</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Hiburan</p>\r\n<ul>\r\n<li>Organ Siang</li>\r\n<li>Penyanyi 2</li>\r\n<li>MC 1</li>\r\n<li>Kendang 1</li>\r\n<li>Player</li>\r\n<li>Sound</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Siraman</p>\r\n<ul>\r\n<li>Musik Live : Kecapi, Sinden, Suling</li>\r\n<li>MC Siraman</li>\r\n<li>Soundsystem Siraman</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Galura</p>\r\n<ul>\r\n<li>Pemusik : Kecapi, Kendang, Suling, Juru Kawin, Perkusi, Biola</li>\r\n<li>Penari : Pamayang 4, Baksa 1, Abah Lengser 1, Ambu 1</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Prewedding</p>\r\n<ul>\r\n<li>Makeup + Hijab do</li>\r\n<li>Photo Prewedding</li>\r\n<li>2 Frame Besar + 6 Frame Kecil</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Bonus</p>\r\n<ul>\r\n<li>Alat Prasmanan</li>\r\n<li>Piring Hoe 100pcs</li>\r\n<li>Sendok 100pcs</li>\r\n<li>Henna &amp; Kuku</li>\r\n<li>Photoboot Mini</li>\r\n</ul>'),
+(7, 'DAHLIA PACKAGE', 'Rp.40.000.000', '<p>Makeup</p>\r\n<ul>\r\n<li>Makeup &amp; Hair/Hijab Bride</li>\r\n<li>Makeup 2 Ibu Pengantin</li>\r\n<li>Busana akad 1 &amp; Resepsi Pengantin 1</li>\r\n<li>Busana Ibu CPW &amp; CPP</li>\r\n<li>Beskap Bpk CPW &amp; CPP</li>\r\n<li>Fresh Flowers (Melati)</li>\r\n<li>Accesories hair/hijab</li>\r\n<li>4 Makeup + busana pagar ayu</li>\r\n<li>2 Makeup + busana jaga prasmanan</li>\r\n<li>2beskap pager bagus</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dekorasi</p>\r\n<ul>\r\n<li>Dekorasi Pelaminan 6m</li>\r\n<li>Kursi Pengantin</li>\r\n<li>Fresh Flowers (Bunga Hidup)</li>\r\n<li>Gapura Masuk</li>\r\n<li>Kotak Uang 2 Unit</li>\r\n<li>Mini Garden</li>\r\n<li>Meja Jaga Tamu</li>\r\n<li>Karpet Jalan</li>\r\n<li>Kursi Akad</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Dokumentasi</p>\r\n<ul>\r\n<li>1 Album Sheet 2 Roll</li>\r\n<li>Video Full Liputan</li>\r\n<li>Flashdisk</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Tenda</p>\r\n<ul>\r\n<li>Tenda Pelaminan</li>\r\n<li>Tenda Tamu 2 Lokal</li>\r\n<li>Tenda Lorong 1 Lokal</li>\r\n<li>Panggung Pelaminan 6x3 cm</li>\r\n<li>Lampu Penerangan 2 Hari 2 Malam</li>\r\n<li>Diesel 1 Hari 2 Malam</li>\r\n<li>Kursi 100pcs Cover&nbsp;</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Hiburan</p>\r\n<ul>\r\n<li>Organ Siang</li>\r\n<li>Penyanyi 2</li>\r\n<li>MC 1</li>\r\n<li>Kendang 1</li>\r\n<li>Player</li>\r\n<li>Sound</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Siraman</p>\r\n<ul>\r\n<li>Musik Live : Kecapi, Sinden, Suling</li>\r\n<li>MC Siraman</li>\r\n<li>Soundsystem Siraman</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Galura</p>\r\n<ul>\r\n<li>Pemusik : Kecapi, Kendang, Suling, Juru Kawin, Perkusi, Biola</li>\r\n<li>Penari : Pamayang 4, Baksa 1, Abah Lengser 1, Ambu 1</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Prewedding</p>\r\n<ul>\r\n<li>Makeup + Hijab do</li>\r\n<li>Photo Prewedding</li>\r\n<li>2 Frame Besar + 6 Frame Kecil</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Blower</p>\r\n<ul>\r\n<li>Blower Air 2pcs</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>Bonus</p>\r\n<ul>\r\n<li>Alat Prasmanan</li>\r\n<li>Piring Hoe 100pcs</li>\r\n<li>Sendok 100pcs</li>\r\n<li>Henna &amp; Kuku</li>\r\n<li>Photoboot Mini</li>\r\n</ul>');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pembayaran`
+--
+
+CREATE TABLE `pembayaran` (
+  `id_pembayaran` int(30) NOT NULL,
+  `id_pesanan` int(30) NOT NULL,
+  `metode_pembayaran` varchar(255) NOT NULL,
+  `status_pembayaran` varchar(255) NOT NULL,
+  `bukti_pembayaran` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pesanan`
+--
+
+CREATE TABLE `pesanan` (
+  `id_pesanan` int(30) NOT NULL,
+  `id_pelanggan` int(30) NOT NULL,
+  `id_paket` int(30) NOT NULL,
+  `nama_pelanggan` varchar(255) NOT NULL,
+  `Layanan` varchar(255) NOT NULL,
+  `Harga` varchar(255) NOT NULL,
+  `Status` enum('DP','Proses','Tunda','Lunas') NOT NULL,
+  `Keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -182,8 +216,9 @@ CREATE TABLE `tb_pelanggan` (
 --
 
 INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nama`, `email`, `jenis_kelamin`, `telepon`, `alamat`) VALUES
-(1, 'Moch Rafly Pratama', 'Moch.Rafly@gmail.com', 'Laki-Laki', '08921866573', 'Pagaden Barat'),
-(2, 'Anik Aida Nuraeni', 'anik@gmail.com', 'Perempuan', '083821966573', 'Cibogo');
+(7, 'Moch Rafly Pratama', 'Moch.Rafly@gmail.com', 'Laki-Laki', '081221966573', 'Pagaden Barat, Subang'),
+(17, 'Gibran Satrian Ahmad', 'Gibran.ahmad@gmail.com', 'Laki-Laki', '085121966573', 'Cibogo, subang'),
+(18, 'Amalya Putry Ardytha', 'putry@gmail.com', 'Perempuan', '089218662196', 'Kalijati, Subang');
 
 -- --------------------------------------------------------
 
@@ -197,7 +232,7 @@ CREATE TABLE `tb_vendor` (
   `email` varchar(100) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
   `telepon` varchar(25) DEFAULT NULL,
-  `jenis_layanan` varchar(100) NOT NULL,
+  `jenis_layanan` enum('Cattering','Dekorasi','Hiburan','Makeup') NOT NULL,
   `alamat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -206,7 +241,7 @@ CREATE TABLE `tb_vendor` (
 --
 
 INSERT INTO `tb_vendor` (`id_vendor`, `nama`, `email`, `jenis_kelamin`, `telepon`, `jenis_layanan`, `alamat`) VALUES
-(1, 'Siti Aisah', 'siti.aisah@gmail.com', 'Perempuan', '085173004573', '', 'Cibogo');
+(3, 'Siti Aisah', 'siti.aisah@gmail.com', 'Perempuan', '085173004573', 'Cattering', 'Cibogo, Subang');
 
 -- --------------------------------------------------------
 
@@ -245,7 +280,7 @@ CREATE TABLE `users` (
   `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
   `telepon` varchar(30) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `role` varchar(255) DEFAULT NULL,
+  `role` enum('Owner','Admin','Vendor','User') DEFAULT NULL,
   `reset_token` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -255,27 +290,95 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `nama`, `username`, `email`, `password`, `jenis_kelamin`, `telepon`, `alamat`, `role`, `reset_token`, `created_at`) VALUES
-(1, 'Abdul Aziz', 'Doelzizz', 'abdul.azis2004.aa@gmail.com', '$2y$10$k9szSlHthKsxFyULyONCJuHoFEKYu71brwwc4eqaJMf2hAhSf8sa.', 'Laki-Laki', '088218830417', 'Dusun CIBODAS, RT/RW 030/009, Kalijati Timur, Kalijati, Subang, Jawa Barat 41271', 'SUPER_ADMIN', NULL, '2024-11-16 11:49:15'),
-(2, 'Lulu Latifah Nurhafsyah', 'Lulu', 'lululatifah478@gmail.com', '$2y$10$n5fNv3gt1qN8PYdsi1vPCeXujIIP0Rx86xD9mF2xr60QqnJzsIBtm', 'Perempuan', '083821966573', 'Garut', 'ADMIN', '5aeadaf82d3dc353e800c34cf555305ef1c100f9ed324687d6ab053e94fb3175b0dd87894324c074a9fcf39af68fc27248dc', '2024-11-16 11:49:15'),
-(3, 'Siti Aisah', 'Dina', 'siti.aisah@gmail.com', '$2y$10$ZUKV8K3dgiBDQTgDviUcbu6vczHmDjszCVOFEpda/lt9Q2ZRxUd5.', 'Perempuan', '085173004573', 'Cibogo', 'VENDOR', NULL, '2024-11-16 11:49:15'),
-(4, 'Moch Rafly Pratama', 'Rafly', 'Moch.Rafly@gmail.com', '$2y$10$ONTBwXfoZbcCWcp8OndqRORozd1RGCmIbPUbmQVnaGDrQS/8vnjla', 'Laki-Laki', '08921866573', 'Pagaden Barat', 'USER', NULL, '2024-11-16 11:49:15'),
-(5, 'Anik Aida Nuraeni', 'Anik', 'anik@gmail.com', '$2y$10$I9.8VD8fmNLadJT7BVwFbO2KKcpQbPFtY3A1hqhHqHfeQFHlSNeiK', 'Perempuan', '083821966573', 'Cibogo', 'USER', NULL, '2024-11-18 02:30:45');
+(1, 'Abdul Aziz', 'Doelzizz', 'abdul.azis2004.aa@gmail.com', '$2y$10$k9szSlHthKsxFyULyONCJuHoFEKYu71brwwc4eqaJMf2hAhSf8sa.', 'Laki-Laki', '08921866573', 'Kalijati', 'Owner', NULL, '2024-11-16 11:49:15'),
+(2, 'Lulu Latifah Nurhafsyah', 'Lulu', 'lululatifah478@gmail.com', '$2y$10$n5fNv3gt1qN8PYdsi1vPCeXujIIP0Rx86xD9mF2xr60QqnJzsIBtm', 'Perempuan', '083821966573', 'Garut', 'Admin', '5aeadaf82d3dc353e800c34cf555305ef1c100f9ed324687d6ab053e94fb3175b0dd87894324c074a9fcf39af68fc27248dc', '2024-11-16 11:49:15'),
+(3, 'Siti Aisah', 'Dina', 'siti.aisah@gmail.com', '$2y$10$hzd2P5Kd/mqki1RmI2KUde20smCqmcwvhO1BYf1kjBrLvRjYiEGwO', 'Perempuan', '085173004573', 'Cibogo, Subang', 'Vendor', NULL, '2024-11-16 11:49:15'),
+(7, 'Moch Rafly Pratama', 'Rafly', 'Moch.Rafly@gmail.com', '$2y$10$OLZAGTeuFKkHO4Ft5OGq5u4fQsV9LlaAqUWvjB9mFQAhUWHDLBHsW', 'Laki-Laki', '081221966573', 'Pagaden Barat, Subang', 'User', NULL, '2024-11-21 04:35:23'),
+(17, 'Gibran Satrian Ahmad', 'gibran', 'Gibran.ahmad@gmail.com', '$2y$10$8qytEkbOUA0C/hYe4V/wZufX6ie/FNURqeDNjyr8pzYeX9pAnwEP.', 'Laki-Laki', '085121966573', 'Cibogo, subang', 'User', NULL, '2024-11-21 04:45:04'),
+(18, 'Amalya Putry Ardytha', 'Putry', 'putry@gmail.com', '$2y$10$xFzQQbvEjQK0jZ7J./vpiuAHLP9wi0wCTUlv8.2Bm5a2RSyQaCDYa', 'Perempuan', '089218662196', 'Kalijati, Subang', 'User', NULL, '2024-11-21 04:45:58');
 
 --
 -- Trigger `users`
 --
 DELIMITER $$
+CREATE TRIGGER `after_users_delete` AFTER DELETE ON `users` FOR EACH ROW BEGIN
+    -- Hapus data di tabel tb_pelanggan yang terkait dengan id_users
+    DELETE FROM tb_pelanggan
+    WHERE id_pelanggan = OLD.id_user;
+
+    -- Hapus data di tabel tb_vendor yang terkait dengan id_users
+    DELETE FROM tb_vendor
+    WHERE id_vendor = OLD.id_user;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_users_role_update` AFTER UPDATE ON `users` FOR EACH ROW BEGIN
+    -- Jika role berubah menjadi 'Vendor', hapus data dari tb_pelanggan dan tambahkan ke tb_vendor
+    IF NEW.role = 'Vendor' THEN
+        DELETE FROM tb_pelanggan
+        WHERE id_pelanggan = NEW.id_user;
+
+        INSERT INTO tb_vendor (id_vendor, nama, email, jenis_kelamin, telepon, alamat)
+        VALUES (NEW.id_user, NEW.nama, NEW.email, NEW.jenis_kelamin, NEW.telepon, NEW.alamat);
+    END IF;
+
+    -- Jika role berubah menjadi 'Admin', hapus data dari tb_pelanggan dan tb_vendor
+    IF NEW.role = 'Admin' THEN
+        DELETE FROM tb_pelanggan
+        WHERE id_pelanggan = NEW.id_user;
+
+        DELETE FROM tb_vendor
+        WHERE id_vendor = NEW.id_user;
+    END IF;
+
+    -- Jika role berubah menjadi 'User', hapus data dari tb_vendor dan tambahkan ke tb_pelanggan
+    IF NEW.role = 'User' THEN
+        DELETE FROM tb_vendor
+        WHERE id_vendor = NEW.id_user;
+
+        INSERT INTO tb_pelanggan (id_pelanggan, nama, email, jenis_kelamin, telepon, alamat)
+        VALUES (NEW.id_user, NEW.nama, NEW.email, NEW.jenis_kelamin, NEW.telepon, NEW.alamat);
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_users_update` AFTER UPDATE ON `users` FOR EACH ROW BEGIN
+    -- Update tabel tb_pelanggan
+    UPDATE tb_pelanggan
+    SET 
+        nama = NEW.nama,
+        email = NEW.email,
+        jenis_kelamin = NEW.jenis_kelamin,
+        telepon = NEW.telepon,
+        alamat = NEW.alamat
+    WHERE id_pelanggan = NEW.id_user;
+
+    -- Update tabel tb_vendor
+    UPDATE tb_vendor
+    SET 
+        nama = NEW.nama,
+        email = NEW.email,
+        jenis_kelamin = NEW.jenis_kelamin,
+        telepon = NEW.telepon,
+        alamat = NEW.alamat
+    WHERE id_vendor = NEW.id_user;
+END
+$$
+DELIMITER ;
+DELIMITER $$
 CREATE TRIGGER `trg_users_after_insert` AFTER INSERT ON `users` FOR EACH ROW BEGIN
     -- Jika role adalah 'VENDOR', masukkan ke tb_vendor
     IF NEW.role = 'VENDOR' THEN
-        INSERT INTO tb_vendor (nama, email, jenis_kelamin, telepon, alamat)
-        VALUES (NEW.Nama, NEW.email, NEW.jenis_kelamin, NEW.telepon, NEW.alamat);
+        INSERT INTO tb_vendor (id_vendor, nama, email, jenis_kelamin, telepon, alamat)
+        VALUES (NEW.id_user, NEW.Nama, NEW.email, NEW.jenis_kelamin, NEW.telepon, NEW.alamat);
     END IF;
 
     -- Jika role adalah 'USER', masukkan ke tb_pelanggan
     IF NEW.role = 'USER' THEN
-        INSERT INTO tb_pelanggan (nama, email, jenis_kelamin, telepon, alamat)
-        VALUES (NEW.Nama, NEW.email, NEW.jenis_kelamin, NEW.telepon, NEW.alamat);
+        INSERT INTO tb_pelanggan (id_pelanggan, nama, email, jenis_kelamin, telepon, alamat)
+        VALUES (NEW.id_user, NEW.Nama, NEW.email, NEW.jenis_kelamin, NEW.telepon, NEW.alamat);
     END IF;
 END
 $$
@@ -345,21 +448,32 @@ ALTER TABLE `gallery`
 -- Indeks untuk tabel `packages`
 --
 ALTER TABLE `packages`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_paket`);
+
+--
+-- Indeks untuk tabel `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`id_pembayaran`);
+
+--
+-- Indeks untuk tabel `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD PRIMARY KEY (`id_pesanan`),
+  ADD KEY `fk_paket` (`id_paket`);
 
 --
 -- Indeks untuk tabel `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  ADD PRIMARY KEY (`id_pelanggan`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id_pelanggan`);
 
 --
 -- Indeks untuk tabel `tb_vendor`
 --
 ALTER TABLE `tb_vendor`
-  ADD PRIMARY KEY (`id_vendor`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id_vendor`);
 
 --
 -- Indeks untuk tabel `testimonial`
@@ -371,8 +485,7 @@ ALTER TABLE `testimonial`
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`),
-  ADD KEY `role_id` (`role`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -406,25 +519,25 @@ ALTER TABLE `features`
 -- AUTO_INCREMENT untuk tabel `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pelanggan`
+-- AUTO_INCREMENT untuk tabel `pembayaran`
 --
-ALTER TABLE `tb_pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `pembayaran`
+  MODIFY `id_pembayaran` int(30) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_vendor`
+-- AUTO_INCREMENT untuk tabel `pesanan`
 --
-ALTER TABLE `tb_vendor`
-  MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `pesanan`
+  MODIFY `id_pesanan` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `testimonial`
@@ -436,7 +549,17 @@ ALTER TABLE `testimonial`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD CONSTRAINT `fk_paket` FOREIGN KEY (`id_paket`) REFERENCES `packages` (`id_paket`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -58,6 +58,9 @@ $menus = [
 
 </head>
 <body>
+<div id="loader-container">
+  <div class="loader"></div>
+</div>
     <!-- Header -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -85,7 +88,7 @@ $menus = [
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="../update.html">
+                        <a class="dropdown-item d-flex align-items-center" href="update.html">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -94,7 +97,7 @@ $menus = [
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="../update.html">
+                        <a class="dropdown-item d-flex align-items-center" href="update.html">
                             <i class="bi bi-gear"></i>
                             <span>Account Settings</span>
                         </a>
@@ -103,7 +106,7 @@ $menus = [
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="../update.html">
+                        <a class="dropdown-item d-flex align-items-center" href="update.html">
                             <i class="bi bi-question-circle"></i>
                             <span>Need Help?</span>
                         </a>
@@ -208,12 +211,27 @@ $menus = [
       
     });
   </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Tambahkan class "loading" ke body untuk mencegah interaksi selama loading
+    document.body.classList.add("loading");
 
+    // Setelah 5 detik, tampilkan konten dan sembunyikan loader
+    setTimeout(() => {
+      // Sembunyikan loader
+      document.getElementById("loader-container").style.display = "none";
 
+      // Tampilkan semua <section>
+      document.querySelectorAll("section, header").forEach(section => {
+        section.style.visibility = "visible";
+        section.style.opacity = "1";
+      });
 
-
-
-
+      // Hapus class "loading" dari body
+      document.body.classList.remove("loading");
+    }, 2000); // Durasi loader dalam milidetik (5 detik)
+  });
+</script>
 </body>
 
 </html>
