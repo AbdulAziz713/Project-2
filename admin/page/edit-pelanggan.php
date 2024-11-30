@@ -62,6 +62,7 @@ if (isset($_GET['id'])) {
                         <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control input-fixed" required>
+                                <option value="" disabled selected></option>
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>

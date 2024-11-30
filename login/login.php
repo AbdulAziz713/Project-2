@@ -11,8 +11,12 @@ if (!$koneksi) {
 function redirectUser($user) {
     $role = trim($user['role']); // Normalisasi role ke uppercase dan hilangkan spasi
     $_SESSION['id'] = $user['id_user'];     // ID pengguna
+    $_SESSION['nama'] = $user['nama'];      // Nama pengguna
     $_SESSION['name'] = $user['username']; // Username pengguna
     $_SESSION['role'] = $role;             // Role pengguna
+    $_SESSION['email'] = $user['email'];   // Email pengguna
+    $_SESSION['telepon'] = $user['telepon'];   // Nomor telepon pengguna
+    $_SESSION['alamat'] = $user['alamat'];   // Alamat pengguna
 
     switch ($role) {
         case 'Owner':

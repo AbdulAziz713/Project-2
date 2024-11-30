@@ -859,3 +859,27 @@ if (!empty($_GET['act'] == "delete-pelanggan")) {
   }
 }
 //  END Delete pelanggan
+
+// Edit Pembayaran
+if (isset($_GET['act']) && $_GET['act'] == "edit-pembayarankonfirmasi") {
+$id_pembayaran = $_GET['id']; 
+$query = "UPDATE pembayaran SET status_pembayaran = 'Terkonfirmasi' WHERE id_pembayaran = '$id_pembayaran'";
+$result = mysqli_query($koneksi, $query);
+if ($result) {
+header("location:admin/index.php?page=pembayaran&pesan=berhasil");
+} else {
+header("location:admin/index.php?page=pembayaran&pesan=gagal");
+}
+}
+
+if (isset($_GET['act']) && $_GET['act'] == "edit-pembayarantolak") {
+  $id_pembayaran = $_GET['id']; 
+  $query = "UPDATE pembayaran SET status_pembayaran = 'Ditolak' WHERE id_pembayaran = '$id_pembayaran'";
+  $result = mysqli_query($koneksi, $query);
+  if ($result) {
+  header("location:admin/index.php?page=pembayaran&pesan=berhasil");
+  } else {
+  header("location:admin/index.php?page=pembayaran&pesan=gagal");
+  }
+  }
+//  END Edit Pembayaran

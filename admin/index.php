@@ -31,6 +31,7 @@ $menus = [
         ['icon' => 'bi bi-file-earmark-text', 'text' => 'Vendor', 'link' => 'index.php?page=vendor'],
         ['icon' => 'bi bi-file-earmark-text', 'text' => 'Pelanggan', 'link' => 'index.php?page=pelanggan'],
         ['icon' => 'bi bi-file-earmark-text', 'text' => 'Pesanan', 'link' => 'index.php?page=pesanan'],
+        ['icon' => 'bi bi-file-earmark-text', 'text' => 'Pembayaran', 'link' => 'index.php?page=pembayaran'],
     ],
     'Vendor' => [
         ['icon' => 'bi bi-archive', 'text' => 'Packages', 'link' => 'index.php?page=packages'],

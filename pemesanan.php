@@ -9,7 +9,21 @@ if (!isset($_SESSION['role'])) {
   echo '<script>alert("Required Login Authorization!");window.location="login/login.php";</script>';
   exit();
 }
+$nama = isset($_SESSION['nama']) ? $_SESSION['nama'] : 'Guest';
 $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
+$telepon = isset($_SESSION['telepon']) ? $_SESSION['telepon'] : 'Guest';
+$alamat = isset($_SESSION['alamat']) ? $_SESSION['alamat'] : 'Guest';
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : 'Guest';
+$query = "SELECT * FROM users WHERE id_user";
+$result = mysqli_query($koneksi, $query);
+  if (!$result) {
+      die("Query Error: " . mysqli_errno($koneksi) .
+          " - " . mysqli_error($koneksi));
+  }
+  $data = mysqli_fetch_assoc($result);
+  if (!count($data)) {
+      echo "<script>alert('Data tidak ditemukan pada database');window.location='admin.php?page=pelanggan';</script>";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -125,7 +139,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
                         </div>
                         <div class="card-body">
                             <p class="price fs-4 fw-bold text-warning text-center"><?php echo $row['packages_price']; ?></p>
-                            <button class="btn btn-warning w-100 mb-3 text-white fw-bold">Pilih Paket</button>
+                            <a class="btn btn-warning w-100 mb-3 text-white fw-bold" href="pesan/confirm.php">Pilih Paket</a>
                             <div class="body-package">
                                 <ul class="list-unstyled">
                                     <?php

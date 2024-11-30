@@ -108,6 +108,10 @@ switch ($page) {
     include "edit-pesanan.php";
     break;
 
+  case 'pembayaran':
+    include "pembayaran.php";
+    break;
+
 
 
   default:

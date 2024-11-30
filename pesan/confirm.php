@@ -1,138 +1,140 @@
 <?php
-// File: getPaket.php
-header('Content-Type: application/json');
+// Mulai sesi
+session_start();
+require '../db-connect.php';
 
-// Koneksi ke database
-$koneksi = new mysqli('localhost', 'root', '', 'wedding_organizer');
-
-if ($koneksi->connect_error) {
-    die(json_encode(['error' => 'Database connection failed']));
+// Cek otorisasi
+if (!isset($_SESSION['role'])) {
+    echo '<script>alert("Required Login Authorization!");window.location="login/login.php";</script>';
+    exit();
 }
 
-// Ambil id_paket dari URL
-$idPaket = $_GET['id'];
+// Debugging sesi (hapus setelah selesai)
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
+// exit();
 
-// Query untuk mendapatkan detail paket
-$query = "SELECT * FROM packages WHERE id_paket = ?";
-$stmt = $koneksi->prepare($query);
-$stmt->bind_param('i', $idPaket);
-$stmt->execute();
-$result = $stmt->get_result();
+// Ambil data sesi
+$nama = isset($_SESSION['nama']) ? $_SESSION['nama'] : 'Guest';
+$username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
+$telepon = isset($_SESSION['telepon']) ? $_SESSION['telepon'] : 'Guest';
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : 'Guest';
 
-if ($result->num_rows > 0) {
-    $data = $result->fetch_assoc();
-    echo json_encode($data);
-} else {
-    echo json_encode(['error' => 'Paket tidak ditemukan']);
+// Ambil ID pengguna dari sesi
+$id_pelanggan = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+
+// Proses form jika dikirimkan
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id_paket = isset($_POST['id_paket']) ? $_POST['id_paket'] : '';
+    $nama_pelanggan = isset($_POST['nama_pelanggan']) ? $_POST['nama_pelanggan'] : '';
+    $tanggal_acara = isset($_POST['tanggal_acara']) ? $_POST['tanggal_acara'] : '';
+    $lokasi = isset($_POST['lokasi']) ? $_POST['lokasi'] : '';
+
+    // Validasi data
+    if (empty($id_paket) || empty($nama_pelanggan) || empty($tanggal_acara) || empty($lokasi) || empty($id_pelanggan)) {
+        echo "<script>alert('Harap isi semua data yang diperlukan.');window.location='confirm.php';</script>";
+        exit();
+    }
+
+    // Data layanan dan harga sesuai paket
+    $paketList = [
+        1 => ['Mawar Package', 15000000],
+        2 => ['Melati Package', 18000000],
+        3 => ['Anggrek Package', 22000000],
+        4 => ['Tulip Package', 25000000],
+        5 => ['Lily Package', 35000000],
+        6 => ['Lavender Package', 38000000],
+        7 => ['Dahlia Package', 40000000],
+    ];
+
+    // Pastikan id_paket valid
+    if (!isset($paketList[$id_paket])) {
+        echo "<script>alert('Paket tidak valid!');window.location='confirm.php';</script>";
+        exit();
+    }
+
+    $layanan = $paketList[$id_paket][0];
+    $harga = $paketList[$id_paket][1];
+
+    // Sanitasi input untuk menghindari SQL Injection
+    $id_pelanggan = mysqli_real_escape_string($koneksi, $id_pelanggan);
+    $id_paket = mysqli_real_escape_string($koneksi, $id_paket);
+    $nama_pelanggan = mysqli_real_escape_string($koneksi, $nama_pelanggan);
+    $layanan = mysqli_real_escape_string($koneksi, $layanan);
+    $harga = mysqli_real_escape_string($koneksi, $harga);
+    $lokasi = mysqli_real_escape_string($koneksi, $lokasi);
+    $tanggal_acara = mysqli_real_escape_string($koneksi, $tanggal_acara);
+
+    // Query insert ke tabel pesanan
+    $query = "INSERT INTO pesanan (id_pelanggan, id_paket, nama_pelanggan, layanan, harga, lokasi, tgl_pernikahan, status, keterangan)
+              VALUES ('$id_pelanggan', '$id_paket', '$nama_pelanggan', '$layanan', '$harga', '$lokasi', '$tanggal_acara', 'Menunggu Pembayaran', '')";
+
+    $result = mysqli_query($koneksi, $query);
+
+    if ($result) {
+        echo "<script>alert('Pesanan berhasil dibuat.');window.location='pembayaran.php';</script>";
+    } else {
+        die("Query Error: " . mysqli_error($koneksi));
+    }
 }
-
-$stmt->close();
-$koneksi->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemesanan Wedding Organizer</title>
+    <title><?php echo htmlspecialchars($username); ?> - Irma Wedding</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Pemesanan Paket Wedding Organizer</h1>
 
-        <!-- Contoh tombol Pilih Paket -->
-<div class="card">
-    <h5 class="card-title">Mawar Package</h5>
-    <p class="card-text">Rp15.000.000</p>
-    <button class="btn btn-warning pilih-paket" data-id-paket="1">Pilih Paket</button>
-</div>
-
-<!-- Form Pemesanan -->
-<form id="formPemesanan" class="mt-5">
-    <div class="mb-3">
-        <label for="paket" class="form-label">Nama Paket</label>
-        <input type="text" id="paket" class="form-control" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="harga" class="form-label">Harga Paket</label>
-        <input type="text" id="harga" class="form-control" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="fasilitas" class="form-label">Fasilitas</label>
-        <textarea id="fasilitas" class="form-control" rows="5" readonly></textarea>
-    </div>
-    <button type="submit" class="btn btn-success">Konfirmasi Pemesanan</button>
-</form>
-            <!-- Konfirmasi Pesanan -->
+        <!-- Form Pemesanan -->
+        <form method="POST" action="">
+            <!-- Pilih Paket -->
             <div class="mb-3">
-                <h5>Ringkasan Pesanan</h5>
-                <p id="ringkasanPesanan" class="border p-3">Pilih paket dan isi data untuk melihat ringkasan.</p>
+                <label for="paket" class="form-label">Pilih Paket</label>
+                <select id="paket" name="id_paket" class="form-select" required>
+                    <option value="" disabled selected>Pilih salah satu...</option>
+                    <option value="1">Mawar Package - Rp15.000.000</option>
+                    <option value="2">Melati Package - Rp18.000.000</option>
+                    <option value="3">Anggrek Package - Rp22.000.000</option>
+                    <option value="4">Tulip Package - Rp25.000.000</option>
+                    <option value="5">Lily Package - Rp35.000.000</option>
+                    <option value="6">Lavender Package - Rp38.000.000</option>
+                    <option value="7">Dahlia Package - Rp40.000.000</option>
+                </select>
+            </div>
+
+            <!-- Isi Data Pemesan -->
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Pemesan</label>
+                <input type="text" id="nama" name="nama_pelanggan" class="form-control" value="<?php echo htmlspecialchars($nama); ?>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" value="<?php echo htmlspecialchars($email); ?>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="noTelepon" class="form-label">Nomor Telepon</label>
+                <input type="tel" id="noTelepon" class="form-control" value="<?php echo htmlspecialchars($telepon); ?>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="tanggalAcara" class="form-label">Tanggal Acara</label>
+                <input type="date" id="tanggalAcara" name="tanggal_acara" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="lokasi" class="form-label">Lokasi Acara</label>
+                <input type="text" id="lokasi" name="lokasi" class="form-control" placeholder="Masukkan lokasi acara" required>
             </div>
 
             <!-- Tombol -->
-            <div class="d-flex justify-content-between">
-                <button type="button" id="btnLihatRingkasan" class="btn btn-primary">Lihat Ringkasan</button>
-                <button type="submit" id="btnKonfirmasi" class="btn btn-success" disabled>Konfirmasi Pemesanan</button>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success">Konfirmasi Pemesanan</button>
             </div>
         </form>
     </div>
-
-    <!-- Script -->
-    <script>
-    // Event listener untuk tombol "Pilih Paket"
-    document.querySelectorAll('.pilih-paket').forEach(button => {
-        button.addEventListener('click', function () {
-            const idPaket = this.getAttribute('data-id-paket');
-
-            // Kirim permintaan ke backend
-            fetch(`/getPaket/${idPaket}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Isi form dengan data dari backend
-                    document.getElementById('paket').value = data.nama_paket;
-                    document.getElementById('harga').value = data.harga;
-                    document.getElementById('fasilitas').value = data.fasilitas;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-    });
-</script>
-    <script>
-        document.getElementById('btnLihatRingkasan').addEventListener('click', function () {
-            const paket = document.getElementById('paket').value;
-            const nama = document.getElementById('nama').value;
-            const email = document.getElementById('email').value;
-            const noTelepon = document.getElementById('noTelepon').value;
-            const tanggalAcara = document.getElementById('tanggalAcara').value;
-            const lokasi = document.getElementById('lokasi').value;
-
-            if (paket && nama && email && noTelepon && tanggalAcara && lokasi) {
-                const paketText = document.getElementById('paket').options[document.getElementById('paket').selectedIndex].text;
-                document.getElementById('ringkasanPesanan').innerHTML = `
-                    <strong>Paket:</strong> ${paketText}<br>
-                    <strong>Nama:</strong> ${nama}<br>
-                    <strong>Email:</strong> ${email}<br>
-                    <strong>Telepon:</strong> ${noTelepon}<br>
-                    <strong>Tanggal Acara:</strong> ${tanggalAcara}<br>
-                    <strong>Lokasi:</strong> ${lokasi}
-                `;
-                document.getElementById('btnKonfirmasi').disabled = false;
-            } else {
-                alert('Mohon isi semua data!');
-            }
-        });
-
-        document.getElementById('formPemesanan').addEventListener('submit', function (event) {
-            event.preventDefault();
-            alert('Pesanan berhasil dikonfirmasi!');
-            this.reset();
-            document.getElementById('ringkasanPesanan').innerHTML = 'Pilih paket dan isi data untuk melihat ringkasan.';
-            document.getElementById('btnKonfirmasi').disabled = true;
-        });
-    </script>
 </body>
 </html>
