@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Nov 2024 pada 05.33
+-- Waktu pembuatan: 30 Nov 2024 pada 08.40
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -175,9 +175,32 @@ CREATE TABLE `pembayaran` (
   `id_pembayaran` int(30) NOT NULL,
   `id_pesanan` int(30) NOT NULL,
   `metode_pembayaran` varchar(255) NOT NULL,
-  `status_pembayaran` varchar(255) NOT NULL,
+  `status_pembayaran` enum('Menunggu Konfirmasi','Terkonfirmasi','Ditolak') NOT NULL,
   `bukti_pembayaran` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_pesanan`, `metode_pembayaran`, `status_pembayaran`, `bukti_pembayaran`) VALUES
+(1, 8, 'Transfer Bank', 'Ditolak', '../assets/img/bukti_pembayaran/1732770181_fav.png'),
+(2, 8, 'E-Wallet', 'Terkonfirmasi', '../assets/img/bukti_pembayaran/1732770220_fav.png');
+
+--
+-- Trigger `pembayaran`
+--
+DELIMITER $$
+CREATE TRIGGER `after_status_pembayaran_update` AFTER UPDATE ON `pembayaran` FOR EACH ROW BEGIN
+    -- Pastikan hanya melakukan update jika kolom status_pembayaran berubah
+    IF NEW.status_pembayaran <> OLD.status_pembayaran THEN
+        UPDATE pesanan
+        SET status_pembayaran = NEW.status_pembayaran
+        WHERE id_pesanan = NEW.id_pesanan; -- Asumsikan ada kolom id_pesanan untuk menghubungkan kedua tabel
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -192,9 +215,25 @@ CREATE TABLE `pesanan` (
   `nama_pelanggan` varchar(255) NOT NULL,
   `Layanan` varchar(255) NOT NULL,
   `Harga` varchar(255) NOT NULL,
-  `Status` enum('DP','Proses','Tunda','Lunas') NOT NULL,
+  `lokasi` varchar(255) NOT NULL,
+  `tgl_pernikahan` varchar(255) NOT NULL,
+  `status_pembayaran` enum('Menunggu Pembayaran','Terkonfirmasi','Ditolak') NOT NULL,
   `Keterangan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pesanan`
+--
+
+INSERT INTO `pesanan` (`id_pesanan`, `id_pelanggan`, `id_paket`, `nama_pelanggan`, `Layanan`, `Harga`, `lokasi`, `tgl_pernikahan`, `status_pembayaran`, `Keterangan`) VALUES
+(2, 7, 7, 'Moch Rafly Pratama', 'Dahlia Package', '40000000', 'Kalijati, Subang', '2024-11-21', '', ''),
+(3, 7, 7, 'Moch Rafly Pratama', 'Dahlia Package', '40000000', 'Kalijati, Subang', '2024-11-21', 'Menunggu Pembayaran', ''),
+(4, 7, 7, 'Moch Rafly Pratama', 'Dahlia Package', '40000000', 'Kalijati, Subang', '2024-11-21', 'Menunggu Pembayaran', ''),
+(5, 7, 1, 'Moch Rafly Pratama', 'Mawar Package', '15000000', 'Kalijati, Subang', '2024-11-21', 'Menunggu Pembayaran', ''),
+(6, 7, 1, 'Moch Rafly Pratama', 'Mawar Package', '15000000', 'Kalijati, Subang', '2024-11-21', 'Menunggu Pembayaran', ''),
+(7, 7, 4, 'Moch Rafly Pratama', 'Tulip Package', '25000000', 'Kalijati, Subang', '2024-11-15', 'Menunggu Pembayaran', ''),
+(8, 7, 5, 'Moch Rafly Pratama', 'Lily Package', '35000000', 'Kalijati, Subang', '2024-11-22', 'Ditolak', ''),
+(9, 7, 1, 'Moch Rafly Pratama', 'Mawar Package', '15000000', 'Kalijati, Subang', '2024-11-07', 'Menunggu Pembayaran', '');
 
 -- --------------------------------------------------------
 
@@ -531,13 +570,13 @@ ALTER TABLE `packages`
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(30) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pesanan` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `testimonial`
