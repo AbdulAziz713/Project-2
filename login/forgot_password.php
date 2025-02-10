@@ -75,8 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="kotak_login">
-        <h3><b>Sistem Informasi Wedding Organizer </b> <br/> Politeknik Negeri Subang</h3>
-        <center><img src="../assets/img/logo/polsub.png" width="200" height="200"></center>
+        <center><img src="../assets/img/logo/logo-irma.png" width="250" height="200"></center>
     </div>
     <div class="kotak_login2">
         <p class="tulisan_login">Form Lupa Password</p>

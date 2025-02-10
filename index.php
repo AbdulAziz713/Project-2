@@ -89,6 +89,9 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li>
+        <a class="dropdown-item" href="pesan/orders.php">Pesanan</a>
+      </li>
+      <li>
         <a class="dropdown-item" href="action.php?act=rubah-password">Rubah Password</a>
       </li>
       <li>
@@ -107,7 +110,7 @@ $username = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
       <div class="container">
         <div class="masthead-heading">Selamat Datang di <span style="color: #ffc800">Irma Wedding!</span></div>
         <div class="masthead-subheading">Tempat dimana anda akan merayakan pernikahan</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="pemesanan.php"
+        <a class="btn btn-primary btn-xl text-uppercase" href="pesan/pemesanan.php"
           >Pesan Sekarang!</a
         >
       </div>

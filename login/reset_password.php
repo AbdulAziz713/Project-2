@@ -69,8 +69,7 @@ if (isset($_POST['reset'])) {
 </head>
 <body>
     <div class="kotak_login">
-        <h3><b>Sistem Informasi Irma Wedding </b> <br/> Politeknik Negeri Subang</h3>
-        <center><img src="../assets/img/logo/polsub.png" width="200" height="200"></center>
+        <center><img src="../assets/img/logo/logo-irma.png" width="250" height="200"></center>
     </div>
     <div class="kotak_login2 signup-form"> <!-- Tambahkan kelas khusus -->
         <p class="tulisan_login">Silahkan Isi Data</p>

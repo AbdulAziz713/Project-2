@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tanggal_acara = mysqli_real_escape_string($koneksi, $tanggal_acara);
 
     // Query insert ke tabel pesanan
-    $query = "INSERT INTO pesanan (id_pelanggan, id_paket, nama_pelanggan, layanan, harga, lokasi, tgl_pernikahan, status, keterangan)
+    $query = "INSERT INTO pesanan (id_pelanggan, id_paket, nama_pelanggan, layanan, harga, lokasi, tgl_pernikahan, status_pembayaran, keterangan)
               VALUES ('$id_pelanggan', '$id_paket', '$nama_pelanggan', '$layanan', '$harga', '$lokasi', '$tanggal_acara', 'Menunggu Pembayaran', '')";
 
     $result = mysqli_query($koneksi, $query);

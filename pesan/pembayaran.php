@@ -91,15 +91,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <form method="POST" enctype="multipart/form-data" class="mt-4">
-            <div class="mb-3">
-                <label for="metode_pembayaran" class="form-label">Pilih Metode Pembayaran</label>
-                <select id="metode_pembayaran" name="metode_pembayaran" class="form-select" required>
-                    <option value="" disabled selected>Pilih salah satu...</option>
-                    <option value="Transfer Bank">Transfer Bank</option>
-                    <option value="E-Wallet">E-Wallet (Gopay/OVO/DANA)</option>
-                    <option value="Cash">Cash</option>
-                </select>
-            </div>
+        <div class="mb-3">
+    <label for="metode_pembayaran" class="form-label">Pilih Metode Pembayaran</label>
+    <select id="metode_pembayaran" name="metode_pembayaran" class="form-select" required onchange="updatePaymentDetails()">
+        <option value="" disabled selected>Pilih salah satu...</option>
+        <option value="Transfer Bank">Transfer Bank</option>
+        <option value="E-Wallet">E-Wallet (Gopay/OVO/DANA)</option>
+        <option value="Qris">QRis</option>
+    </select>
+</div>
+
+<div id="payment-details" class="border p-3 rounded bg-light" style="display: none;">
+    <!-- Detail metode pembayaran akan muncul di sini -->
+</div>
+
 
             <div class="mb-3">
                 <label for="bukti_pembayaran" class="form-label">Unggah Bukti Pembayaran</label>
@@ -112,4 +117,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </body>
+<script>
+    function updatePaymentDetails() {
+        const paymentDetailsDiv = document.getElementById('payment-details');
+        const selectedMethod = document.getElementById('metode_pembayaran').value;
+
+        let details = '';
+        switch (selectedMethod) {
+            case 'Transfer Bank':
+                details = `
+                    <h6>Transfer Bank</h6>
+                    <p>Silakan transfer ke salah satu rekening berikut:</p>
+                    <ul>
+                        <li>BCA: 1234567890 a.n Irma Wedding</li>
+                        <li>Mandiri: 0987654321 a.n Irma Wedding</li>
+                    </ul>
+                `;
+                break;
+            case 'E-Wallet':
+                details = `
+                    <h6>E-Wallet</h6>
+                    <p>Scan QR berikut untuk melakukan pembayaran:</p>
+                    <img src="../assets/img/qr-code-example.png" alt="QR Code" class="img-fluid" style="max-width: 200px;">
+                    <p>GOPAY</p>
+                    <img src="../assets/img/qr-code-example.png" alt="QR Code" class="img-fluid" style="max-width: 200px;">
+                    <p>OVO</p>
+                    <img src="../assets/img/qr-code-example.png" alt="QR Code" class="img-fluid" style="max-width: 200px;">
+                    <p>DANA</p>
+                `;
+                break;
+                case 'Qris':
+                details = `
+                    <h6>QRis</h6>
+                    <p>Scan QR berikut untuk melakukan pembayaran:</p>
+                    <img src="../assets/img/qr-code-example.png" alt="QR Code" class="img-fluid" style="max-width: 200px;">
+                `;
+                break;
+            default:
+                details = '';
+        }
+
+        if (details) {
+            paymentDetailsDiv.innerHTML = details;
+            paymentDetailsDiv.style.display = 'block';
+        } else {
+            paymentDetailsDiv.style.display = 'none';
+        }
+    }
+</script>
+
 </html>

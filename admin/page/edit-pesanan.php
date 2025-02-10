@@ -40,47 +40,12 @@ if (isset($_GET['id'])) {
         <div class="col-12">
             <div class="card vendor-card">
                 <div class="card-body">
-                    <h5 class="card-title">Edit Data Vendor</h5>
-                    <form class="row g-3" method="POST" action="../action.php?act=edit-vendor" enctype="multipart/form-data">
-                        <div class="col-lg-3 col-md-9 col-sm-8">
-                            <input name="id_vendor" value="<?php echo $data['id_pesanan']; ?>" hidden />
-                            <label class="form-label">Nama Pelanggan</label>
-                            <input type="text" class="form-control" name="nama_vendor" required="required" autocomplete="off">
-                        </div>
-                        <div class="col-lg-3 col-md-9 col-sm-8">
-                            <label class="form-label">Layanan</label>
-                            <input type="text" class="form-control" name="username" required="required" autocomplete="off">
-                        </div>
-                        <div class="col-lg-3 col-md-9 col-sm-8">
-                            <label class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" required="required" autocomplete="off">
-                        </div>
-                        <div class="col-lg-3 col-md-9 col-sm-8">
-                            <label class="form-label">Password</label>
-                            <input type="Password" class="form-control" name="password" autocomplete="off">
-                        </div>
-                        <div class="col-lg-3 col-md-9 col-sm-8">
-                            <label class="form-label">Jenis Kelamin</label>
-                            <select name="jenis_kelamin" class="form-control input-fixed" required>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-9 col-sm-8">
-                            <label class="form-label">Telepon</label>
-                            <input type="text" class="form-control" name="telepon" required="required" autocomplete="off">
-                        </div>
-                        <div class="col-lg-3 col-md-9 col-sm-8">
-                            <label class="form-label">Role</label>
-                            <select name="role" class="form-control input-fixed" required>
-                                <option value="Admin">Admin</option>
-                                <option value="Vendor">Vendor</option>
-                                <option value="User">Pelanggan</option>
-                            </select>
-                        </div>
+                    <h5 class="card-title">Edit Data Pesanan</h5>
+                    <form class="row g-3" method="POST" action="../action.php?act=edit-pesanan&id=<?php echo $data['id_pesanan']; ?>" enctype="multipart/form-data">
                         <div class="col-12">
-                            <label class="form-label">Alamat</label>
-                            <textarea class="form-control" name="alamat" rows="5"><?php echo $data['Keterangan']; ?></textarea>
+                            <input name="id_pesanan" value="<?php echo $data['id_pesanan']; ?>" hidden />
+                            <label class="form-label">Keterangan</label>
+                            <textarea class="form-control" name="keterangan" rows="5"><?php echo $data['Keterangan']; ?></textarea>
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success">Submit</button>

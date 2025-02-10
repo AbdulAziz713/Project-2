@@ -45,15 +45,15 @@ if (isset($_GET['id'])) {
                         <div class="col-lg-3 col-md-9 col-sm-8">
                             <input name="id_vendor" value="<?php echo $data['id_user']; ?>" hidden />
                             <label class="form-label">Nama</label>
-                            <input type="text" class="form-control" name="nama_vendor" required="required" autocomplete="off">
+                            <input type="text" class="form-control" name="nama_vendor" value="<?php echo $data['nama']; ?>" required="required" autocomplete="off">
                         </div>
                         <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" required="required" autocomplete="off">
+                            <input type="text" class="form-control" name="username" value="<?php echo $data['username']; ?>" required="required" autocomplete="off">
                         </div>
                         <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" required="required" autocomplete="off">
+                            <input type="text" class="form-control" name="email" value="<?php echo $data['email']; ?>" required="required" autocomplete="off">
                         </div>
                         <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Password</label>
@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Telepon</label>
-                            <input type="text" class="form-control" name="telepon" required="required" autocomplete="off">
+                            <input type="text" class="form-control" name="telepon" value="<?php echo $data['telepon']; ?>" required="required" autocomplete="off">
                         </div>
                         <div class="col-lg-3 col-md-9 col-sm-8">
                             <label class="form-label">Role</label>

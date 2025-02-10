@@ -4,7 +4,7 @@ if (!empty($_SESSION)) {
 } else {
   session_start();
 }
-require 'db-connect.php';
+require '../db-connect.php';
 if (!isset($_SESSION['role'])) {
   echo '<script>alert("Required Login Authorization!");window.location="login/login.php";</script>';
   exit();
@@ -38,7 +38,7 @@ $result = mysqli_query($koneksi, $query);
     <meta name="author" content="" />
     <title><?php echo htmlspecialchars($username); ?> - Irma Wedding</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -57,7 +57,7 @@ $result = mysqli_query($koneksi, $query);
     />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="landing-page/css/styles.css" rel="stylesheet" />
+    <link href="../landing-page/css/styles.css" rel="stylesheet" />
   </head>
   <body id="page-top">
   <div id="loader-container">
@@ -82,8 +82,8 @@ $result = mysqli_query($koneksi, $query);
         </button>
         <div class="collapse navbar-collapse d-flex justify-content-between align-items-center" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-            <li class="nav-item"><a class="nav-link" href="index.php">Beranda</a></li>
-            <li class="nav-item"><a class="nav-link" href="action.php?act=pesanan">Pesanan</a></li>
+            <li class="nav-item"><a class="nav-link" href="../index.php">Beranda</a></li>
+            <li class="nav-item"><a class="nav-link" href="../pesan/orders.php">Pesanan</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -139,7 +139,7 @@ $result = mysqli_query($koneksi, $query);
                         </div>
                         <div class="card-body">
                             <p class="price fs-4 fw-bold text-warning text-center"><?php echo $row['packages_price']; ?></p>
-                            <a class="btn btn-warning w-100 mb-3 text-white fw-bold" href="pesan/confirm.php">Pilih Paket</a>
+                            <a class="btn btn-warning w-100 mb-3 text-white fw-bold" href="confirm.php">Pilih Paket</a>
                             <div class="body-package">
                                 <ul class="list-unstyled">
                                     <?php
@@ -216,30 +216,30 @@ $result = mysqli_query($koneksi, $query);
             <div class="carousel-item active">
                 <div class="row g-3 justify-content-center">
                     <div class="col-md-5">
-                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_1.jpg" alt="dekor1">
+                        <img class="dekorasi img-fluid" src="../assets/img/dekorasi/dekor_1.jpg" alt="dekor1">
                     </div>
                     <div class="col-md-5">
-                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_2.jpg" alt="dekor2">
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row justify-content-center">
-                    <div class="col-md-5">
-                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_3.jpg" alt="dekor3">
-                    </div>
-                    <div class="col-md-5">
-                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_4.jpg" alt="dekor4">
+                        <img class="dekorasi img-fluid" src="../assets/img/dekorasi/dekor_2.jpg" alt="dekor2">
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="row justify-content-center">
                     <div class="col-md-5">
-                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_5.jpg" alt="mua3">
+                        <img class="dekorasi img-fluid" src="../assets/img/dekorasi/dekor_3.jpg" alt="dekor3">
                     </div>
                     <div class="col-md-5">
-                        <img class="dekorasi img-fluid" src="assets/img/dekorasi/dekor_6.jpg" alt="dekor3">
+                        <img class="dekorasi img-fluid" src="../assets/img/dekorasi/dekor_4.jpg" alt="dekor4">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="../assets/img/dekorasi/dekor_5.jpg" alt="mua3">
+                    </div>
+                    <div class="col-md-5">
+                        <img class="dekorasi img-fluid" src="../assets/img/dekorasi/dekor_6.jpg" alt="dekor3">
                     </div>
                 </div>
             </div>
@@ -281,30 +281,30 @@ $result = mysqli_query($koneksi, $query);
             <div class="carousel-item active">
                 <div class="row g-3 justify-content-center">
                     <div class="col-md-4">
-                        <img class="makeup img-fluid" src="assets/img/makeup/mua_1.jpg" alt="dekor1">
+                        <img class="makeup img-fluid" src="../assets/img/makeup/mua_1.jpg" alt="dekor1">
                     </div>
                     <div class="col-md-4">
-                        <img class="makeup img-fluid" src="assets/img/makeup/mua_2.jpg" alt="dekor2">
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <img class="makeup img-fluid" src="assets/img/makeup/mua_3.jpg" alt="dekor3">
-                    </div>
-                    <div class="col-md-4">
-                        <img class="makeup img-fluid" src="assets/img/makeup/mua_4.jpg" alt="dekor4">
+                        <img class="makeup img-fluid" src="../assets/img/makeup/mua_2.jpg" alt="dekor2">
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="row justify-content-center">
                     <div class="col-md-4">
-                        <img class="makeup img-fluid" src="assets/img/makeup/mua_5.jpg" alt="mua3">
+                        <img class="makeup img-fluid" src="../assets/img/makeup/mua_3.jpg" alt="dekor3">
                     </div>
                     <div class="col-md-4">
-                        <img class="makeup img-fluid" src="assets/img/makeup/mua_6.jpg" alt="dekor3">
+                        <img class="makeup img-fluid" src="../assets/img/makeup/mua_4.jpg" alt="dekor4">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="../assets/img/makeup/mua_5.jpg" alt="mua3">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="makeup img-fluid" src="../assets/img/makeup/mua_6.jpg" alt="dekor3">
                     </div>
                 </div>
             </div>
@@ -356,7 +356,7 @@ $result = mysqli_query($koneksi, $query);
                             </div>
                             <img src="assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
                           </a> -->
-                          <img src="assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
+                          <img src="../assets/img/gallery/<?php echo $row['gallery_image']; ?>" alt="..." class="img-fluid">
                           <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Pernikahan <?php echo $row['gallery_heading']; ?></div>
                             <div class="portfolio-caption-subheading text-muted">
@@ -406,7 +406,7 @@ $result = mysqli_query($koneksi, $query);
                                 if (isset($items[$j])) { ?>
                                     <div class="col-md-6">
                                         <div class="card bg-dark border-0 rounded-4 text-center p-4">
-                                            <img src="assets/img/testimonial/<?php echo $items[$j]['testi_image']; ?>" alt="Client Image" class="rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                                            <img src="../assets/img/testimonial/<?php echo $items[$j]['testi_image']; ?>" alt="Client Image" class="rounded-circle mx-auto mb-3" style="width: 100px; height: 100px; object-fit: cover;">
                                             <blockquote class="blockquote mb-0">
                                                 <p class="mb-2"><?php echo $items[$j]['testi_text']; ?></p>
                                                 <footer class="blockquote-footer text-light"><cite title="<?php echo $items[$j]['testi_client']; ?>"><?php echo $items[$j]['testi_client']; ?></cite></footer>
@@ -424,116 +424,6 @@ $result = mysqli_query($koneksi, $query);
     </div>
 </section>
 <!-- testimonial End -->
-
-    <!-- Team-->
-    <section class="page-section bg-light" id="team">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-heading text-uppercase text-dark" style="font-family: 'Comic Sans MS', sans-serif; color: #fff; margin-top: 80px">Our Amazing Team</h2>
-          <h3 class="section-subheading text-muted">
-            Lorem ipsum dolor sit amet consectetur.
-          </h3>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="team-member">
-              <img
-                class="mx-auto rounded-circle"
-                src="landing-page/assets/img/team/1.jpg"
-                alt="..."
-              />
-              <h4>Abdul Aziz</h4>
-              <p class="text-muted">Full Stack Developer</p>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="https://instagram.com/4doel_aziz" target="_blank"
-                aria-label="Parveen Anand Twitter Profile"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="https://web.facebook.com/profile.php?id=100014337487034" target="_blank"
-                aria-label="Parveen Anand Facebook Profile"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="https://www.linkedin.com/in/abdul-aziz-29925021a/" target="_blank"
-                aria-label="Parveen Anand LinkedIn Profile"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="team-member">
-              <img
-                class="mx-auto rounded-circle"
-                src="landing-page/assets/img/team/2.jpg"
-                alt="..."
-              />
-              <h4>Lulu Latifah Nurhafsyah</h4>
-              <p class="text-muted">Marketing</p>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="#!"
-                aria-label="Diana Petersen Twitter Profile"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="#!"
-                aria-label="Diana Petersen Facebook Profile"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="#!"
-                aria-label="Diana Petersen LinkedIn Profile"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="team-member">
-              <img
-                class="mx-auto rounded-circle"
-                src="landing-page/assets/img/team/3.jpg"
-                alt="..."
-              />
-              <h4>Siti Aisah</h4>
-              <p class="text-muted">Designer</p>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="#!"
-                aria-label="Larry Parker Twitter Profile"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="#!"
-                aria-label="Larry Parker Facebook Profile"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a
-                class="btn btn-dark btn-social mx-2"
-                href="#!"
-                aria-label="Larry Parker LinkedIn Profile"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <p class="large text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
-              eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam
-              corporis ea, alias ut unde.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Clients-->
     <!-- <div class="py-5">
@@ -740,7 +630,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="landing-page/js/scripts.js"></script>
+    <script src="../landing-page/js/scripts.js"></script>
 
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <script>

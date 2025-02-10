@@ -38,8 +38,6 @@ if (isset($_GET['id'])) {
 
 <section class="section dashboard">
     <div class="row">
-
-
         <div class="col-12">
             <div class="card features-card">
                 <div class="card-body">

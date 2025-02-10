@@ -862,24 +862,67 @@ if (!empty($_GET['act'] == "delete-pelanggan")) {
 
 // Edit Pembayaran
 if (isset($_GET['act']) && $_GET['act'] == "edit-pembayarankonfirmasi") {
-$id_pembayaran = $_GET['id']; 
-$query = "UPDATE pembayaran SET status_pembayaran = 'Terkonfirmasi' WHERE id_pembayaran = '$id_pembayaran'";
-$result = mysqli_query($koneksi, $query);
-if ($result) {
-header("location:admin/index.php?page=pembayaran&pesan=berhasil");
-} else {
-header("location:admin/index.php?page=pembayaran&pesan=gagal");
-}
-}
+  $id_pembayaran = $_GET['id']; 
+  $query = "UPDATE pembayaran SET status_pembayaran = 'Terkonfirmasi' WHERE id_pembayaran = '$id_pembayaran'";
+  $result = mysqli_query($koneksi, $query);
+  if ($result) {
+  header("location:admin/index.php?page=pesanan&pesan=berhasil");
+  } else {
+  header("location:admin/index.php?page=pesanan&pesan=gagal");
+  }
+  }
 
 if (isset($_GET['act']) && $_GET['act'] == "edit-pembayarantolak") {
   $id_pembayaran = $_GET['id']; 
   $query = "UPDATE pembayaran SET status_pembayaran = 'Ditolak' WHERE id_pembayaran = '$id_pembayaran'";
   $result = mysqli_query($koneksi, $query);
   if ($result) {
-  header("location:admin/index.php?page=pembayaran&pesan=berhasil");
+  header("location:admin/index.php?page=pesanan&pesan=berhasil");
   } else {
-  header("location:admin/index.php?page=pembayaran&pesan=gagal");
+  header("location:admin/index.php?page=pesanan&pesan=gagal");
   }
   }
 //  END Edit Pembayaran
+
+// Delete pesanan
+if (!empty($_GET['act'] == "delete-pesanan")) {
+  if (isset($_GET['id'])) {
+    if ($_GET['id'] != "") {
+
+      $id = $_GET['id'];
+      $query = mysqli_query($koneksi, "DELETE FROM pesanan WHERE id_pesanan='$id'");
+      if ($query) {
+        header("location:admin/index.php?page=pesanan&pesan=hapus");
+      } else {
+        header("location:admin/index.php?page=pesanan&pesan=gagalhapus");
+      }
+    } else {
+      header("location:admin/index.php?page=pesanan");
+    }
+  } else {
+    header("location:admin/index.php?page=pesanan");
+  }
+}
+//  END Delete pesanan
+
+// Edit pesanan
+if (!empty($_GET['act'] == "edit-pesanan")) {
+  if (isset($_GET['id'])) {
+    if ($_GET['id'] != "") {
+
+      $id = $_GET['id_pesanan'];
+      $keterangan = $_GET['keterangan'];
+      $query = "UPDATE pembayaran SET Keterangan = '$keterangan' WHERE id_pesanan = '$id'";
+      if ($query) {
+        header("location:admin/index.php?page=pesanan&pesan=berhasil");
+      } else {
+        header("location:admin/index.php?page=pesanan&pesan=gagal");
+      }
+    } else {
+      header("location:admin/index.php?page=pesanan");
+    }
+  } else {
+    header("location:admin/index.php?page=pesanan");
+  }
+}
+//  END Edit pesanan
